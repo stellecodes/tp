@@ -8,7 +8,7 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class RemarkCommandParser implements Parser<RemarkCommand> {
-    private static final Prefix PREFIX_REMARK = new Prefix("r/");
+    static final Prefix PREFIX_REMARK = new Prefix("r/");
     private static final String MESSAGE_INVALID_COMMAND_FORMAT =
             "Invalid command format! \n%1$s";
 
