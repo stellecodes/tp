@@ -279,31 +279,31 @@ No more digging through a messy contact list — keep lessons running smoothly w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …                        | I want to …                                                            | So that I can…                                                 |
-| -------- | ----------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------- |
-| `* * *`  | tutor                         | add a new **student** contact                                          | keep track of the student’s details easily                     |
-| `* * *`  | tutor                         | add a new **parent** contact                                           | keep track of the student’s parents’ details easily            |
-| `* * *`  | tutor                         | **delete** a student’s contact                                         | keep my list clean and up to date                              |
-| `* * *`  | tutor                         | **delete** a parent’s contact                                          | keep my list clean and up to date                              |
-| `* * *`  | tutor                         | **link** a student contact with a parent contact                       | understand and manage their relationship                       |
-| `* * *`  | tutor                         | **find a parent’s contact from a student’s contact**                   | contact the parent even when I only have the student’s details |
-| `* * *`  | tutor                         | **search by student name**                                             | find a student’s information faster                            |
-| `* * *`  | tutor                         | **search by parent name**                                              | find a parent’s information faster                             |
-| `* *`    | tutor with many students      | tag students with their **level**                                      | manage students based on their level                           |
-| `* *`    | tutor with many students      | tag students with their **subject**                                    | manage and track students by their subjects                    |
-| `* *`    | tutor with many students      | tag students with their **grades**                                     | identify students who need more attention                      |
-| `* *`    | tutor with many students      | tag students by their **classes**                                      | manage students who are in the same class                      |
-| `* *`    | tutor                         | **update tags** without affecting current tags                         | make changes without disrupting existing data                  |
-| `* *`    | tutor with a lot of classes   | retrieve contact info of all **students in the same class**            | send class announcements to students quickly                   |
-| `* *`    | tutor                         | see **students’ and parents’** contacts side by side                   | choose the right person to contact                             |
-| `* *`    | tutor with a lot of classes   | retrieve contact info of all **parents of students in the same class** | send class announcements to parents quickly                    |
-| `* *`    | tutor                         | **search for students by level/subject/grades**                        | target specific students more easily                           |
-| `* *`    | tutor                         | record the **preferred communication method** for each contact         | reach students/parents effectively                             |
-| `* *`    | tutor                         | keep **short notes** for each contact                                  | recall important attributes or situations                      |
-| `* *`    | new tutor                     | access a **help page**                                                 | learn how to use the app                                       |
-| `* *`    | new tutor                     | see **sample data** on first launch                                    | familiarise myself with the functionalities                    |
-| `*`      | tutor                         | **pin** certain contacts to the top                                    | quickly find contacts I contact often                          |
-| `*`      | tutor returning after a while | access a **refresher tutorial** on launch                              | get back up to speed quickly                                   |
+| Priority | As a …                        | I want to …               | So that I can…                                                 |
+| -------- | ----------------------------- | ------------------------- | -------------------------------------------------------------- |
+| `* * *`  | tutor                         | add a new student contact | keep track of the student’s details easily                     |
+| `* * *`  | tutor                         | add a new parent contact  | keep track of the student’s parents’ details easily            |
+| `* * *`  | tutor                         | delete a student’s contact | keep my list clean and up to date                              |
+| `* * *`  | tutor                         | delete a parent’s contact | keep my list clean and up to date                              |
+| `* * *`  | tutor                         | link a student contact with a parent contact | understand and manage their relationship                       |
+| `* * *`  | tutor                         | find a parent’s contact from a student’s contact | contact the parent even when I only have the student’s details |
+| `* * *`  | tutor                         | search by student name    | find a student’s information faster                            |
+| `* * *`  | tutor                         | search by parent name     | find a parent’s information faster                             |
+| `* *`    | tutor with many students      | tag students with their level | manage students based on their level                           |
+| `* *`    | tutor with many students      | tag students with their subject | manage and track students by their subjects                    |
+| `* *`    | tutor with many students      | tag students with their grades | identify students who need more attention                      |
+| `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
+| `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
+| `* *`    | tutor with a lot of classes   | retrieve contact info of all students in the same class | send class announcements to students quickly                   |
+| `* *`    | tutor                         | see students’ and parents’ contacts side by side | choose the right person to contact                             |
+| `* *`    | tutor with a lot of classes   | retrieve contact info of all parents of students in the same class | send class announcements to parents quickly                    |
+| `* *`    | tutor                         | search for students by level/subject/grades | target specific students more easily                           |
+| `* *`    | tutor                         | record the preferred communication method for each contact | reach students/parents effectively                             |
+| `* *`    | tutor                         | keep short notes for each contact | recall important attributes or situations                      |
+| `* *`    | new tutor                     | access a help page        | learn how to use the app                                       |
+| `* *`    | new tutor                     | see sample data on first launch | familiarise myself with the functionalities                    |
+| `*`      | tutor                         | pin certain contacts to the top | quickly find contacts I contact often                          |
+| `*`      | tutor returning after a while | access a refresher tutorial on launch | get back up to speed quickly                                   |
 
 ### Use cases
 
