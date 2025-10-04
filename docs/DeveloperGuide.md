@@ -279,45 +279,223 @@ No more digging through a messy contact list — keep lessons running smoothly w
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
-
-*{More to be added}*
+| Priority | As a …                        | I want to …               | So that I can…                                                 |
+| -------- | ----------------------------- | ------------------------- | -------------------------------------------------------------- |
+| `* * *`  | tutor                         | add a new student contact | keep track of the student’s details easily                     |
+| `* * *`  | tutor                         | add a new parent contact  | keep track of the student’s parents’ details easily            |
+| `* * *`  | tutor                         | delete a student’s contact | keep my list clean and up to date                              |
+| `* * *`  | tutor                         | delete a parent’s contact | keep my list clean and up to date                              |
+| `* * *`  | tutor                         | link a student contact with a parent contact | understand and manage their relationship                       |
+| `* * *`  | tutor                         | find a parent’s contact from a student’s contact | contact the parent even when I only have the student’s details |
+| `* * *`  | tutor                         | search by student name    | find a student’s information faster                            |
+| `* * *`  | tutor                         | search by parent name     | find a parent’s information faster                             |
+| `* *`    | tutor with many students      | tag students with their level | manage students based on their level                           |
+| `* *`    | tutor with many students      | tag students with their subject | manage and track students by their subjects                    |
+| `* *`    | tutor with many students      | tag students with their grades | identify students who need more attention                      |
+| `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
+| `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
+| `* *`    | tutor with a lot of classes   | retrieve contact info of all students in the same class | send class announcements to students quickly                   |
+| `* *`    | tutor                         | see students’ and parents’ contacts side by side | choose the right person to contact                             |
+| `* *`    | tutor with a lot of classes   | retrieve contact info of all parents of students in the same class | send class announcements to parents quickly                    |
+| `* *`    | tutor                         | search for students by level/subject/grades | target specific students more easily                           |
+| `* *`    | tutor                         | record the preferred communication method for each contact | reach students/parents effectively                             |
+| `* *`    | tutor                         | keep short notes for each contact | recall important attributes or situations                      |
+| `* *`    | new tutor                     | access a help page        | learn how to use the app                                       |
+| `* *`    | new tutor                     | see sample data on first launch | familiarise myself with the functionalities                    |
+| `*`      | tutor                         | pin certain contacts to the top | quickly find contacts I contact often                          |
+| `*`      | tutor returning after a while | access a refresher tutorial on launch | get back up to speed quickly                                   |
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ClassConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+
+**Use case: Add a student contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a student with details.
+2. System validates the details and checks for duplicates.
+3. User confirms proceeding with the validated details.
+4. System adds the student and acknowledges success.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Details are invalid.
+    * 2a1. System presents the validation issue.
+    * 2a2. User revises the details (returns to Step 2).
 
-  Use case ends.
+* 2b. A matching student already exists.
+    * 2b1. System reports the duplicate and aborts.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. User cancels after validation.
+    * 3a1. System discards the request.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-*{More to be added}*
+---
+
+**Use case: Add a parent contact**
+
+**MSS**
+
+1. User requests to add a parent with details.
+2. System validates the details and checks for duplicates.
+3. User confirms proceeding with the validated details.
+4. System adds the parent and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Details are invalid.
+    * 2a1. System presents the validation issue.
+    * 2a2. User revises the details (returns to Step 2).
+
+* 2b. A matching parent already exists.
+    * 2b1. System reports the duplicate and aborts.
+
+      Use case ends.
+
+* 3a. User cancels after validation.
+    * 3a1. System discards the request.
+
+      Use case ends.
+
+---
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1. User requests to delete a contact.
+2. System identifies matching contact(s).
+3. User selects the intended contact.
+4. System deletes the contact and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No contact matches.
+    * 2a1. System informs the absence of a match.
+
+      Use case ends.
+
+* 2b. Multiple contacts match.
+    * 2b1. System requests disambiguation.
+    * 2b2. User provides additional identifying detail (returns to Step 2).
+
+* 3a. User cancels selection.
+    * 3a1. System aborts the deletion.
+
+      Use case ends.
+
+---
+
+**Use case: Link a student with a parent**
+
+**MSS**
+
+1. User requests to link a specific student with a specific parent.
+2. System verifies that both contacts exist and that the link is valid and new.
+3. User confirms creating the link.
+4. System creates the link and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Student does not exist.
+    * 2a1. System reports the missing student.
+
+      Use case ends.
+
+* 2b. Parent does not exist.
+    * 2b1. System reports the missing parent.
+
+      Use case ends.
+
+* 2c. Link already exists or is invalid.
+    * 2c1. System reports the issue and aborts.
+
+      Use case ends.
+
+* 3a. User cancels linking.
+    * 3a1. System aborts the operation.
+
+      Use case ends.
+
+---
+
+**Use case: Unlink a student from a parent**
+
+**MSS**
+
+1. User requests to unlink a specific student from a specific parent.
+2. System verifies that both contacts exist and that the link currently exists.
+3. User confirms removing the link.
+4. System removes the link and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. One or both contacts do not exist.
+    * 2a1. System reports the missing contact(s).
+
+      Use case ends.
+
+* 2b. No such link exists.
+    * 2b1. System reports that the relationship is absent.
+
+      Use case ends.
+
+* 3a. User cancels unlinking.
+    * 3a1. System aborts the operation.
+
+      Use case ends.
+
+---
+
+**Use case: Save data (auto-save)**
+
+**MSS**
+
+1. User completes an operation that changes stored data.
+2. System persists the updated data and continues operation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Persistence fails.
+    * 2a1. System warns about the failure.
+
+      Use case ends.
+
+---
+
+**Use case: Exit the program**
+
+**MSS**
+
+1. User requests to close the application.
+2. System saves current data and terminates.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Saving fails.
+    * 2a1. System warns about unsaved changes and proceeds or aborts per policy.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
