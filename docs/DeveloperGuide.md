@@ -292,32 +292,195 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is `ClassConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+---
+
+**Use case: Add a student contact**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User requests to add a student with details.
+2. System validates the details and checks for duplicates.
+3. User confirms proceeding with the validated details.
+4. System adds the student and acknowledges success.
 
-    Use case ends.
+   Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 2a. Details are invalid.
+    * 2a1. System presents the validation issue.
+    * 2a2. User revises the details (returns to Step 2).
 
-  Use case ends.
+* 2b. A matching student already exists.
+    * 2b1. System reports the duplicate and aborts.
 
-* 3a. The given index is invalid.
+      Use case ends.
 
-    * 3a1. AddressBook shows an error message.
+* 3a. User cancels after validation.
+    * 3a1. System discards the request.
 
-      Use case resumes at step 2.
+      Use case ends.
 
-*{More to be added}*
+---
+
+**Use case: Add a parent contact**
+
+**MSS**
+
+1. User requests to add a parent with details.
+2. System validates the details and checks for duplicates.
+3. User confirms proceeding with the validated details.
+4. System adds the parent and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Details are invalid.
+    * 2a1. System presents the validation issue.
+    * 2a2. User revises the details (returns to Step 2).
+
+* 2b. A matching parent already exists.
+    * 2b1. System reports the duplicate and aborts.
+
+      Use case ends.
+
+* 3a. User cancels after validation.
+    * 3a1. System discards the request.
+
+      Use case ends.
+
+---
+
+**Use case: Delete a contact**
+
+**MSS**
+
+1. User requests to delete a contact.
+2. System identifies matching contact(s).
+3. User selects the intended contact.
+4. System deletes the contact and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. No contact matches.
+    * 2a1. System informs the absence of a match.
+
+      Use case ends.
+
+* 2b. Multiple contacts match.
+    * 2b1. System requests disambiguation.
+    * 2b2. User provides additional identifying detail (returns to Step 2).
+
+* 3a. User cancels selection.
+    * 3a1. System aborts the deletion.
+
+      Use case ends.
+
+---
+
+**Use case: Link a student with a parent**
+
+**MSS**
+
+1. User requests to link a specific student with a specific parent.
+2. System verifies that both contacts exist and that the link is valid and new.
+3. User confirms creating the link.
+4. System creates the link and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Student does not exist.
+    * 2a1. System reports the missing student.
+
+      Use case ends.
+
+* 2b. Parent does not exist.
+    * 2b1. System reports the missing parent.
+
+      Use case ends.
+
+* 2c. Link already exists or is invalid.
+    * 2c1. System reports the issue and aborts.
+
+      Use case ends.
+
+* 3a. User cancels linking.
+    * 3a1. System aborts the operation.
+
+      Use case ends.
+
+---
+
+**Use case: Unlink a student from a parent**
+
+**MSS**
+
+1. User requests to unlink a specific student from a specific parent.
+2. System verifies that both contacts exist and that the link currently exists.
+3. User confirms removing the link.
+4. System removes the link and acknowledges success.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. One or both contacts do not exist.
+    * 2a1. System reports the missing contact(s).
+
+      Use case ends.
+
+* 2b. No such link exists.
+    * 2b1. System reports that the relationship is absent.
+
+      Use case ends.
+
+* 3a. User cancels unlinking.
+    * 3a1. System aborts the operation.
+
+      Use case ends.
+
+---
+
+**Use case: Save data (auto-save)**
+
+**MSS**
+
+1. User completes an operation that changes stored data.
+2. System persists the updated data and continues operation.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Persistence fails.
+    * 2a1. System warns about the failure.
+
+      Use case ends.
+
+---
+
+**Use case: Exit the program**
+
+**MSS**
+
+1. User requests to close the application.
+2. System saves current data and terminates.
+
+   Use case ends.
+
+**Extensions**
+
+* 2a. Saving fails.
+    * 2a1. System warns about unsaved changes and proceeds or aborts per policy.
+
+      Use case ends.
 
 ### Non-Functional Requirements
 
