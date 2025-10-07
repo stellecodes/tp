@@ -502,8 +502,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+4.  Should not depend on a DBMS or remote server for core operations.
+5.  Should be packaged into a single executable JAR file ≤ 100 MB, without requiring an installer.
+6.  Should run without OS-specific dependencies, allowing platform-independent execution.
+7.  Should display all functions correctly at 1920×1080 resolution (100%/125% scaling) and remain usable at 1280×720 resolution (150% scaling).
+8.  Should follow an object-oriented design so that new commands can be added with minimal changes to existing code.
+9. Should remain a single-user application, preventing simultaneous or shared multi-user access to data files.
+10. Should store data locally in a human-editable text file (JSON format), and recover gracefully by starting with an empty dataset if the file is corrupted.
 
 ### Glossary
 
