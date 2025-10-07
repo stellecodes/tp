@@ -507,8 +507,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Address Book**: The core dataset of the app that stores all Student and Parent.
+* **Command**: A typed instruction from the user that tells the app to perform an action (e.g., adding a contact, finding someone, linking a parent and student).
+* **CommandResult**: The object returned after executing a Command, containing feedback and optional instructions for the UI.
+* **Command Line Interface**: A text-based interface where users type commands instead of using buttons or menus.
+* **Command Parser**: A class that reads and interprets the text the user types, then creates the appropriate Command object to execute the action.
+* **Error Message**: A message shown when a command cannot be executed or fails validation.
+* **JAR File**: A packaged Java application that can be run directly.
+* **JSON (JavaScript Object Notation)**: A lightweight text format used to save and load data on disk.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS.
+* **Link (Student-Parent)**: A data relationship between a Student and a Parent contact to reflect real-world connections.
+* **Logic Component**: The part of the system that parses and executes commands. It connects user input to the Model and Storage.
+* **Main**: The entry point of the application. Initialises all components in the correct order during startup and handles shutdown.
+* **Model Component**: The in-memory representation of the app's data.
+* **Parent Contact**: A Person entry representing a parent or guardian, usually linked to one or more students.
+* **Parser**: A general interface implemented by all command parsers, ensuring a consistent way to interpret user commands.
+* **Person**: The base data entity representing any contact (student or parent) in the address book.
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Storage Component**: Responsible for reading from and writing to files on the disk. Uses JSON to persist address book data.
+* **Student Contact**: A Person entry representing a student taught by the tutor.
+* **Tag**: A label that can be attached to contacts (e.g., “Math”, “Sec2”, “ClassA”) to help categorize, search, and manage them efficiently.
+* **UI (User Interface) component**: The part of the app that displays information and receives user input. Although the app is CLI-driven, it uses JavaFX under the hood.
+* **UniquePersonList**: A data structure that ensures there are no duplicate Person entries in the address book.
+* **Undo / Redo**: Features that allow reversing the last action (undo) or reapplying an undone action (redo).
+* **User Preferences (UserPrefs)**: Configuration information stored per user, such as file paths and window size.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
