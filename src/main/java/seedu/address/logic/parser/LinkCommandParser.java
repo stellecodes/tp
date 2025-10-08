@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PARENT_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STUDENT_PHONE;
 
 import java.util.List;
 
@@ -13,14 +17,7 @@ import seedu.address.model.person.Person;
  * Parses input arguments and creates a new LinkCommand object.
  */
 public class LinkCommandParser implements Parser<LinkCommand> {
-
-    private static final Prefix PREFIX_STUDENT_NAME = new Prefix("sn/");
-    private static final Prefix PREFIX_STUDENT_PHONE = new Prefix("sp/");
-    private static final Prefix PREFIX_PARENT_NAME = new Prefix("pn/");
-    private static final Prefix PREFIX_PARENT_PHONE = new Prefix("pp/");
-
     private final Model model;
-
     /**
      * Model is injected here to resolve Person objects by name and phone.
      * This approach follows AB3 testability (dependency passed from LogicManager).
