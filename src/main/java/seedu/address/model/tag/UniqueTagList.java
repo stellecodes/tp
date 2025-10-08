@@ -1,0 +1,115 @@
+package seedu.address.model.tag;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.exceptions.PersonNotFoundInTagException;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
+
+/**
+ * A list-like structure that maps each unique Tag to an ObservableList of Person objects.
+ * Enforces uniqueness of tags and non-null constraints.
+ */
+public class UniqueTagList  {
+
+    private final Map<Tag, ObservableList<Person>> tagMap = new HashMap<>();
+
+    /**
+     * Returns true if the list contains an equivalent tag as the given argument.
+     */
+    public boolean contains(Tag toCheck) {
+        requireNonNull(toCheck);
+        return tagMap.containsKey(toCheck);
+    }
+
+    /**
+     * Adds a person to the list of persons for the given tag.
+     * If the tag does not exist, it is created.
+     */
+    public void add(Tag toAddTag, Person toAddPerson ) {
+        requireNonNull(toAddTag);
+        requireNonNull(toAddPerson);
+        ObservableList<Person> personList;
+        if (contains(toAddTag)) {
+            personList = tagMap.get(toAddTag);
+            if (!personList.contains(toAddPerson)) {
+                personList.add(toAddPerson);
+            }
+            return;
+        } else {
+            personList = FXCollections.observableArrayList();
+            personList.add(toAddPerson);
+        }
+        tagMap.put(toAddTag, personList);
+    }
+
+    /**
+     * Removes a person from the given tag's person list.
+     */
+    public void removePersonFromTag(Tag toRemoveTag, Person toRemovePerson) {
+        requireAllNonNull(toRemoveTag, toRemovePerson);
+        if (!contains(toRemoveTag)) {
+            throw new TagNotFoundException();
+        }
+        ObservableList<Person> persons = tagMap.get(toRemoveTag);
+        boolean found = false;
+        for (int i = 0; i < persons.size(); i++) {
+            if (persons.get(i).isSamePerson(toRemovePerson)) { // or .equals(toRemove)
+                persons.remove(i);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            throw new PersonNotFoundInTagException();
+        }
+    }
+
+    /**
+     * Replaces the current map with another UniqueTagList's contents.
+     */
+    public void setTags(UniqueTagList replacement) {
+        requireNonNull(replacement);
+        tagMap.clear();
+        tagMap.putAll(replacement.tagMap);
+    }
+
+    /**
+     * Returns all tags as an unmodifiable observable list.
+     */
+    public ObservableList<Tag> asUnmodifiableObservableList() {
+        return FXCollections.unmodifiableObservableList(
+                FXCollections.observableArrayList(tagMap.keySet()));
+    }
+
+    /**
+     * Returns all tags currently in the map.
+     */
+    public Set<Tag> getTags() {
+        return tagMap.keySet();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof UniqueTagList
+                && tagMap.equals(((UniqueTagList) other).tagMap));
+    }
+
+    @Override
+    public int hashCode() {
+        return tagMap.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return tagMap.toString();
+    }
+}
