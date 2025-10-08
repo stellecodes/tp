@@ -162,6 +162,17 @@ public class AddCommandTest {
         public ObservableList<Person> getLinkedPersons(Person person) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean link(Person a, Person b) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean unlink(Person a, Person b) {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
