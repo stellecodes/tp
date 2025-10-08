@@ -4,6 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
 
+/**
+ * Displays all persons in the address book.
+ * This command resets any applied filters and shows the complete person list.
+ */
 public class ShowAllCommand extends Command {
 
     public static final String COMMAND_WORD = "showall";
