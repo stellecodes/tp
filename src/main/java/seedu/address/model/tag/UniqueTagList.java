@@ -14,7 +14,7 @@ import seedu.address.model.tag.exceptions.PersonNotFoundInTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
- * A list-like structure that maps each unique Tag to an ObservableList of Person objects.
+ * A hashmap that maps each unique Tag to an ObservableList of Person objects.
  * Enforces uniqueness of tags and non-null constraints.
  */
 public class UniqueTagList {
