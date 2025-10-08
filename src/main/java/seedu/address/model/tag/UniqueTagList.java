@@ -62,7 +62,7 @@ public class UniqueTagList {
         ObservableList<Person> persons = tagMap.get(toRemoveTag);
         boolean found = false;
         for (int i = 0; i < persons.size(); i++) {
-            if (persons.get(i).isSamePerson(toRemovePerson)) { // or .equals(toRemove)
+            if (persons.get(i).isSamePerson(toRemovePerson)) {
                 persons.remove(i);
                 found = true;
                 break;
@@ -82,7 +82,7 @@ public class UniqueTagList {
         for (Tag tag : tags) {
             ObservableList<Person> persons = tagMap.get(tag);
             for (int i = 0; i < persons.size(); i++) {
-                if (persons.get(i).isSamePerson(toRemovePerson)) { // or .equals(toRemove)
+                if (persons.get(i).isSamePerson(toRemovePerson)) {
                     persons.remove(i);
                     break;
                 }
