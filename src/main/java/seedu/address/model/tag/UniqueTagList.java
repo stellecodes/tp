@@ -17,8 +17,7 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  * A list-like structure that maps each unique Tag to an ObservableList of Person objects.
  * Enforces uniqueness of tags and non-null constraints.
  */
-public class UniqueTagList  {
-
+public class UniqueTagList {
     private final Map<Tag, ObservableList<Person>> tagMap = new HashMap<>();
 
     /**
@@ -33,28 +32,30 @@ public class UniqueTagList  {
      * Adds a person to the list of persons for the given tag.
      * If the tag does not exist, it is created.
      */
-    public void add(Tag toAddTag, Person toAddPerson ) {
-        requireNonNull(toAddTag);
+    public void addPersonToTags(Person toAddPerson) {
         requireNonNull(toAddPerson);
-        ObservableList<Person> personList;
-        if (contains(toAddTag)) {
-            personList = tagMap.get(toAddTag);
-            if (!personList.contains(toAddPerson)) {
+        Set<Tag> tags = toAddPerson.getTags();
+        for (Tag toAddTag : tags) {
+            ObservableList<Person> personList;
+            if (contains(toAddTag)) {
+                personList = tagMap.get(toAddTag);
+                if (!personList.contains(toAddPerson)) {
+                    personList.add(toAddPerson);
+                }
+                continue;
+            } else {
+                personList = FXCollections.observableArrayList();
                 personList.add(toAddPerson);
             }
-            return;
-        } else {
-            personList = FXCollections.observableArrayList();
-            personList.add(toAddPerson);
+            tagMap.put(toAddTag, personList);
         }
-        tagMap.put(toAddTag, personList);
     }
 
     /**
-     * Removes a person from the given tag's person list.
+     * Removes a person from one associated tag.
      */
     public void removePersonFromTag(Tag toRemoveTag, Person toRemovePerson) {
-        requireAllNonNull(toRemoveTag, toRemovePerson);
+        requireAllNonNull(toRemovePerson);
         if (!contains(toRemoveTag)) {
             throw new TagNotFoundException();
         }
@@ -71,6 +72,24 @@ public class UniqueTagList  {
             throw new PersonNotFoundInTagException();
         }
     }
+
+    /**
+     * Removes a person from its associated tags when it is deleted.
+     */
+    public void removePersonFromAllTags(Person toRemovePerson) {
+        requireNonNull(toRemovePerson);
+        Set<Tag> tags = toRemovePerson.getTags();
+        for (Tag tag : tags) {
+            ObservableList<Person> persons = tagMap.get(tag);
+            for (int i = 0; i < persons.size(); i++) {
+                if (persons.get(i).isSamePerson(toRemovePerson)) { // or .equals(toRemove)
+                    persons.remove(i);
+                    break;
+                }
+            }
+        }
+    }
+
 
     /**
      * Replaces the current map with another UniqueTagList's contents.
