@@ -1,0 +1,82 @@
+package seedu.address.logic.parser;
+
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
+import java.util.List;
+
+import seedu.address.logic.commands.LinkCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Person;
+
+/**
+ * Parses input arguments and creates a new LinkCommand object.
+ */
+public class LinkCommandParser implements Parser<LinkCommand> {
+
+    private static final Prefix PREFIX_STUDENT_NAME = new Prefix("sn/");
+    private static final Prefix PREFIX_STUDENT_PHONE = new Prefix("sp/");
+    private static final Prefix PREFIX_PARENT_NAME = new Prefix("pn/");
+    private static final Prefix PREFIX_PARENT_PHONE = new Prefix("pp/");
+
+    private final Model model;
+
+    /**
+     * Model is injected here to resolve Person objects by name and phone.
+     * This approach follows AB3 testability (dependency passed from LogicManager).
+     */
+    public LinkCommandParser(Model model) {
+        this.model = model;
+    }
+
+    @Override
+    public LinkCommand parse(String args) throws ParseException {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args,
+                PREFIX_STUDENT_NAME, PREFIX_STUDENT_PHONE,
+                PREFIX_PARENT_NAME, PREFIX_PARENT_PHONE);
+
+        if (!argMultimap.getValue(PREFIX_STUDENT_NAME).isPresent()
+                || !argMultimap.getValue(PREFIX_PARENT_NAME).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        }
+
+        String studentName = argMultimap.getValue(PREFIX_STUDENT_NAME).get().trim();
+        String studentPhone = argMultimap.getValue(PREFIX_STUDENT_PHONE).orElse("").trim();
+        String parentName = argMultimap.getValue(PREFIX_PARENT_NAME).get().trim();
+        String parentPhone = argMultimap.getValue(PREFIX_PARENT_PHONE).orElse("").trim();
+
+        Person student = resolvePerson(studentName, studentPhone);
+        Person parent = resolvePerson(parentName, parentPhone);
+
+        if (student == null || parent == null) {
+            throw new ParseException(LinkCommand.MESSAGE_NOT_FOUND);
+        }
+
+        return new LinkCommand(student, parent);
+    }
+
+    /**
+     * Finds a unique Person from the model by name and (optionally) phone number.
+     */
+    private Person resolvePerson(String name, String phone) {
+        List<Person> allPersons = model.getFilteredPersonList();
+        List<Person> nameMatches = allPersons.stream()
+                .filter(p -> p.getName().fullName.equalsIgnoreCase(name))
+                .toList();
+
+        if (nameMatches.isEmpty()) {
+            return null;
+        }
+        if (nameMatches.size() == 1) {
+            return nameMatches.get(0);
+        }
+        if (!phone.isEmpty()) {
+            return nameMatches.stream()
+                    .filter(p -> p.getPhone().value.equals(phone))
+                    .findFirst()
+                    .orElse(null);
+        }
+        // ambiguous case: multiple same names, no phone provided
+        return null;
+    }
+}
