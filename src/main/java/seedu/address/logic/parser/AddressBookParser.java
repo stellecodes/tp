@@ -93,7 +93,7 @@ public class AddressBookParser {
             return new UnlinkCommandParser(model).parse(arguments);
 
         case FilterTagCommand.COMMAND_WORD:
-            return new FilterTagCommandParser(model).parse(arguments);
+            return new FilterTagCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
