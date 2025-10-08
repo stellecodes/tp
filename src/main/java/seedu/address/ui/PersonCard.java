@@ -1,12 +1,14 @@
 package seedu.address.ui;
 
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.logic.Logic;
 import seedu.address.model.person.Person;
 
 /**
@@ -16,15 +18,8 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
-
     public final Person person;
+    private final Logic logic;
 
     @FXML
     private HBox cardPane;
@@ -40,20 +35,49 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label linkedContacts;
 
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCard} with the given {@code Person} and index to display.
      */
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex, Logic logic) {
         super(FXML);
         this.person = person;
+        this.logic = logic;
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+
+        // show linked contacts if any exist
+        String linkedText = getLinkedText(person);
+        linkedContacts.setText(linkedText.isEmpty() ? "" : "Linked: " + linkedText);
+
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    /**
+     * Returns a comma-separated list of linked contact names, or an empty string if none.
+     */
+    private String getLinkedText(Person person) {
+        if (logic == null) {
+            return "";
+        }
+
+        var linkedList = logic.getLinkedPersons(person);
+        if (linkedList.isEmpty()) {
+            return "";
+        }
+
+        String joined = linkedList.stream()
+                .map(p -> p.getName().fullName)
+                .limit(3)
+                .collect(Collectors.joining(", "));
+        return linkedList.size() > 3 ? joined + "…" : joined;
     }
 }

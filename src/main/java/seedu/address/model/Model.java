@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -84,4 +85,24 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    //=========== Relationship management =============================================================
+
+    /**
+     * Creates a bidirectional link between two persons.
+     * Returns true if link was added successfully, false if it already exists.
+     */
+    boolean link(Person a, Person b);
+
+    /**
+     * Removes a bidirectional link between two persons, if it exists.
+     * Returns true if link was removed, false otherwise.
+     */
+    boolean unlink(Person a, Person b);
+
+    /**
+     * Returns a list of persons linked to the given person.
+     */
+    List<Person> getLinkedPersons(Person person);
+
 }
