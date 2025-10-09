@@ -1,5 +1,9 @@
 package seedu.address.model.person;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents remarks associated with a Person in the address book.
  * Guarantees: mutable; is valid as declared in {@link #isValidRemark(String)}
@@ -25,9 +29,7 @@ public class Remark {
         if (remark == null) {
             this.remarks = "";
         } else {
-            if (!isValidRemark(remark)) {
-                throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
-            }
+            checkArgument(isValidRemark(remark), MESSAGE_CONSTRAINTS);
             this.remarks = remark;
         }
     }
