@@ -40,6 +40,11 @@ public class Remark {
     }
 
     @Override
+    public String toString() {
+        return remarks;
+    }
+
+    @Override
     public boolean equals(Object other) {
         if (this == other) {
             return true;

@@ -54,8 +54,13 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         // Set remark if present
-        String remarkText = person.getRemark() != null ? person.getRemark().remarks : "";
-        remark.setText(remarkText);
+        String remarkText;
+        if (person.getRemark().remarks.isEmpty() || person.getRemark() == null) {
+            remarkText = "Nil";
+        } else {
+            remarkText = person.getRemark().remarks;
+        }
+        remark.setText("Remarks: " + remarkText);
 
         // show linked contacts if any exist
         String linkedText = getLinkedText(person);
