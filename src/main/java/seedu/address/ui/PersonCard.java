@@ -37,6 +37,8 @@ public class PersonCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private Label linkedContacts;
+    @FXML
+    private Label remark;
 
     /**
      * Creates a {@code PersonCard} with the given {@code Person} and index to display.
@@ -51,6 +53,14 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        // Set remark if present
+        String remarkText;
+        if (person.getRemark().remarks.isEmpty() || person.getRemark() == null) {
+            remarkText = "Nil";
+        } else {
+            remarkText = person.getRemark().remarks;
+        }
+        remark.setText("Remarks: " + remarkText);
 
         // show linked contacts if any exist
         String linkedText = getLinkedText(person);

@@ -93,7 +93,23 @@ public class PersonTest {
     @Test
     public void toStringMethod() {
         String expected = Person.class.getCanonicalName() + "{name=" + ALICE.getName() + ", phone=" + ALICE.getPhone()
-                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + ", remark=" + ALICE.getRemark()
+                + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void remark_field() {
+        Remark remark1 = new Remark("Hates Math");
+        Remark remark2 = new Remark("Loves Math");
+        Person personWithRemark1 = new PersonBuilder().withRemark("Hates Math").build();
+        Person personWithRemark2 = new PersonBuilder().withRemark("Loves Math").build();
+        Person personWithNoRemark = new PersonBuilder().withRemark("").build();
+
+        assertEquals(remark1.remarks, personWithRemark1.getRemark().remarks);
+        assertEquals(remark2.remarks, personWithRemark2.getRemark().remarks);
+        assertEquals("", personWithNoRemark.getRemark().remarks);
+        assertFalse(personWithRemark1.equals(personWithRemark2));
+        assertTrue(personWithRemark1.equals(new PersonBuilder().withRemark("Hates Math").build()));
     }
 }
