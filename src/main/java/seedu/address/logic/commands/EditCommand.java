@@ -104,9 +104,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Remark updatedRemark;
-        if (editPersonDescriptor.getRemark() != null && !editPersonDescriptor.getRemark().remarks.isEmpty()) {
+        if (editPersonDescriptor.getRemark() != null && editPersonDescriptor.getRemark().isPresent()) {
             // Edit remark only if a non-empty remark is provided
-            updatedRemark = editPersonDescriptor.getRemark();
+            updatedRemark = editPersonDescriptor.getRemark().orElse(personToEdit.getRemark());
         } else {
             // Keep existing remark
             updatedRemark = personToEdit.getRemark();
@@ -210,8 +210,8 @@ public class EditCommand extends Command {
             this.remark = remark;
         }
 
-        public Remark getRemark() {
-            return remark;
+        public Optional<Remark> getRemark() {
+            return Optional.ofNullable(remark);
         }
 
         /**
