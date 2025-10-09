@@ -137,4 +137,19 @@ public class DeleteCommand extends Command {
                 && email.equals(o.email)
                 && phone.equals(o.phone);
     }
+
+    @Override
+    public String toString() {
+        // Match test expectation: <canonical class name>{targetIndex=<Index.toString()>} OR attributes
+        StringBuilder sb = new StringBuilder(getClass().getCanonicalName()).append("{");
+        if (targetIndex.isPresent()) {
+            sb.append("targetIndex=").append(targetIndex.get()); // uses Index#toString()
+        } else {
+            sb.append("name=").append(name)
+                    .append(", email=").append(email)
+                    .append(", phone=").append(phone);
+        }
+        sb.append("}");
+        return sb.toString();
+    }
 }

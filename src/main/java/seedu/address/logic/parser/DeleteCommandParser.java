@@ -42,10 +42,17 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         if (!hasAnyPrefix) {
             String trimmed = args.trim();
             if (trimmed.isEmpty()) {
-                throw new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT + "\n" + DeleteCommand.MESSAGE_USAGE);
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
-            Index index = ParserUtil.parseIndex(trimmed);
-            return new DeleteCommand(index);
+            try {
+                Index index = ParserUtil.parseIndex(trimmed);
+                return new DeleteCommand(index);
+            } catch (ParseException pe) {
+                throw new ParseException(
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)
+                );
+            }
         }
 
         // Attribute-based delete: unwrap values and let ParserUtil validate/construct domain objects.
@@ -68,7 +75,8 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         if (name.isEmpty() && email.isEmpty() && phone.isEmpty()) {
-            throw new ParseException(Messages.MESSAGE_INVALID_COMMAND_FORMAT + "\n" + DeleteCommand.MESSAGE_USAGE);
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         return new DeleteCommand(name, email, phone);
