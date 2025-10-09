@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
 
-    // Either index is present OR one/more of these fields
+    // Either index is present OR one/more of these fields, hence usage of Optional
     private final Optional<Index> targetIndex;
     private final Optional<Name> name;
     private final Optional<Email> email;
@@ -56,6 +56,7 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        // if index is present, perform legacy behaviour for delete
         if (targetIndex.isPresent()) {
             var lastShownList = model.getFilteredPersonList();
             if (targetIndex.get().getZeroBased() >= lastShownList.size()) {
@@ -67,7 +68,7 @@ public class DeleteCommand extends Command {
                     Messages.format(personToDelete)));
         }
 
-        // Placeholder – actual attribute-based logic will be added in next commits
+        // Placeholder, actual attribute-based logic will be added in next commits
         throw new CommandException("Attribute-based delete not yet implemented.");
     }
 
