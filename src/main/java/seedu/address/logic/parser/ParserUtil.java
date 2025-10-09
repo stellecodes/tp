@@ -132,7 +132,7 @@ public class ParserUtil {
     public static Remark parseRemark(String remark) throws ParseException {
         // If remark is null, it means no remark was provided. Return a Remark with null value.
         if (remark == null) {
-            return new Remark(null);
+            return new Remark("");
         }
         // Else, validate and return the Remark.
         requireNonNull(remark);

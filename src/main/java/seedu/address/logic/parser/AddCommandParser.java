@@ -49,7 +49,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_REMARK)) {
             remark = ParserUtil.parseRemark(argMultimap.getValue(PREFIX_REMARK).get());
         } else {
-            remark = new Remark(null);
+            // If no remark field is present, set it to empty string
+            remark = new Remark("");
         }
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
