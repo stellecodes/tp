@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
