@@ -38,4 +38,22 @@ public class Remark {
     public static boolean isValidRemark(String test) {
         return test.matches(VALIDATION_REGEX);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof Remark)) {
+            return false;
+        }
+        Remark otherRemark = (Remark) other;
+        return remarks.equals(otherRemark.remarks);
+    }
+
+    @Override
+    public int hashCode() {
+        return remarks.hashCode();
+    }
 }
