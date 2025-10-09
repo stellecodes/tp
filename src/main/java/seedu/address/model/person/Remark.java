@@ -18,7 +18,7 @@ public class Remark {
      */
     public static final String VALIDATION_REGEX = "[^\\n/]*";
 
-    public String remarks;
+    public final String remarks;
 
     /**
      * Constructs a {@code Remark}.
