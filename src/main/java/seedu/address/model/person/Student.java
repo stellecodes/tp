@@ -22,7 +22,7 @@ public class Student extends Person {
      * Every field must be present and not null except remark.
      */
     public Student(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, remark, tags);
+        super(name, phone, email, address, remark);
         requireAllNonNull(name, phone, email, address, tags);
         this.tags.addAll(tags);
     }
@@ -81,6 +81,7 @@ public class Student extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
+                .add("role", "Student")
                 .add("name", getName())
                 .add("phone", getPhone())
                 .add("email", getEmail())
