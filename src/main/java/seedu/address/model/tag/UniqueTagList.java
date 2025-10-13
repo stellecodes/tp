@@ -37,6 +37,7 @@ public class UniqueTagList {
         Set<Tag> tags = toAddPerson.getTags();
         for (Tag toAddTag : tags) {
             ObservableList<Person> personList;
+
             if (contains(toAddTag)) {
                 personList = tagMap.get(toAddTag);
                 if (!personList.contains(toAddPerson)) {
