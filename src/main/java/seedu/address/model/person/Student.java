@@ -81,7 +81,7 @@ public class Student extends Person {
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("role", "Student")
+                .add("role", "[Student]")
                 .add("name", getName())
                 .add("phone", getPhone())
                 .add("email", getEmail())
