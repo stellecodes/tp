@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -78,7 +79,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
-        tags.addPersonToTags(p);
+
+        if (p instanceof Student) {
+            tags.addStudentToTags((Student) p);
+        }
     }
 
     /**
@@ -98,7 +102,10 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
-        tags.removePersonFromAllTags(key);
+
+        if (key instanceof Student) {
+            tags.removePersonFromAllTags((Student)key);
+        }
     }
 
     //// util methods
