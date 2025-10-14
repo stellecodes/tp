@@ -8,7 +8,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 
+/**
+ * Adds a parent to the address book.
+ */
 public class AddParentCommand extends AddCommand {
+
     public static final String COMMAND_WORD = "addp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a parent to the address book. "
