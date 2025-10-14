@@ -7,9 +7,9 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
 /**
- * Tests that a {@code Person}'s tags matches any of the keywords given.
+ * Tests that a {@code Student}'s tags matches any of the keywords given.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Person> {
+public class TagContainsKeywordsPredicate implements Predicate<Student> {
     private final List<String> keywords;
 
     public TagContainsKeywordsPredicate(List<String> keywords) {
@@ -17,8 +17,8 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     }
 
     @Override
-    public boolean test(Person person) {
-        return person.getTags().stream()
+    public boolean test(Student student) {
+        return student.getTags().stream()
                 .map(Tag::getTagName)
                 .anyMatch(tagName -> keywords.stream()
                         .anyMatch(keyword -> tagName.equalsIgnoreCase(keyword)));
