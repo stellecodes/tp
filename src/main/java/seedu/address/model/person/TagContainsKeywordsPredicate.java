@@ -9,7 +9,7 @@ import seedu.address.model.tag.Tag;
 /**
  * Tests that a {@code Student}'s tags matches any of the keywords given.
  */
-public class TagContainsKeywordsPredicate implements Predicate<Student> {
+public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public TagContainsKeywordsPredicate(List<String> keywords) {
@@ -17,8 +17,14 @@ public class TagContainsKeywordsPredicate implements Predicate<Student> {
     }
 
     @Override
-    public boolean test(Student student) {
-        return student.getTags().stream()
+    public boolean test(Person student) {
+        /* FilterTagCommand is general and only takes in Predicate<Person>
+         * But Predicate do not accept generics and there is no way for the code to know
+         * that Student is a subclass of Person.
+         * Hence, we need to perform a cast here.
+         */
+        assert student instanceof Student;
+        return ((Student) student).getTags().stream()
                 .map(Tag::getTagName)
                 .anyMatch(tagName -> keywords.stream()
                         .anyMatch(keyword -> tagName.equalsIgnoreCase(keyword)));
