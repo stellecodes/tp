@@ -65,7 +65,14 @@ public class PersonCard extends UiPart<Region> {
 
         // show linked contacts if any exist
         String linkedText = getLinkedText(person);
-        linkedContacts.setText(linkedText.isEmpty() ? "" : "Linked: " + linkedText);
+        if (linkedText.isEmpty()) {
+            linkedContacts.setVisible(false);
+            linkedContacts.setManaged(false); // removes it from layout spacing
+        } else {
+            linkedContacts.setText("Linked: " + linkedText);
+            linkedContacts.setVisible(true);
+            linkedContacts.setManaged(true);
+        }
 
         // show tags if person is a student
         if (person instanceof Student) {
