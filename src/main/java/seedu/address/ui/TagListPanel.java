@@ -8,12 +8,9 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
-import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
@@ -46,7 +43,7 @@ public class TagListPanel extends UiPart<Region> {
                 if (empty || tag == null) {
                     setText(null);
                 } else {
-                    setText(tag.tagName);   // Removes the square brackets from display
+                    setText(tag.tagName); // Removes the square brackets from display
                 }
             }
         });
