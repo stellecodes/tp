@@ -49,8 +49,8 @@ public class Messages {
                 .append("; Tags: ");
 
         if (person instanceof Student) {
-            (
-            (Student) person).getTags().forEach(builder::append);
+            Student student = ((Student) person);
+            student.getTags().forEach(builder::append);
         }
 
         return builder.toString();

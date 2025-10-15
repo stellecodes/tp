@@ -69,8 +69,8 @@ public class PersonCard extends UiPart<Region> {
 
         // show tags if person is a student
         if (person instanceof Student) {
-            (
-            (Student) person).getTags().stream()
+            Student student = ((Student) person);
+            student.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {
