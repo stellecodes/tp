@@ -30,24 +30,25 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
      */
     @JsonCreator
-    public JsonAdaptedStudent(@JsonProperty("name") String name,
-                              @JsonProperty("phone") String phone,
-                              @JsonProperty("email") String email,
-                              @JsonProperty("address") String address,
-                              @JsonProperty("remark") String remark,
-                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        super(name, phone, email, address, remark);
+    public JsonAdaptedStudent(
+        @JsonProperty("role") Role role,
+        @JsonProperty("name") String name,
+        @JsonProperty("phone") String phone,
+        @JsonProperty("email") String email,
+        @JsonProperty("address") String address,
+        @JsonProperty("remark") String remark,
+        @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        super(role, name, phone, email, address, remark);
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.role = Role.STUDENT;
     }
 
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        super(source);
+        super(Role.STUDENT, source);
         for (Tag tag : source.getTags()) {
             tags.add(new JsonAdaptedTag(tag));
         }

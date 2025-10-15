@@ -1,15 +1,12 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
 import java.util.Dictionary;
-import java.util.HashSet;
 import java.util.Hashtable;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
@@ -19,7 +16,20 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Role;
-import seedu.address.model.tag.Tag;
+
+
+/**
+ * Jackson annotations to handle the polymorphic nature of Person.
+ */
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "role"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "STUDENT"),
+        @JsonSubTypes.Type(value = JsonAdaptedParent.class, name = "PARENT")
+})
 
 /**
  * Jackson-friendly version of {@link Person}.
@@ -38,11 +48,14 @@ abstract class JsonAdaptedPerson {
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
-    public JsonAdaptedPerson(@JsonProperty("name") String name,
+    @JsonCreator
+    public JsonAdaptedPerson(@JsonProperty("role") Role role,
+                             @JsonProperty("name") String name,
                              @JsonProperty("phone") String phone,
                              @JsonProperty("email") String email,
                              @JsonProperty("address") String address,
                              @JsonProperty("remark") String remark) {
+        this.role = role;
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -53,8 +66,8 @@ abstract class JsonAdaptedPerson {
     /**
      * Converts a given {@code Person} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Person source) {
-        role = source.getRole();
+    public JsonAdaptedPerson(Role personRole, Person source) {
+        role = personRole;
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
