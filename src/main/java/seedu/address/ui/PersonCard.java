@@ -68,10 +68,10 @@ public class PersonCard extends UiPart<Region> {
         linkedContacts.setText(linkedText.isEmpty() ? "" : "Linked: " + linkedText);
 
         // show tags if person is a student
-        if (person instanceof Student) {(
-                (Student) person).getTags().stream()
-                    .sorted(Comparator.comparing(tag -> tag.tagName))
-                    .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person instanceof Student) { (
+            (Student) person).getTags().stream()
+                .sorted(Comparator.comparing(tag -> tag.tagName))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {
             tags.getChildren().clear();
         }

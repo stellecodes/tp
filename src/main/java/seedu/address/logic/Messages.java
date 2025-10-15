@@ -48,8 +48,8 @@ public class Messages {
                 .append(person.getRemark())
                 .append("; Tags: ");
 
-        if (person instanceof Student) {(
-                (Student) person).getTags().forEach(builder::append);
+        if (person instanceof Student) { (
+            (Student) person).getTags().forEach(builder::append);
         }
 
         return builder.toString();
