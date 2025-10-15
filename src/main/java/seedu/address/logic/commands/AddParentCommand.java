@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Parent;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -49,5 +50,12 @@ public class AddParentCommand extends AddCommand {
 
         AddParentCommand otherAddParentCommand = (AddParentCommand) other;
         return toAdd.equals(otherAddParentCommand.toAdd);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("toAddP", toAdd)
+                .toString();
     }
 }
