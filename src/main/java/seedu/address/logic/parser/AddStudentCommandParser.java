@@ -7,6 +7,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -35,7 +36,7 @@ public class AddStudentCommandParser extends AddCommandParser {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_REMARK, PREFIX_TAG);
 
-        Dictionary<String, Object> fieldSet= setCommonFields(argMultimap);
+        Dictionary<String, Object> fieldSet= setCommonFields(Role.STUDENT, argMultimap);
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 

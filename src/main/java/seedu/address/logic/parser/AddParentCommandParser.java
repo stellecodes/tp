@@ -8,6 +8,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Role;
 
 import java.util.Dictionary;
 
@@ -32,7 +33,7 @@ public class AddParentCommandParser extends AddCommandParser {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_REMARK);
 
-        Dictionary<String, Object> fieldSet= setCommonFields(argMultimap);
+        Dictionary<String, Object> fieldSet= setCommonFields(Role.PARENT,argMultimap);
 
         Parent parent = new Parent((Name) fieldSet.get("name"), (Phone) fieldSet.get("phone"),
                 (Email) fieldSet.get("email"), (Address) fieldSet.get("address"),
