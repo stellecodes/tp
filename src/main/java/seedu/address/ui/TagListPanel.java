@@ -38,5 +38,17 @@ public class TagListPanel extends UiPart<Region> {
         // Wrap as observable and show
         ObservableList<Tag> observableTags = FXCollections.observableArrayList(sortedTags);
         tagListView.setItems(observableTags);
+
+        tagListView.setCellFactory(listView -> new javafx.scene.control.ListCell<>() {
+            @Override
+            protected void updateItem(Tag tag, boolean empty) {
+                super.updateItem(tag, empty);
+                if (empty || tag == null) {
+                    setText(null);
+                } else {
+                    setText(tag.tagName);   // Removes the square brackets from display
+                }
+            }
+        });
     }
 }
