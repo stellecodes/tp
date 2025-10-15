@@ -38,4 +38,3 @@ public class FindLinkCommandParser implements Parser<FindLinkCommand> {
         return new FindLinkCommand(nameOpt.get());
     }
 }
-
