@@ -51,4 +51,13 @@ public class TagListPanel extends UiPart<Region> {
             }
         });
     }
+
+    /**
+     * Updates tagListView with changes to uniqueTagList if any
+     */
+    public void updateTags(UniqueTagList uniqueTagList) {
+        tagListView.setItems(
+                FXCollections.observableArrayList(uniqueTagList.getTags())
+        );
+    }
 }
