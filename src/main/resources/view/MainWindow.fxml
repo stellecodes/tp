@@ -46,11 +46,11 @@
           </padding>
         </StackPane>
 
-        <SplitPane fx:id="mainContentSplitPane" orientation="HORIZONTAL" VBox.vgrow="ALWAYS" dividerPositions="0.7">
+        <SplitPane fx:id="mainContentSplitPane" VBox.vgrow="ALWAYS" dividerPositions="0.9">
           <items>
             <StackPane fx:id="personListPanelPlaceholder" />
 
-            <StackPane fx:id="tagListPanelPlaceholder" prefWidth="200" />
+            <StackPane fx:id="tagListPanelPlaceholder"/>
           </items>
         </SplitPane>
 
