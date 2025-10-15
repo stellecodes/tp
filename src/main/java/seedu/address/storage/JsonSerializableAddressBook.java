@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -37,7 +39,20 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(source.getPersonList().stream().map(this::identifyContactType).collect(Collectors.toList()));
+    }
+
+    /**
+     * Helper function to be used with JsonSerializableAddressBook to use the appropriate JsonAdapterPerson class
+     * @param p a Person object
+     * @return an instance of the appropriate child class
+     */
+    private JsonAdaptedPerson identifyContactType(Person p) {
+        if (p instanceof Student) {
+            return new JsonAdaptedStudent((Student) p);
+        } else {
+            return new JsonAdaptedParent(p);
+        }
     }
 
     /**
