@@ -160,15 +160,15 @@ public class PersonTest {
 
     @Test
     public void toStringMethod() {
-        String expectedStudent = Person.class.getCanonicalName() + "{name=" + ALICE.getName()
+        String expectedStudent = Student.class.getCanonicalName() + "{role=[Student], name=" + ALICE.getName()
                 + ", phone=" + ALICE.getPhone() + ", email=" + ALICE.getEmail() + ", address="
                 + ALICE.getAddress() + ", remark=" + ALICE.getRemark() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expectedStudent, ALICE.toString());
 
-        String expectedParent = Person.class.getCanonicalName() + "{name=" + CARL.getName()
+        String expectedParent = Parent.class.getCanonicalName() + "{role=[Parent], name=" + CARL.getName()
                 + ", phone=" + CARL.getPhone() + ", email=" + CARL.getEmail() + ", address="
                 + CARL.getAddress() + ", remark=" + CARL.getRemark() + "}";
-        assertEquals(expectedStudent, CARL.toString());
+        assertEquals(expectedParent, CARL.toString());
     }
 
     @Test
@@ -176,7 +176,7 @@ public class PersonTest {
         Remark remark1 = new Remark("Hates Math");
         Remark remark2 = new Remark("Loves Math");
         Student studentWithRemark1 = new PersonBuilder().withRemark("Hates Math").buildStudent();
-        Parent parentWithRemark2 = new PersonBuilder().withRemark("Teaches Math at ABS School").buildParent();
+        Parent parentWithRemark2 = new PersonBuilder().withRemark("Loves Math").buildParent();
         Parent parentWithNoRemark = new PersonBuilder().withRemark("").buildParent();
 
         assertEquals(remark1.remarks, studentWithRemark1.getRemark().remarks);

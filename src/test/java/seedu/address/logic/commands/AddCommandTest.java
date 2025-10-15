@@ -132,11 +132,11 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         AddStudentCommand addStudentCommand = new AddStudentCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAddS=" + ALICE + "}";
+        String expected = AddStudentCommand.class.getCanonicalName() + "{toAddS=" + ALICE + "}";
         assertEquals(expected, addStudentCommand.toString());
 
         AddParentCommand addParentCommand = new AddParentCommand(CARL);
-        String expectedParent = AddCommand.class.getCanonicalName() + "{toAddP=" + CARL + "}";
+        String expectedParent = AddParentCommand.class.getCanonicalName() + "{toAddP=" + CARL + "}";
         assertEquals(expectedParent, addParentCommand.toString());
     }
 
