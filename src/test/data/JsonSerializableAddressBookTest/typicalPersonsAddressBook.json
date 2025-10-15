@@ -1,6 +1,7 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
+    "role" : "STUDENT",
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
@@ -8,6 +9,7 @@
     "remark" : "",
     "tags" : [ "friends" ]
   }, {
+    "role" : "STUDENT",
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
@@ -15,6 +17,7 @@
     "remark" : "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
+    "role" : "PARENT",
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
@@ -22,6 +25,7 @@
     "remark" : "",
     "tags" : [ ]
   }, {
+    "role" : "PARENT",
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
@@ -29,6 +33,7 @@
     "remark" : "",
     "tags" : [ "friends" ]
   }, {
+    "role" : "PARENT",
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
@@ -36,6 +41,7 @@
     "address" : "michegan ave",
     "tags" : [ ]
   }, {
+    "role" : "PARENT",
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
@@ -43,6 +49,7 @@
     "remark" : "",
     "tags" : [ ]
   }, {
+    "role" : "PARENT",
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
