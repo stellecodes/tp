@@ -17,7 +17,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
 import seedu.address.model.person.Role;
 
-
+/**
+ * Jackson-friendly version of {@link Person}.
+ */
 // Jackson annotations to handle the polymorphic nature of Person.
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -29,9 +31,6 @@ import seedu.address.model.person.Role;
     @JsonSubTypes.Type(value = JsonAdaptedParent.class, name = "PARENT")
 })
 
-/**
- * Jackson-friendly version of {@link Person}.
- */
 abstract class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";

@@ -39,14 +39,17 @@ public abstract class AddCommandParser implements Parser<AddCommand> {
      * Returns a Dictionary with the parsed fields.
      * @throws ParseException if the user input does not conform the expected format
      */
-    protected static Dictionary<String, Object> setCommonFields(Role role, ArgumentMultimap argMultimap) throws ParseException {
+    protected static Dictionary<String, Object> setCommonFields(Role role,
+                                                                ArgumentMultimap argMultimap) throws ParseException {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
             if (role == Role.STUDENT) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddStudentCommand.MESSAGE_USAGE));
             } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddParentCommand.MESSAGE_USAGE));
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        AddParentCommand.MESSAGE_USAGE));
             }
         }
 
