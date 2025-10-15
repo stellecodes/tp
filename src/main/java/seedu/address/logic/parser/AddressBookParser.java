@@ -22,6 +22,7 @@ import seedu.address.logic.commands.LinkCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.ShowAllCommand;
 import seedu.address.logic.commands.UnlinkCommand;
+import seedu.address.logic.commands.FindLinkCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
@@ -96,6 +97,9 @@ public class AddressBookParser {
 
         case UnlinkCommand.COMMAND_WORD:
             return new UnlinkCommandParser(model).parse(arguments);
+
+        case FindLinkCommand.COMMAND_WORD:
+            return new FindLinkCommandParser().parse(arguments);
 
         case FilterTagCommand.COMMAND_WORD:
             return new FilterTagCommandParser().parse(arguments);
