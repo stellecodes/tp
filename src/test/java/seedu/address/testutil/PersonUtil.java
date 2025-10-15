@@ -8,7 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddParentCommand;
 import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -44,7 +43,8 @@ public class PersonUtil {
         sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
 
         if (person instanceof Student) {
-            ((Student) person).getTags().stream().forEach(
+            Student student = ((Student) person);
+            student.getTags().stream().forEach(
                     s -> sb.append(PREFIX_TAG + s.tagName + " ")
             );
         }
