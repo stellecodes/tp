@@ -16,6 +16,9 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    // Role field
+    private final Role role;
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -28,13 +31,18 @@ public class Person {
     /**
      * Every field must be present and not null except remark.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark) {
+    public Person(Role role, Name name, Phone phone, Email email, Address address, Remark remark) {
+        this.role = role;
         requireAllNonNull(name, phone, email, address);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.remark = remark;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     public Name getName() {
@@ -109,5 +117,4 @@ public class Person {
                 .add("remark", remark)
                 .toString();
     }
-
 }

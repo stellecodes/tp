@@ -5,8 +5,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Remark;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
@@ -29,26 +31,26 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      */
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email,
-                             @JsonProperty("address") String address,
-                             @JsonProperty("remark") String remark,
-                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                              @JsonProperty("phone") String phone,
+                              @JsonProperty("email") String email,
+                              @JsonProperty("address") String address,
+                              @JsonProperty("remark") String remark,
+                              @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         super(name, phone, email, address, remark);
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        this.role = Role.STUDENT;
     }
 
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
     public JsonAdaptedStudent(Student source) {
-        super(source.getName().fullName, source.getPhone().value, source.getEmail().value,
-                source.getAddress().value, source.getRemark().remarks);
-        tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+        super(source);
+        for (Tag tag : source.getTags()) {
+            tags.add(new JsonAdaptedTag(tag));
+        }
     }
 
     @Override
@@ -68,4 +70,3 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
                 (Remark) fieldSet.get("modelRemark"), modelTags);
     }
 }
-

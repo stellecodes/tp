@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Role.STUDENT;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,7 +23,7 @@ public class Student extends Person {
      * Every field must be present and not null except remark.
      */
     public Student(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
-        super(name, phone, email, address, remark);
+        super(STUDENT, name, phone, email, address, remark);
         requireAllNonNull(name, phone, email, address, tags);
         this.tags.addAll(tags);
     }

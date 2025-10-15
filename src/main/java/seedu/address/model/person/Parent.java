@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.Role.PARENT;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -20,7 +21,7 @@ public class Parent extends Person {
      * Every field must be present and not null except remark.
      */
     public Parent(Name name, Phone phone, Email email, Address address, Remark remark) {
-        super(name, phone, email, address, remark);
+        super(PARENT, name, phone, email, address, remark);
         requireAllNonNull(name, phone, email, address);
     }
 
