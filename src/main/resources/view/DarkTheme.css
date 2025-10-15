@@ -350,3 +350,48 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.tag-list-panel {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #e5e7eb;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 10;
+}
+
+#tagTitle {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2937;
+}
+
+#tagListView {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-padding: 5;
+    -fx-border-color: transparent;
+}
+
+#tagListView .list-cell {
+    -fx-background-radius: 8;
+    -fx-background-color: #e0f2fe; /* light blue */
+    -fx-text-fill: #1e3a8a;        /* darker blue text */
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 13px;
+    -fx-margin: 4;
+}
+
+#tagListView .list-cell:hover {
+    -fx-background-color: #bfdbfe;
+}
+#tagListView .list-cell:filled:selected {
+    -fx-background-color: #93c5fd;
+    -fx-text-fill: white;
+}
+
+/* no empty cells under existing tags */
+#tagListView .list-cell:empty,
+#tagListView .list-cell:empty:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
