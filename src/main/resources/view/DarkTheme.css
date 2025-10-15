@@ -103,14 +103,21 @@
     -fx-label-padding: 0 0 0 0;
     -fx-graphic-text-gap : 0;
     -fx-padding: 0 0 0 0;
+    -fx-background-color: transparent;
 }
 
-.list-cell:filled:even {
-    -fx-background-color: #d3e5f2;
+.student-card {
+    -fx-background-color: #a8cfff;
+    -fx-background-radius: 8;
+    -fx-border-color: #93c5fd;
+    -fx-border-radius: 8;
 }
 
-.list-cell:filled:odd {
-    -fx-background-color: #c7e7ff;
+.parent-card {
+    -fx-background-color: #dbbdff;
+    -fx-background-radius: 8;
+    -fx-border-color: #fcd34d;
+    -fx-border-radius: 8;
 }
 
 .list-cell:filled:selected {
@@ -317,8 +324,8 @@
 }
 
 #cardPane {
-    -fx-background-color: transparent;
-    -fx-border-width: 0;
+    -fx-border-width: 2;
+    -fx-border-color: white;
 }
 
 #commandTypeLabel {
@@ -347,8 +354,7 @@
 }
 
 .contact-link {
-    -fx-text-fill: #000000;
-    -fx-background-color: #ffcceb;
+    -fx-background-color: white;
     -fx-padding: 1 3 1 3;
     -fx-border-radius: 2;
     -fx-background-radius: 2;

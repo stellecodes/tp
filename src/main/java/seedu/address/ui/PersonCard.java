@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.logic.Logic;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -82,6 +83,14 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {
             tags.getChildren().clear();
+        }
+
+        // Apply background color based on type
+        cardPane.getStyleClass().removeAll("student-card", "parent-card");
+        if (person instanceof Student) {
+            cardPane.getStyleClass().add("student-card");
+        } else if (person instanceof Parent) {
+            cardPane.getStyleClass().add("parent-card");
         }
     }
 
