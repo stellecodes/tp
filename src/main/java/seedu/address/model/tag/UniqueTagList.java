@@ -34,6 +34,7 @@ public class UniqueTagList {
      * If the tag does not exist, it is created.
      */
     public void addStudentToTags(Student toAddStudent) {
+        // Only students have tags, so we can just use Student objects here
         requireNonNull(toAddStudent);
         Set<Tag> tags = toAddStudent.getTags();
         for (Tag toAddTag : tags) {
