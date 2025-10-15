@@ -9,16 +9,16 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.exceptions.PersonNotFoundInTagException;
+import seedu.address.model.person.Student;
+import seedu.address.model.tag.exceptions.StudentNotFoundInTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
- * A hashmap that maps each unique Tag to an ObservableList of Person objects.
+ * A hashmap that maps each unique Tag to an ObservableList of Student objects.
  * Enforces uniqueness of tags and non-null constraints.
  */
 public class UniqueTagList {
-    private final Map<Tag, ObservableList<Person>> tagMap = new HashMap<>();
+    private final Map<Tag, ObservableList<Student>> tagMap = new HashMap<>();
 
     /**
      * Returns true if the list contains an equivalent tag as the given argument.
@@ -29,62 +29,62 @@ public class UniqueTagList {
     }
 
     /**
-     * Adds a person to the list of persons for the given tag.
+     * Adds a student to the list of students for the given tag.
      * If the tag does not exist, it is created.
      */
-    public void addPersonToTags(Person toAddPerson) {
-        requireNonNull(toAddPerson);
-        Set<Tag> tags = toAddPerson.getTags();
+    public void addStudentToTags(Student toAddStudent) {
+        // Only students have tags, so we can just use Student objects here
+        requireNonNull(toAddStudent);
+        Set<Tag> tags = toAddStudent.getTags();
         for (Tag toAddTag : tags) {
-            ObservableList<Person> personList;
-
+            ObservableList<Student> studentList;
             if (contains(toAddTag)) {
-                personList = tagMap.get(toAddTag);
-                if (!personList.contains(toAddPerson)) {
-                    personList.add(toAddPerson);
+                studentList = tagMap.get(toAddTag);
+                if (!studentList.contains(toAddStudent)) {
+                    studentList.add(toAddStudent);
                 }
                 continue;
             } else {
-                personList = FXCollections.observableArrayList();
-                personList.add(toAddPerson);
+                studentList = FXCollections.observableArrayList();
+                studentList.add(toAddStudent);
             }
-            tagMap.put(toAddTag, personList);
+            tagMap.put(toAddTag, studentList);
         }
     }
 
     /**
-     * Removes a person from one associated tag.
+     * Removes a student from one associated tag.
      */
-    public void removePersonFromTag(Tag toRemoveTag, Person toRemovePerson) {
-        requireAllNonNull(toRemovePerson);
+    public void removeStudentFromTag(Tag toRemoveTag, Student toRemoveStudent) {
+        requireAllNonNull(toRemoveStudent);
         if (!contains(toRemoveTag)) {
             throw new TagNotFoundException();
         }
-        ObservableList<Person> persons = tagMap.get(toRemoveTag);
+        ObservableList<Student> students = tagMap.get(toRemoveTag);
         boolean found = false;
-        for (int i = 0; i < persons.size(); i++) {
-            if (persons.get(i).isSamePerson(toRemovePerson)) {
-                persons.remove(i);
+        for (int i = 0; i < students.size(); i++) {
+            if (students.get(i).isSamePerson(toRemoveStudent)) {
+                students.remove(i);
                 found = true;
                 break;
             }
         }
         if (!found) {
-            throw new PersonNotFoundInTagException();
+            throw new StudentNotFoundInTagException();
         }
     }
 
     /**
-     * Removes a person from its associated tags when it is deleted.
+     * Removes a student from its associated tags when it is deleted.
      */
-    public void removePersonFromAllTags(Person toRemovePerson) {
-        requireNonNull(toRemovePerson);
-        Set<Tag> tags = toRemovePerson.getTags();
+    public void removePersonFromAllTags(Student toRemoveStudent) {
+        requireNonNull(toRemoveStudent);
+        Set<Tag> tags = toRemoveStudent.getTags();
         for (Tag tag : tags) {
-            ObservableList<Person> persons = tagMap.get(tag);
-            for (int i = 0; i < persons.size(); i++) {
-                if (persons.get(i).isSamePerson(toRemovePerson)) {
-                    persons.remove(i);
+            ObservableList<Student> students = tagMap.get(tag);
+            for (int i = 0; i < students.size(); i++) {
+                if (students.get(i).isSameStudent(toRemoveStudent)) {
+                    students.remove(i);
                     break;
                 }
             }
