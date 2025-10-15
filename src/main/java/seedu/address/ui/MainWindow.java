@@ -183,6 +183,7 @@ public class MainWindow extends UiPart<Stage> {
         try {
             CommandResult commandResult = logic.execute(commandText);
             tagListPanel.updateTags(logic.getAddressBook().getTagList()); // Ensure tag list is updated
+            personListPanel.refresh(); // Ensure contacts are updated for changes
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
