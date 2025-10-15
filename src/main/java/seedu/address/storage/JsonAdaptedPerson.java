@@ -18,17 +18,15 @@ import seedu.address.model.person.Remark;
 import seedu.address.model.person.Role;
 
 
-/**
- * Jackson annotations to handle the polymorphic nature of Person.
- */
+// Jackson annotations to handle the polymorphic nature of Person.
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.EXISTING_PROPERTY,
         property = "role"
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "STUDENT"),
-        @JsonSubTypes.Type(value = JsonAdaptedParent.class, name = "PARENT")
+    @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "STUDENT"),
+    @JsonSubTypes.Type(value = JsonAdaptedParent.class, name = "PARENT")
 })
 
 /**

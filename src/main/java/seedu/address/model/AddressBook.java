@@ -104,7 +104,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
 
         if (key instanceof Student) {
-            tags.removePersonFromAllTags((Student)key);
+            tags.removePersonFromAllTags((Student) key);
         }
     }
 

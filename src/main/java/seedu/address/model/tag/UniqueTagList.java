@@ -9,7 +9,6 @@ import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.exceptions.StudentNotFoundInTagException;
 import seedu.address.model.tag.exceptions.TagNotFoundException;

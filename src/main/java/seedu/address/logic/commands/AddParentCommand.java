@@ -1,13 +1,13 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Parent;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+
+import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.person.Parent;
 
 /**
  * Adds a parent to the address book.
