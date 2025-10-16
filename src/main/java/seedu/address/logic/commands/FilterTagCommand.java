@@ -43,4 +43,9 @@ public class FilterTagCommand extends Command {
         FilterTagCommand otherFilterTagCommand = (FilterTagCommand) other;
         return predicate.equals(otherFilterTagCommand.predicate);
     }
+
+    @Override
+    public String toString() {
+        return getClass().getCanonicalName() + "{predicate=" + predicate + "}";
+    }
 }

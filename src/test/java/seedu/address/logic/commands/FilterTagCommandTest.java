@@ -77,6 +77,55 @@ public class FilterTagCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
     }
 
+    @Test
+    public void execute_singleTagKeyword_somePeopleFound() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(
+                Collections.singletonList("friends"));
+        FilterTagCommand command = new FilterTagCommand(predicate);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format("%d people found with the specified tag(s).",
+                expectedModel.getFilteredPersonList().size());
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_multipleTagKeywords_unionOfPeopleFound() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(
+                Arrays.asList("friends", "owesMoney"));
+        FilterTagCommand command = new FilterTagCommand(predicate);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format("%d people found with the specified tag(s).",
+                expectedModel.getFilteredPersonList().size());
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_tagNotFound_noPersonFound() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(
+                Collections.singletonList("nonexistentTag"));
+        FilterTagCommand command = new FilterTagCommand(predicate);
+
+        expectedModel.updateFilteredPersonList(predicate);
+        String expectedMessage = String.format("%d people found with the specified tag(s).",
+                expectedModel.getFilteredPersonList().size());
+
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertTrue(expectedModel.getFilteredPersonList().isEmpty());
+    }
+
+    @Test
+    public void toStringMethod() {
+        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(
+                Collections.singletonList("keyword"));
+        FilterTagCommand command = new FilterTagCommand(predicate);
+        String expected = FilterTagCommand.class.getCanonicalName() + "{predicate=" + predicate + "}";
+        assertEquals(expected, command.toString());
+    }
+
     /**
      * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}, removing blanks.
      */
