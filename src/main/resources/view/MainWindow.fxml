@@ -50,7 +50,7 @@
           <items>
             <StackPane fx:id="personListPanelPlaceholder" />
 
-            <StackPane fx:id="tagListPanelPlaceholder"/>
+            <StackPane fx:id="tagListPanelPlaceholder" maxWidth="200"/>
           </items>
         </SplitPane>
 
