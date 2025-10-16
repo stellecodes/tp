@@ -21,16 +21,21 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   <img src="images/Ui.png" alt="Ui" width="400" style="height:auto;">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * Lists all contacts: `list`/`showall` 
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
-
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+   * Add contacts:
+     * Adds a student named `John` with tag `Math` to the Address Book:
+       * `adds n/John p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Hate school t/Math`
+     * Adds a parent named `Jane` to the Address Book:
+       * `addp n/Jane p/87654321 2/jane@example.com a/Jane street, block 321, #01-01 r/Love John`
+   * Find all contacts with names containing `John`: `find John`
+    
+   * Deletes the 3rd contact shown in the current list: `delete 3`.
 
    * `clear` : Deletes all contacts.
 
@@ -68,51 +73,64 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
-
+<img src="images/helpMessage.png" alt="help" width="400" style="height:auto;">
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a contact: `adds`/`addp`
 
-Adds a person to the address book.
+Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+All contacts contain an **_optional_** `remark` field and the following **_compulsory_** fields:
+- `name`
+- `phone number`
+- `email`
+- `address`<br>
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have any number of tags (including 0)
+Students contain an additional **_optional_** `tags` field<br>
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** Only existing tags in the tag list can be added to a student.<br>
+Use the `add_tags` command to add new tags before use.
+</div>
+
+Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
+Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+A student can have any number of tags (including 0).<br>
+The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
+* `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal r/Prefers email`
 
-### Listing all persons : `list`
+### Listing all contacts : `list`/`showall`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts in the address book.
 
-Format: `list`
+Format: `list`/`showall`
 
-### Editing a person : `edit`
+### Editing a contact : `edit`
 
-Edits an existing person in the address book.
+Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person’s tags by typing `t/` without
-    specifying any tags after it.
+* When editing tags, the existing tags of the person will be replaced.
+* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating persons by name: `find`
+### Locating contacts by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -126,7 +144,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find John` returns `john` and `John Doe`
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+<img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
 
 ### Filtering by tags: `filter`
 
@@ -144,12 +162,6 @@ Examples:
 * John Doe has Math tag, Peter has Chem and Math tags
 * `filter Math` returns `John Doe`
 * `filter Math Chem` returns `John Doe` and `Peter`
-
-### Show all contacts: `showall`
-
-Show all contacts with no filters.
-
-Format: `showall`
 
 ### Deleting a person : `delete`
 
@@ -197,19 +209,20 @@ Examples:
 * `findlink n/Bob Lee` shows “0 linked contact(s)” if Bob Lee has no linked persons.
 * `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
 
-### Adding more tags : `add_tags t/[TAG] t/[TAG]`
-*Adds more possible tags to use
-*Possible to add multiple tags at once
-
-### Deleting tag types: `delete_tags t/[TAG] t/[TAG]`
-*Deletes a tag type from the possible tags list. This will also delete the tag from all persons who have this tag.
-*Possible to delete multiple tags at once
-
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+### Tag management
+#### Adding tags : `add_tags t/[TAG] t/[TAG]`
+*Adds more possible tags to use
+*Possible to add multiple tags at once
+
+#### Deleting tags : `delete_tags t/[TAG] t/[TAG]`
+*Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
+*Possible to delete multiple tags at once
 
 ### Exiting the program : `exit`
 
@@ -230,9 +243,6 @@ If your changes to the data file makes its format invalid, AddressBook will disc
 Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -254,11 +264,13 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Adds** | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `adds n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
+**Addp** | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/87654321 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
 **Clear** | `clear`
 **Delete** | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **FindLink** | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
+**Filter** | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **List** | `list`
 **Help** | `help`
