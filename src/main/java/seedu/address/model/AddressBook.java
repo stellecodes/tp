@@ -3,12 +3,14 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 
 /**
@@ -94,6 +96,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+        tags.removePersonFromAllTags((Student) target);
+        tags.addStudentToTags((Student) editedPerson);
     }
 
     /**
@@ -125,6 +129,32 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public boolean personHasValidTags(Person person) {
+        return tags.personHasValidTags(person);
+    }
+
+    @Override
+    public boolean hasTag(Tag tag) {
+        requireNonNull(tag);
+        return tags.contains(tag);
+    }
+
+    @Override
+    public void addTagTypes(Set<Tag> tags) {
+        this.tags.addTagTypes(tags);
+    }
+
+    @Override
+    public void deleteTagTypes(Set<Tag> tags) {
+        this.tags.deleteTagTypes(tags);
+    }
+
+    @Override
+    public Set<Tag> getTags() {
+        return tags.getTags();
     }
 
     @Override
