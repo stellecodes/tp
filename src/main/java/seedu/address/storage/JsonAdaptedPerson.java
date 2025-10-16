@@ -3,8 +3,6 @@ package seedu.address.storage;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -23,7 +21,7 @@ import seedu.address.model.person.Role;
 // Jackson annotations to handle the polymorphic nature of Person.
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        include = JsonTypeInfo.As.PROPERTY,
         property = "role"
 )
 @JsonSubTypes({
@@ -44,20 +42,21 @@ abstract class JsonAdaptedPerson {
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
+     * Note: this constructor is intended to be called by subclasses' @JsonCreator.
      */
-    @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("role") Role role,
-                             @JsonProperty("name") String name,
-                             @JsonProperty("phone") String phone,
-                             @JsonProperty("email") String email,
-                             @JsonProperty("address") String address,
-                             @JsonProperty("remark") String remark) {
+    public JsonAdaptedPerson(Role role,
+                             String name,
+                             String phone,
+                             String email,
+                             String address,
+                             String remark) {
         this.role = role;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.remark = remark;
+        // treat missing remark as empty string per project convention
+        this.remark = (remark == null) ? "" : remark;
     }
 
     /**
@@ -117,9 +116,9 @@ abstract class JsonAdaptedPerson {
         }
         fieldSet.put("modelAddress", new Address(address));
 
+        // remark may be empty string by convention; ensure non-null and valid
         if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Address.class.getSimpleName()));
+            remark = "";
         }
         if (!Remark.isValidRemark(remark)) {
             throw new IllegalValueException(Remark.MESSAGE_CONSTRAINTS);
