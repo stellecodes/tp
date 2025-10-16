@@ -9,6 +9,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.logic.Logic;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -65,7 +66,14 @@ public class PersonCard extends UiPart<Region> {
 
         // show linked contacts if any exist
         String linkedText = getLinkedText(person);
-        linkedContacts.setText(linkedText.isEmpty() ? "" : "Linked: " + linkedText);
+        if (linkedText.isEmpty()) {
+            linkedContacts.setVisible(false);
+            linkedContacts.setManaged(false); // removes it from layout spacing
+        } else {
+            linkedContacts.setText("Linked: " + linkedText);
+            linkedContacts.setVisible(true);
+            linkedContacts.setManaged(true);
+        }
 
         // show tags if person is a student
         if (person instanceof Student) {
@@ -75,6 +83,14 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {
             tags.getChildren().clear();
+        }
+
+        // Apply background color based on type
+        cardPane.getStyleClass().removeAll("student-card", "parent-card");
+        if (person instanceof Student) {
+            cardPane.getStyleClass().add("student-card");
+        } else if (person instanceof Parent) {
+            cardPane.getStyleClass().add("parent-card");
         }
     }
 

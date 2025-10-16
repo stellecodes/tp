@@ -50,4 +50,11 @@ public class PersonListPanel extends UiPart<Region> {
         }
     }
 
+    /**
+     * Refreshes the contact display for any changes
+     */
+    public void refresh() {
+        personListView.refresh();
+    }
+
 }
