@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.util.RelationshipGraph;
 
 /**
  * Wraps all data at the address-book level
@@ -21,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueTagList tags;
+    private final RelationshipGraph relationshipGraph = new RelationshipGraph();
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -62,6 +65,10 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         this.tags.setTags(newData.getTagList());
+
+        if (newData instanceof AddressBook) {
+            this.relationshipGraph.copyFrom(((AddressBook) newData).getRelationshipGraph());
+        }
     }
 
     //// person-level operations
@@ -105,6 +112,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
+        // remove any existing links involving this person
+        removeAllLinksFor(key);
         persons.remove(key);
 
         if (key instanceof Student) {
@@ -176,4 +185,59 @@ public class AddressBook implements ReadOnlyAddressBook {
     public int hashCode() {
         return persons.hashCode();
     }
+
+    public RelationshipGraph getRelationshipGraph() {
+        return relationshipGraph;
+    }
+
+    /**
+     * Adds a bidirectional link between two persons.
+     * Returns true if successful, false if link already exists.
+     */
+    public boolean linkPersons(Person a, Person b) {
+        return relationshipGraph.addLink(a, b);
+    }
+
+    /**
+     * Removes a bidirectional link between two persons.
+     * Returns true if successful, false if no such link exists.
+     */
+    public boolean unlinkPersons(Person a, Person b) {
+        return relationshipGraph.removeLink(a, b);
+    }
+
+    /**
+     * Returns all persons linked to the given person.
+     */
+    public List<Person> getLinkedPersons(Person person) {
+        return new ArrayList<>(relationshipGraph.getLinked(person));
+    }
+
+    /**
+     * Removes all relationships involving this person (called during delete).
+     */
+    public void removeAllLinksFor(Person person) {
+        relationshipGraph.removeAll(person);
+    }
+
+    /**
+     * Returns the first {@code Person} in the address book whose name matches the given {@code name},
+     * ignoring case sensitivity.
+     * <p>
+     * This method performs a linear search over the list of persons stored in the address book.
+     * If multiple persons share the same name, the first match encountered will be returned.
+     * If no match is found, {@code null} is returned.
+     *
+     * @param name The name of the person to find. Must not be {@code null}.
+     * @return The matching {@code Person} object if found; otherwise {@code null}.
+     */
+    public Person findPersonByName(String name) {
+        for (Person p : persons) {
+            if (p.getName().fullName.equalsIgnoreCase(name)) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 }
