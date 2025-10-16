@@ -145,6 +145,12 @@ Examples:
 * `filter Math` returns `John Doe`
 * `filter Math Chem` returns `John Doe` and `Peter`
 
+### Show all contacts: `showall`
+
+Show all contacts with no filters.
+
+Format: `showall`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
