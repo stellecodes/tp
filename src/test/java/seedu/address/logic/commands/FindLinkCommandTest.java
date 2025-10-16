@@ -5,16 +5,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Predicate;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -30,14 +35,15 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Integration-style tests for {@link FindLinkCommand} using a purpose-built Model stub.
+ * Integration-style tests for {@link FindLinkCommand} using a purpose-built
+ * Model stub.
  */
 public class FindLinkCommandTest {
 
-    private Student alice;       // student
-    private Parent mary;         // parent
-    private Parent tom;          // parent
-    private Student bob;         // student (unlinked)
+    private Student alice; // student
+    private Parent mary; // parent
+    private Parent tom; // parent
+    private Student bob; // student (unlinked)
     private ModelStubWithPersons model;
 
     @BeforeEach
@@ -79,7 +85,6 @@ public class FindLinkCommandTest {
         assertTrue(filtered.contains(tom));
 
         // message should start with count and include Alice's summary (Messages.format)
-        String expectedPrefix = "Showing 2 linked contact(s) for " + Messages.format(alice);
         assertTrue(result.getFeedbackToUser().startsWith("Showing 2 linked contact(s)"));
         assertTrue(result.getFeedbackToUser().contains(Messages.format(alice)));
     }
@@ -197,25 +202,82 @@ public class FindLinkCommandTest {
             return addressBook;
         }
 
-        // Minimal implementations
-        @Override public void setUserPrefs(ReadOnlyUserPrefs userPrefs) { }
-        @Override public ReadOnlyUserPrefs getUserPrefs() { return prefs; }
-        @Override public GuiSettings getGuiSettings() { return prefs.getGuiSettings(); }
-        @Override public void setGuiSettings(GuiSettings guiSettings) { prefs.setGuiSettings(guiSettings); }
-        @Override public Path getAddressBookFilePath() { return prefs.getAddressBookFilePath(); }
-        @Override public void setAddressBookFilePath(Path addressBookFilePath) { prefs.setAddressBookFilePath(addressBookFilePath); }
-        @Override public void setAddressBook(ReadOnlyAddressBook addressBook) { }
-        @Override public boolean hasPerson(Person person) { return persons.contains(person); }
-        @Override public void deletePerson(Person target) { persons.remove(target); }
-        @Override public void addPerson(Person person) { persons.add(person); addressBook.addPerson(person); links.putIfAbsent(person, new HashSet<>()); }
-        @Override public void setPerson(Person target, Person editedPerson) { }
-        @Override public Set<Tag> getTags() { return new HashSet<>(); }
-        @Override public boolean personHasValidTags(Person p) { return true; }
-        @Override public boolean hasTag(Tag tag) { return false; }
-        @Override public void addTagTypes(Set<Tag> tags) { }
-        @Override public void deleteTagTypes(Set<Tag> tagsDelete) { }
+        // Minimal implementations (expanded to satisfy LeftCurly rule)
+        @Override
+        public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
+        }
+
+        @Override
+        public ReadOnlyUserPrefs getUserPrefs() {
+            return prefs;
+        }
+
+        @Override
+        public GuiSettings getGuiSettings() {
+            return prefs.getGuiSettings();
+        }
+
+        @Override
+        public void setGuiSettings(GuiSettings guiSettings) {
+            prefs.setGuiSettings(guiSettings);
+        }
+
+        @Override
+        public Path getAddressBookFilePath() {
+            return prefs.getAddressBookFilePath();
+        }
+
+        @Override
+        public void setAddressBookFilePath(Path addressBookFilePath) {
+            prefs.setAddressBookFilePath(addressBookFilePath);
+        }
+
+        @Override
+        public void setAddressBook(ReadOnlyAddressBook addressBook) {
+        }
+
+        @Override
+        public boolean hasPerson(Person person) {
+            return persons.contains(person);
+        }
+
+        @Override
+        public void deletePerson(Person target) {
+            persons.remove(target);
+        }
+
+        @Override
+        public void addPerson(Person person) {
+            persons.add(person);
+            addressBook.addPerson(person);
+            links.putIfAbsent(person, new HashSet<>());
+        }
+
+        @Override
+        public void setPerson(Person target, Person editedPerson) {
+        }
+
+        @Override
+        public Set<Tag> getTags() {
+            return new HashSet<>();
+        }
+
+        @Override
+        public boolean personHasValidTags(Person p) {
+            return true;
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            return false;
+        }
+
+        @Override
+        public void addTagTypes(Set<Tag> tags) {
+        }
+
+        @Override
+        public void deleteTagTypes(Set<Tag> tagsDelete) {
+        }
     }
 }
-
-
-

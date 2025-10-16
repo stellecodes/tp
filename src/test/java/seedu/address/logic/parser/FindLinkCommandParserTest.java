@@ -28,7 +28,7 @@ public class FindLinkCommandParserTest {
     }
 
     @Test
-    public void parse_trailingGarbage_treatedAsPartOfName_success() {
+    public void parseTrailingGarbage_treatedAsPartOfName_success() {
         // The parser does not reject trailing “unexpected” text — it becomes part of the name.
         assertParseSuccess(parser, " n/ John Tan unexpected",
                 new FindLinkCommand("John Tan unexpected"));
@@ -52,4 +52,3 @@ public class FindLinkCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindLinkCommand.MESSAGE_USAGE));
     }
 }
-
