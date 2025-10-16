@@ -128,6 +128,23 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Filtering by tags: `filter`
+
+Show students whose have any of the tags given.
+
+Format: `filter tag [MORE_TAGS]`
+
+* The search is case-insensitive. e.g `Math` will match `math`
+* The order of the tags does not matter.
+* Only the tags are searched.
+* Only full words will be matched e.g. `Math` will not match `Mathematics`
+* Students with at least one tag will be returned (i.e. `OR` search).
+
+Examples:
+* John Doe has Math tag, Peter has Chem and Math tags
+* `filter Math` returns `John Doe`
+* `filter Math Chem` returns `John Doe` and `Peter`
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
