@@ -25,4 +25,10 @@ public class ShowAllCommand extends Command {
     public boolean equals(Object other) {
         return other instanceof ShowAllCommand; // ShowAllCommand should be the same for all
     }
+
+    @Override
+    public String toString() {
+        return getClass().getCanonicalName() + "{}";
+    }
+
 }
