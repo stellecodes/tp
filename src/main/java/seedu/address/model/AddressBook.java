@@ -96,8 +96,8 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
-        tags.removePersonFromAllTags((Student) target);
-        tags.addStudentToTags((Student) editedPerson);
+        tags.removePersonFromAllTags(target);
+        tags.addStudentToTags(editedPerson);
     }
 
     /**

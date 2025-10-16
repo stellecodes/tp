@@ -34,21 +34,24 @@ public class UniqueTagList {
      * Adds a student to the list of students for the given tag.
      * If the tag does not exist, it is created.
      */
-    public void addStudentToTags(Student toAddStudent) {
+    public void addStudentToTags(Person toAddStudent) {
         // Only students have tags, so we can just use Student objects here
         requireNonNull(toAddStudent);
-        Set<Tag> tags = toAddStudent.getTags();
+        if (!(toAddStudent instanceof Student toAddStudentCasted)) {
+            return;
+        }
+        Set<Tag> tags = toAddStudentCasted.getTags();
         for (Tag toAddTag : tags) {
             ObservableList<Student> studentList;
             if (contains(toAddTag)) {
                 studentList = tagMap.get(toAddTag);
                 if (!studentList.contains(toAddStudent)) {
-                    studentList.add(toAddStudent);
+                    studentList.add(toAddStudentCasted);
                 }
                 continue;
             } else {
                 studentList = FXCollections.observableArrayList();
-                studentList.add(toAddStudent);
+                studentList.add(toAddStudentCasted);
             }
             tagMap.put(toAddTag, studentList);
         }

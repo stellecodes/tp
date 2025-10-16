@@ -2,9 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Set;
+
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
-import java.util.Set;
 
 /**
  * Lists all tags in the address book to the user.

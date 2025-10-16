@@ -1,18 +1,18 @@
 package seedu.address.logic.commands;
 
-import java.util.Set;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
-
 /**
  * Adds a person to the address book.
  */
-public class DeleteTagsCommand  extends Command {
+public class DeleteTagsCommand extends Command {
 
     public static final String COMMAND_WORD = "delete_tags";
 
