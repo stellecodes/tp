@@ -132,15 +132,27 @@ Examples:
 
 Deletes the specified person from the address book.
 
-Format: `delete INDEX`
+Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s). 
+* The index refers to the index number shown in the displayed person list. 
+* The index must be a positive integer 1, 2, 3, … 
+* When using identifiers:
+* `n/NAME` — matches the full name (case-insensitive). 
+* `e/EMAIL` — matches the exact email address (case-insensitive). 
+* `p/PHONE` — matches the exact phone number. 
+* You may combine multiple identifiers (e.g. `n/` + `e/`) to narrow down the match when multiple persons share the same name. 
+* You must use either the index form or the identifier form — not both in the same command. 
+* If multiple persons match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
+* If no match is found, the app will show a no match found message.
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2` deletes the 2nd person in the address book. 
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
+* `delete n/John Doe` deletes the contact whose name is “John Doe”. 
+* `delete e/alice@example.com` deletes the contact with the given email address.
+* `delete p/91234567 deletes` the contact with that phone number. 
+* `delete n/John Tan e/john.tan@example.com` deletes the “John Tan” identified by the provided email.
 
 ### Adding more tags : `add_tags t/[TAG] t/[TAG]`
 *Adds more possible tags to use
@@ -201,7 +213,7 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
