@@ -154,6 +154,26 @@ Examples:
 * `delete p/91234567 deletes` the contact with that phone number. 
 * `delete n/John Tan e/john.tan@example.com` deletes the “John Tan” identified by the provided email.
 
+### Finding linked contacts : `findlink`
+
+Finds and displays all contacts that are linked to a specified person.
+
+Format: `findlink n/NAME`
+
+* Shows all persons who are linked to the specified person. 
+  For example, if a student is linked to their parents, this command will display the parents’ contacts.
+* The search by `NAME` is case-insensitive and must match the person’s full name exactly.
+  (e.g. `findlink n/Alice Tan`, `findlink n/aLiCe tAn` both refer to the same contact.)
+* You must include the `n/` prefix when specifying the name. 
+* If the specified person has no linked contacts, the command will show that there are 0 linked results. 
+* If the specified name does not exist in the address book, an error message will be displayed.
+
+Examples:
+* `findlink n/Alice Tan` shows all contacts linked to Alice Tan (e.g. her parents).
+* `findlink n/Tom Tan` shows all contacts linked to Tom Tan (e.g. his children).
+* `findlink n/Bob Lee` shows “0 linked contact(s)” if Bob Lee has no linked persons.
+* `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
+
 ### Adding more tags : `add_tags t/[TAG] t/[TAG]`
 *Adds more possible tags to use
 *Possible to add multiple tags at once
@@ -216,5 +236,6 @@ Action | Format, Examples
 **Delete** | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**FindLink** | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
 **List** | `list`
 **Help** | `help`
