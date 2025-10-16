@@ -400,11 +400,18 @@
 
 #tagListView .list-cell {
     -fx-background-radius: 8;
-    -fx-background-color: #e0f2fe; /* light blue */
+    -fx-background-color: transparent;
     -fx-text-fill: #1e3a8a;        /* darker blue text */
-    -fx-padding: 6 10 6 10;
+    -fx-padding: 6 0 6 0;
     -fx-font-size: 13px;
-    -fx-margin: 4 0 0 4;
+}
+
+#tagListView .list-cell .label {
+    -fx-background-color:  #e0f2fe;
+    -fx-background-radius: 10;
+    -fx-padding: 6 10;
+    -fx-text-fill: #1e3a8a;
+    -fx-wrap-text: true;
 }
 
 #tagListView .list-cell:hover {
