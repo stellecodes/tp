@@ -142,6 +142,14 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Adding more tags : `add_tags t/[TAG] t/[TAG]`
+*Adds more possible tags to use
+*Possible to add multiple tags at once
+
+### Deleting tag types: `delete_tags t/[TAG] t/[TAG]`
+*Deletes a tag type from the possible tags list. This will also delete the tag from all persons who have this tag.
+*Possible to delete multiple tags at once
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

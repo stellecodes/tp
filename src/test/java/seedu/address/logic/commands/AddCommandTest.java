@@ -26,7 +26,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class AddCommandTest {
 
@@ -197,6 +199,29 @@ public class AddCommandTest {
         @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean personHasValidTags(Person person) {
+            return true;
+        }
+
+        @Override
+        public boolean hasTag(Tag tag) {
+            return true;
+        }
+
+        @Override
+        public void addTagTypes(java.util.Set<Tag> tags) {
+        }
+
+        @Override
+        public void deleteTagTypes(java.util.Set<Tag> tags) {
+        }
+
+        @Override
+        public java.util.Set<Tag> getTags() {
+            return new java.util.HashSet<>();
         }
 
         @Override

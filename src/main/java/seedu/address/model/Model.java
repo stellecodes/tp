@@ -2,11 +2,13 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 /**
  * The API of the Model component.
@@ -77,6 +79,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+    Set<Tag> getTags();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -105,4 +109,12 @@ public interface Model {
      */
     List<Person> getLinkedPersons(Person person);
 
+    //======= Tag Management ============================================================================
+    boolean personHasValidTags(Person p);
+
+    boolean hasTag(Tag tag);
+
+    void addTagTypes(Set<Tag> tags);
+
+    void deleteTagTypes(Set<Tag> tagsDelete);
 }
