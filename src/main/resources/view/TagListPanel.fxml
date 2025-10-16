@@ -6,5 +6,5 @@
 <?import javafx.scene.text.Text?>
 <VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" styleClass="tag-list-panel">
     <Text fx:id="tagTitle">List of your tags</Text>
-    <ListView fx:id="tagListView" VBox.vgrow="ALWAYS" />
+    <ListView fx:id="tagListView" VBox.vgrow="ALWAYS"/>
 </VBox>

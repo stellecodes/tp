@@ -404,7 +404,7 @@
     -fx-text-fill: #1e3a8a;        /* darker blue text */
     -fx-padding: 6 10 6 10;
     -fx-font-size: 13px;
-    -fx-margin: 4;
+    -fx-margin: 4 0 0 4;
 }
 
 #tagListView .list-cell:hover {
