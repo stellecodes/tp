@@ -1,7 +1,9 @@
 package seedu.address.model.person;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
@@ -13,21 +15,35 @@ public class TagContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
     public TagContainsKeywordsPredicate(List<String> keywords) {
-        this.keywords = keywords;
+        // normalize list: avoid nulls and blanks
+        this.keywords = (keywords == null)
+                ? Collections.emptyList()
+                : keywords.stream()
+                .filter(s -> s != null && !s.isBlank())
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public boolean test(Person student) {
-        /* FilterTagCommand is general and only takes in Predicate<Person>
-         * But Predicate do not accept generics and there is no way for the code to know
-         * that Student is a subclass of Person.
-         * Hence, we need to perform a cast here.
-         */
-        assert student instanceof Student;
-        return ((Student) student).getTags().stream()
+    public boolean test(Person person) {
+        // skip invalid or empty cases
+        if (person == null || keywords.isEmpty()) {
+            return false;
+        }
+
+        // only Students have tags — ignore others
+        if (!(person instanceof Student)) {
+            return false;
+        }
+
+        Student student = (Student) person;
+
+        return student.getTags().stream()
                 .map(Tag::getTagName)
-                .anyMatch(tagName -> keywords.stream()
-                        .anyMatch(keyword -> tagName.equalsIgnoreCase(keyword)));
+                .anyMatch(tagName ->
+                        keywords.stream()
+                                .anyMatch(keyword ->
+                                        tagName.equalsIgnoreCase(keyword)));
     }
 
     @Override
