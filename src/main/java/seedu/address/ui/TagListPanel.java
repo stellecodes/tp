@@ -61,7 +61,7 @@ public class TagListPanel extends UiPart<Region> {
                 if (empty || tag == null) {
                     setGraphic(null);
                 } else {
-                    label.setText(tag.tagName);  // display tag name only
+                    label.setText(tag.tagName); // display tag name only
                     setGraphic(label);
                 }
             }
