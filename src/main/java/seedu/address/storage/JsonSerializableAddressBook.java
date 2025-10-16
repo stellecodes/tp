@@ -12,7 +12,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Role;
 import seedu.address.model.person.Student;
 
 /**
@@ -25,6 +24,7 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+    private final List<JsonAdaptedLink> links = new ArrayList<>();
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
      */
@@ -39,7 +39,16 @@ class JsonSerializableAddressBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().map(this::identifyContactType).collect(Collectors.toList()));
+        persons.addAll(source.getPersonList().stream()
+                .map(this::identifyContactType)
+                .collect(Collectors.toList()));
+
+        if (source instanceof AddressBook) {
+            AddressBook ab = (AddressBook) source;
+            ab.getRelationshipGraph().getAllLinksAsPairs().forEach(
+                    pair -> links.add(new JsonAdaptedLink(pair.getKey(), pair.getValue()))
+            );
+        }
     }
 
     /**
@@ -62,20 +71,23 @@ class JsonSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
-            Person person;
-            if (jsonAdaptedPerson.role == Role.STUDENT) {
-                person = ((JsonAdaptedStudent) jsonAdaptedPerson).toModelType();
-            } else if (jsonAdaptedPerson.role == Role.PARENT) {
-                person = ((JsonAdaptedParent) jsonAdaptedPerson).toModelType();
-            } else {
-                person = jsonAdaptedPerson.toModelType();
-            }
-            if (addressBook.hasPerson(person)) {
+        for (JsonAdaptedPerson jsonPerson : persons) {
+            Person p = jsonPerson.toModelType();
+            if (addressBook.hasPerson(p)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addPerson(p);
         }
+
+        // REBUILD LINKS
+        for (JsonAdaptedLink jsonLink : links) {
+            Person a = addressBook.findPersonByName(jsonLink.getA());
+            Person b = addressBook.findPersonByName(jsonLink.getB());
+            if (a != null && b != null) {
+                addressBook.linkPersons(a, b);
+            }
+        }
+
         return addressBook;
     }
 
