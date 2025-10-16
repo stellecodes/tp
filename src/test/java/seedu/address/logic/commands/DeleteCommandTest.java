@@ -10,6 +10,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -17,7 +19,10 @@ import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -26,6 +31,8 @@ import seedu.address.model.person.Person;
 public class DeleteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    // existing AB-3 style index-based tests
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
@@ -103,18 +110,103 @@ public class DeleteCommandTest {
 
     @Test
     public void toStringMethod() {
-        Index targetIndex = Index.fromOneBased(1);
+        Index targetIndex = INDEX_FIRST_PERSON;
         DeleteCommand deleteCommand = new DeleteCommand(targetIndex);
         String expected = DeleteCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, deleteCommand.toString());
     }
 
+    // new tests: attribute-based deletion (n/, e/, p/)
+
+    @Test
+    public void execute_deleteByName_success() {
+        Person target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        DeleteCommand cmd = new DeleteCommand(
+                Optional.of(new Name(target.getName().fullName)),
+                Optional.empty(),
+                Optional.empty());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(target));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(target);
+
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteByNameCaseInsensitive_success() {
+        Person target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        String weirdCasing = target.getName().fullName.toUpperCase();
+
+        DeleteCommand cmd = new DeleteCommand(
+                Optional.of(new Name(weirdCasing)),
+                Optional.empty(),
+                Optional.empty());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(target));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(target);
+
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteByEmail_success() {
+        Person target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        DeleteCommand cmd = new DeleteCommand(
+                Optional.empty(),
+                Optional.of(new Email(target.getEmail().value)),
+                Optional.empty());
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(target));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(target);
+
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteByPhone_success() {
+        Person target = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+
+        DeleteCommand cmd = new DeleteCommand(
+                Optional.empty(),
+                Optional.empty(),
+                Optional.of(new Phone(target.getPhone().value)));
+
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                Messages.format(target));
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.deletePerson(target);
+
+        assertCommandSuccess(cmd, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_deleteByName_noMatch() {
+        DeleteCommand cmd = new DeleteCommand(
+                Optional.of(new Name("No Such Person 12345")),
+                Optional.empty(),
+                Optional.empty());
+
+        assertCommandFailure(cmd, model, DeleteCommand.MESSAGE_NO_MATCH);
+    }
+
     /**
      * Updates {@code model}'s filtered list to show no one.
      */
-    private void showNoPerson(Model model) {
-        model.updateFilteredPersonList(p -> false);
-
-        assertTrue(model.getFilteredPersonList().isEmpty());
+    private void showNoPerson(Model modelToUpdate) {
+        modelToUpdate.updateFilteredPersonList(p -> false);
+        assertTrue(modelToUpdate.getFilteredPersonList().isEmpty());
     }
 }
+
