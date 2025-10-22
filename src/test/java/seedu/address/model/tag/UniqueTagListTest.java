@@ -1,20 +1,21 @@
 package seedu.address.model.tag;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BENSON;
 
-import java.util.Collections;
 import java.util.Set;
-import javafx.collections.ObservableList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
-import seedu.address.model.tag.exceptions.StudentNotFoundInTagException;
-import seedu.address.model.tag.exceptions.TagNotFoundException;
 
-import static seedu.address.testutil.TypicalPersons.ALICE;;
-import static seedu.address.testutil.TypicalPersons.BENSON;;
+import javafx.collections.ObservableList;
+import seedu.address.model.person.Student;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 class UniqueTagListTest {
 
