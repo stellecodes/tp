@@ -163,6 +163,14 @@ public class UniqueTagList {
         return true;
     }
 
+    public ObservableList<Student> getStudentsWithTag(Tag tag) {
+        requireNonNull(tag);
+        if (!contains(tag)) {
+            throw new TagNotFoundException(tag);
+        }
+        return FXCollections.unmodifiableObservableList(tagMap.get(tag));
+    }
+
     /**
      * Adds multiple tag types to the map.
      * Returns a set of tags that were not added because they already exist.
