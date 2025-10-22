@@ -189,6 +189,41 @@ Examples:
 * `delete p/91234567 deletes` the contact with that phone number. 
 * `delete n/John Tan e/john.tan@example.com` deletes the “John Tan” identified by the provided email.
 
+### Linking a student and parent : `link`
+Links an existing student contact with a parent contact, forming a two-way relationship between them.
+
+Format: `link sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]`
+
+* `sn/` — name of the student contact (required)
+* `sp/` — phone number of the student (optional, used for disambiguation)
+* `pn/` — name of the parent contact (required)
+* `pp/` — phone number of the parent (optional, used for disambiguation)
+* 
+Examples:
+* `link sn/John Tan pn/Mrs Tan` Links student John Tan with parent Mrs Tan.
+* `link sn/Aisha Lim sp/91234567 pn/Mr Lim pp/92345678` Links the student and parent when there are duplicate names.
+
+Notes:
+* A student can be linked to multiple parents (e.g., mother and father).
+* A parent can be linked to multiple students (e.g., siblings).
+* Links are bidirectional — linking a student to a parent automatically links the parent to that student.
+* Link relationships are automatically saved in the data file and reloaded when the app restarts.
+* Deleting a contact automatically removes all links associated with that contact.
+
+### Unlinking a student and parent : `unlink`
+Removes an existing link between a student and a parent contact.
+
+Format: `unlink sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]`
+
+* `sn/` — name of the student contact (required)
+* `sp/` — phone number of the student (optional, used for disambiguation)
+* `pn/` — name of the parent contact (required)
+* `pp/` — phone number of the parent (optional, used for disambiguation)
+
+Examples:
+* unlink sn/John Tan pn/Mrs Tan `Removes the link between John Tan and Mrs Tan.`
+* unlink sn/Aisha Lim sp/91234567 pn/Mr Lim pp/92345678 `Removes a specific link if there are duplicate names.`
+
 ### Finding linked contacts : `findlink`
 
 Finds and displays all contacts that are linked to a specified person.
@@ -270,6 +305,8 @@ Action | Format, Examples
 **Delete** | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Link** | `link sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]` <br> e.g., `link sn/John Tan pn/Mrs Tan`
+**Unlink** | `unlink sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
 **FindLink** | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
 **Filter** | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **List** | `list`
