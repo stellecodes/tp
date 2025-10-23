@@ -26,7 +26,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * Lists all contacts: `list`/`showall` 
+   * Lists all contacts: `list`
 
    * Add contacts:
      * Adds a student named `John` with tag `Math` to the Address Book:
@@ -57,7 +57,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items with `…`​ after them can be used multiple times including zero times.<br>
+* Items with `…​` after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
 * Parameters can be in any order.<br>
@@ -106,11 +106,11 @@ Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
 * `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal r/Prefers email`
 
-### Listing all contacts : `list`/`showall`
+### Listing all contacts : `list`
 
 Shows a list of all contacts in the address book.
 
-Format: `list`/`showall`
+Format: `list`
 
 ### Editing a contact : `edit`
 
@@ -123,6 +123,12 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be replaced.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+Only student contacts can have tags, so updates to the tag with `t/` only applies to student contacts.<br>
+</div>
+
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
