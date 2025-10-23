@@ -280,7 +280,7 @@ No more digging through a messy contact list — keep lessons running smoothly w
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …                        | I want to …               | So that I can…                                                 |
-| -------- | ----------------------------- | ------------------------- | -------------------------------------------------------------- |
+| -------- |-------------------------------| ------------------------- | -------------------------------------------------------------- |
 | `* * *`  | tutor                         | add a new student contact | keep track of the student’s details easily                     |
 | `* * *`  | tutor                         | add a new parent contact  | keep track of the student’s parents’ details easily            |
 | `* * *`  | tutor                         | delete a student’s contact | keep my list clean and up to date                              |
@@ -291,6 +291,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | tutor                         | search by parent name     | find a parent’s information faster                             |
 | `* *`    | tutor with many students      | tag students with their level | manage students based on their level                           |
 | `* *`    | tutor with many students      | tag students with their subject | manage and track students by their subjects                    |
+| `* *`    | tutor with many students      | find all linked contacts (e.g., parents of a student, students of a parent) | easily view relationships without searching manually                                                        |
 | `* *`    | tutor with many students      | tag students with their grades | identify students who need more attention                      |
 | `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
 | `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
@@ -372,13 +373,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Use case: Delete a contact**
 
 **MSS**
-
-1. User requests to delete a contact.
-2. System identifies matching contact(s).
-3. User selects the intended contact.
-4. System deletes the contact and acknowledges success.
+1. User requests to delete a contact using either an index or identifiers.
+2. System validates the request:
+    * If an index is provided, system checks that it exists in the current list.
+    * If identifiers are provided, system searches for matching contact(s).
+3. If exactly one contact matches, the system deletes that contact and acknowledges success.
 
    Use case ends.
+
+**Extensions**
+* 2a. No contact matches.
+    * 2a1. System informs the user: “No person found matching the provided identifiers.”
+
+      Use case ends.
+
+* 2b. Multiple contacts match.
+    * 2b1. System reports ambiguity and requests additional identifiers.
+
+      Use case ends.
+
+* 2c. User provides both index and identifiers.
+    * 2c1. System rejects the command with a format error message.
+
+      Use case ends.
 
 **Extensions**
 
@@ -458,6 +475,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. User cancels unlinking.
     * 3a1. System aborts the operation.
+
+      Use case ends.
+
+---
+
+**Use case: Find linked contacts**
+
+**MSS**
+1. User requests to view all contacts linked to a specific student or parent.
+2. System verifies that the specified contact exists and has valid links.
+3. System displays all linked contacts.
+
+   Use case ends.
+
+**Extensions**
+* 2a. No contact matches the provided identifiers.
+    * 2a1. System informs the user that no matching contact was found.
+
+      Use case ends.
+
+* 2b. The contact exists but has no links.
+    * 2b1. System reports that no linked contacts were found.
 
       Use case ends.
 
@@ -581,7 +620,45 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+1. Deleting by identifiers (name/email/phone)
+
+   1. Test case: `delete n/John Doe`<br>
+      Expected: The contact whose name matches “John Doe” (case-insensitive) is deleted. Success message shows the deleted person’s details.
+
+   2. Test case: `delete e/alice@example.com`<br>
+      Expected: The contact with the given email address is deleted. Success message confirms deletion.
+
+   3. Test case: `delete p/91234567`<br>
+      Expected: The contact with the given phone number is deleted. Success message confirms deletion.
+
+   4. Test case: `delete n/John Tan e/john.tan@example.com`<br>
+      Expected: Deletes the specific “John Tan” whose email matches the provided address. This helps when multiple persons share the same name. Success message confirms deletion.
+
+   5. Test case: `delete n/John` (ambiguous input)<br>
+      Expected: No person is deleted. Error message shown: “Multiple persons match the given identifiers. Please provide more identifiers to specify the person.”
+
+   6. Test case: `delete n/Nonexistent Name`<br>
+      Expected: No person is deleted. Error message shown: “No person found matching the provided identifiers.”
+
+   7. Test case: `delete 1 n/John Doe`<br>
+      Expected: No person is deleted. Error message shown: “You may use either the index form or identifier form — not both.”
+
+   8. Test case: `delete n/`<br>
+      Expected: Error message shown: “Invalid command format. Identifier cannot be empty.” No data modified.
+
+### Finding linked contacts
+
+1. Displays all contacts that are linked to a given person (e.g., showing all parents linked to a student, or vice versa).
+
+   1. Test case: `findlink n/John Doe`<br>
+      Expected: Lists all contacts linked to “John Doe”. Message: Showing X linked contact(s) for John Doe.
+
+   2. Test case: `findlink n/Nonexistent Name`<br>
+      Expected: Error: No person found with the name: Nonexistent Name.
+
+   3. Other incorrect delete commands to try: `findlink`, `findlink n/`, `findlink 1`, `findlink n/John n/Jane`,  `findlink randomtext n/John`<br>
+      Expected: Error: Invalid command format. Usage: findlink n/NAME.
 
 ### Saving data
 
