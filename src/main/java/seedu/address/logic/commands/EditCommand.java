@@ -95,7 +95,22 @@ public class EditCommand extends Command {
             throw new CommandException(e.getMessage());
         }
 
+        // Preserve existing links before editing
+        List<Person> oldLinks = model.getLinkedPersons(personToEdit);
+
+        // Remove all old links to avoid stale references
+        for (Person linked : oldLinks) {
+            model.unlink(personToEdit, linked);
+        }
+
+        // Replace the old person with the edited one
         model.setPerson(personToEdit, editedPerson);
+
+        // Recreate all links using the updated person instance
+        for (Person linked : oldLinks) {
+            model.link(editedPerson, linked);
+        }
+
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
