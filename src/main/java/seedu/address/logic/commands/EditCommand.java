@@ -48,7 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_REMARK + "REMARK] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG]...\n (for Students)"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com"
@@ -57,6 +57,7 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_CANNOT_EDIT_PARENT_TAGS = "Parents do not have tags.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -119,7 +120,8 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -141,6 +143,10 @@ public class EditCommand extends Command {
             Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(((Student) personToEdit).getTags());
             return new Student(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark, updatedTags);
         } else {
+            Optional<Set<Tag>> updatedTags = editPersonDescriptor.getTags();
+            if (updatedTags.isPresent()) {
+                throw new CommandException(MESSAGE_CANNOT_EDIT_PARENT_TAGS);
+            }
             return new Parent(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedRemark);
         }
 
