@@ -45,6 +45,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+        for (Person person : persons) {
+            if (person instanceof Student student) {
+                tags.addTagTypes(student.getTags());
+            }
+        }
     }
 
     //// list overwrite operations
@@ -88,10 +93,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void addPerson(Person p) {
         persons.add(p);
-
-        if (p instanceof Student) {
-            tags.addStudentToTags((Student) p);
-        }
     }
 
     /**
@@ -103,8 +104,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
-        tags.removePersonFromAllTags(target);
-        tags.addStudentToTags(editedPerson);
     }
 
     /**
@@ -115,10 +114,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         // remove any existing links involving this person
         removeAllLinksFor(key);
         persons.remove(key);
-
-        if (key instanceof Student) {
-            tags.removePersonFromAllTags((Student) key);
-        }
     }
 
     //// util methods
