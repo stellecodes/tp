@@ -581,7 +581,34 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+
+1. Deleting by identifiers (name/email/phone)
+    
+   1. Prerequisites: Ensure the person you are deleting exists and that their name, email and phone are known. You may use the `list` or `find` command to confirm.
+
+   2. Test case: `delete n/John Doe`<br>
+      Expected: The contact whose name matches “John Doe” (case-insensitive) is deleted. Success message shows the deleted person’s details.
+
+   3. Test case: `delete e/alice@example.com`<br>
+      Expected: The contact with the given email address is deleted. Success message confirms deletion.
+
+   4. Test case: `delete p/91234567`<br>
+      Expected: The contact with the given phone number is deleted. Success message confirms deletion.
+
+   5. Test case: `delete n/John Tan e/john.tan@example.com`<br>
+      Expected: Deletes the specific “John Tan” whose email matches the provided address. This helps when multiple persons share the same name. Success message confirms deletion.
+
+   6. Test case: `delete n/John` (ambiguous input)<br>
+      Expected: No person is deleted. Error message shown: “Multiple persons match the given identifiers. Please provide more identifiers to specify the person.”
+
+   7. Test case: `delete n/Nonexistent Name`<br>
+      Expected: No person is deleted. Error message shown: “No person found matching the provided identifiers.”
+
+   8. Test case: `delete 1 n/John Doe`<br>
+      Expected: No person is deleted. Error message shown: “You may use either the index form or identifier form — not both.”
+
+   9. Test case: `delete n/`<br>
+      Expected: Error message shown: “Invalid command format. Identifier cannot be empty.” No data modified.
 
 ### Saving data
 
