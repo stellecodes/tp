@@ -100,6 +100,15 @@ public class EditCommandTest {
     }
 
     @Test
+    public void execute_editParentTag() {
+        Student editedStudent = new PersonBuilder().buildStudent();
+        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedStudent).build();
+        EditCommand editCommand = new EditCommand(INDEX_THIRD_PERSON, descriptor);
+
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_CANNOT_EDIT_PARENT_TAGS);
+    }
+
+    @Test
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
