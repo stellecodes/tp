@@ -411,14 +411,6 @@
     -fx-wrap-text: true;
 }
 
-#tagListView .list-cell:hover {
-    -fx-background-color: #bfdbfe;
-}
-#tagListView .list-cell:filled:selected {
-    -fx-background-color: #93c5fd;
-    -fx-text-fill: white;
-}
-
 /* no empty cells under existing tags */
 #tagListView .list-cell:empty,
 #tagListView .list-cell:empty:hover {
