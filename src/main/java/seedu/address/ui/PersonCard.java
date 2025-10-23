@@ -113,6 +113,8 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         } else {
             tags.getChildren().clear();
+            tags.setManaged(false);
+            tags.setVisible(false);
         }
 
         // Apply background color based on type
