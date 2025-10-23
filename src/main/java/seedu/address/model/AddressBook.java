@@ -9,8 +9,8 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.person.Student;
+import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.util.RelationshipGraph;
@@ -46,7 +46,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this();
         resetData(toBeCopied);
         for (Person person : persons) {
-            if (person instanceof  Student student) {
+            if (person instanceof Student student) {
                 tags.addTagTypes(student.getTags());
             }
         }
