@@ -58,11 +58,11 @@ public class PersonCard extends UiPart<Region> {
         // Set remark if present
         String remarkText;
         if (person.getRemark().remarks.isEmpty() || person.getRemark() == null) {
-            remarkText = "Nil";
+            remark.setVisible(false);
+            remark.setManaged(false);
         } else {
-            remarkText = person.getRemark().remarks;
+            remark.setText("Remarks: " + person.getRemark().remarks);
         }
-        remark.setText("Remarks: " + remarkText);
 
         // show linked contacts if any exist
         String linkedText = getLinkedText(person);
@@ -70,9 +70,11 @@ public class PersonCard extends UiPart<Region> {
             linkedContacts.setVisible(false);
             linkedContacts.setManaged(false); // removes it from layout spacing
         } else {
-            linkedContacts.setText("Linked: " + linkedText);
-            linkedContacts.setVisible(true);
-            linkedContacts.setManaged(true);
+            if (person instanceof Parent) {
+                linkedContacts.setText("Children: " + linkedText);
+            } else if (person instanceof Student) {
+                linkedContacts.setText("Parents: " + linkedText);
+            }
         }
 
         // show tags if person is a student
