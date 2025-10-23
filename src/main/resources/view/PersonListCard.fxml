@@ -7,40 +7,51 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
-    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-    </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <HBox spacing="3">
-          <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
-          <Label fx:id="linkedContacts" styleClass="contact-link">
-            <HBox.margin>
-              <Insets top="3" right="0" bottom="0" left="6" />
-            </HBox.margin>
+  <StackPane HBox.hgrow="ALWAYS">
+    <GridPane>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      </columnConstraints>
+      <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+        <padding>
+          <Insets top="5" right="5" bottom="5" left="15" />
+        </padding>
+        <HBox spacing="0.5" alignment="CENTER_LEFT">
+          <Label fx:id="id" styleClass="cell_big_label">
+            <minWidth>
+              <!-- Ensures that the label text is never truncated -->
+              <Region fx:constant="USE_PREF_SIZE" />
+            </minWidth>
           </Label>
+          <HBox spacing="3">
+            <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+            <Label fx:id="linkedContacts" styleClass="contact-link">
+              <HBox.margin>
+                <Insets top="3" right="0" bottom="0" left="6" />
+              </HBox.margin>
+            </Label>
+          </HBox>
         </HBox>
-      </HBox>
-      <FlowPane fx:id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-      <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-      <FlowPane fx:id="remarks">
-        <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
-      </FlowPane>
+        <FlowPane fx:id="tags" />
+        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        <FlowPane fx:id="remarks">
+          <Label fx:id="remark" styleClass="cell_small_label" text="\$remark" />
+        </FlowPane>
+      </VBox>
+    </GridPane>
+
+    <!-- role chip overlayed in the top-right of the card content -->
+    <VBox fx:id="roleContainer" StackPane.alignment="TOP_RIGHT" alignment="CENTER" styleClass="role-chip">
+      <StackPane.margin>
+        <Insets top="0" right="0" bottom="0" left="0" />
+      </StackPane.margin>
+      <Label fx:id="role" styleClass="cell_small_label" text="\$role" />
     </VBox>
-  </GridPane>
+  </StackPane>
 </HBox>

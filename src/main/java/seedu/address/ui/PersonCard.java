@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.address.logic.Logic;
 import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
@@ -25,6 +26,10 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private HBox cardPane;
+    @FXML
+    private VBox roleContainer;
+    @FXML
+    private Label role;
     @FXML
     private Label name;
     @FXML
@@ -50,14 +55,37 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         this.logic = logic;
 
+        if (person instanceof Student) {
+            role.setText("Student");
+        } else if (person instanceof Parent) {
+            role.setText("Parent");
+        } else {
+            role.setText("Person");
+        }
+
+        // Apply role-specific modifier to the role container so the chip takes the right color
+        if (roleContainer != null) {
+            roleContainer.getStyleClass().removeAll("student-role", "parent-role", "person-role");
+            if (person instanceof Student) {
+                roleContainer.getStyleClass().add("student-role");
+            } else if (person instanceof Parent) {
+                roleContainer.getStyleClass().add("parent-role");
+            } else {
+                roleContainer.getStyleClass().add("person-role");
+            }
+            roleContainer.setVisible(true);
+            roleContainer.setManaged(true);
+        }
+        role.setVisible(true);
+        role.setManaged(true);
+
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         // Set remark if present
-        String remarkText;
-        if (person.getRemark().remarks.isEmpty() || person.getRemark() == null) {
+        if (person.getRemark() == null || person.getRemark().remarks.isEmpty()) {
             remark.setVisible(false);
             remark.setManaged(false);
         } else {
