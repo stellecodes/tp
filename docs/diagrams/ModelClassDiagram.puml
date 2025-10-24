@@ -21,6 +21,7 @@ Class Address
 Class Email
 Class Name
 Class Phone
+Class Remark
 Class Tag
 
 Class I #FFFFFF
@@ -43,25 +44,23 @@ AddressBook *--> "1" RelationshipGraph
 RelationshipGraph -[hidden]right-> UniquePersonList
 
 UniquePersonList --> "~* all" Person
+ModelManager --> "~* filtered" Person
 RelationshipGraph --> Person
 
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
-
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Email
-Email -[hidden]right-> Address
+Person *--> Remark
 
 Parent -right-|> Person
 Student -left-|> Person
-Student *--> "*" Tag
+Student *-up-> "*" Tag
 
 Parent -[hidden]right-> Phone
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
 
-ModelManager --> "~* filtered" Person
+
 @enduml
