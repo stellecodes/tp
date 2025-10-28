@@ -29,6 +29,7 @@ public class LinkCommand extends Command {
     public static final String MESSAGE_PARENTS_INVALID_LINK = "Cannot link two parents together.";
     public static final String MESSAGE_NOT_STUDENT = "Student contact not found or is not of type Student.";
     public static final String MESSAGE_NOT_PARENT = "Parent contact not found or is not of type Parent.";
+    public static final String MESSAGE_STUDENT_LINK_LIMIT = "Each student can only be linked to up to 2 parents.";
     private final Person personA;
     private final Person personB;
 
@@ -72,6 +73,10 @@ public class LinkCommand extends Command {
 
         boolean success = model.link(student, parent);
         if (!success) {
+            // Check if student already has two parents
+            if (model.getLinkedPersons(student).stream().filter(p -> p instanceof Parent).count() >= 2) {
+                throw new CommandException(MESSAGE_STUDENT_LINK_LIMIT);
+            }
             throw new CommandException(MESSAGE_DUPLICATE_LINK);
         }
 
