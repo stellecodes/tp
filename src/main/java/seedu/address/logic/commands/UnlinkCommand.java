@@ -16,8 +16,8 @@ public class UnlinkCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Removes the link between two contacts.\n"
-            + "Parameters: sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]\n"
-            + "Example: " + COMMAND_WORD + " sn/John Tan sp/91234567 pn/Mrs Tan pp/92345678";
+            + "Parameters: sn/STUDENT_NAME pn/PARENT_NAME\n"
+            + "Example: " + COMMAND_WORD + " sn/John Tan pn/Mrs Tan";
 
     public static final String MESSAGE_SUCCESS = "Unlinked %1$s ↔ %2$s";
     public static final String MESSAGE_NOT_LINKED = "These contacts are not currently linked.";

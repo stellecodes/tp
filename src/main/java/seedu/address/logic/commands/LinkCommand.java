@@ -16,9 +16,9 @@ public class LinkCommand extends Command {
 
     public static final String COMMAND_WORD = "link";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links two contacts together by name and phone.\n"
-            + "Parameters: sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]\n"
-            + "Example: " + COMMAND_WORD + " sn/John Tan sp/91234567 pn/Mrs Tan pp/92345678";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Links two contacts together by contact name.\n"
+            + "Parameters: sn/STUDENT_NAME pn/PARENT_NAME\n"
+            + "Example: " + COMMAND_WORD + " sn/John Tan pn/Mrs Tan";
 
     public static final String MESSAGE_LINK_SUCCESS = "Linked %1$s ↔ %2$s";
     public static final String MESSAGE_DUPLICATE_LINK = "These contacts are already linked.";
