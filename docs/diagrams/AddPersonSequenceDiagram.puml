@@ -1,0 +1,29 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes add command;
+
+if (Is person a student?) then ([Yes])
+    if (Are tags valid?) then ([Yes])
+        ' continue to add person
+    else ([No])
+        :Throw error: invalid tags for student;
+        stop
+    endif
+else ([No])
+    if (Has any tags?) then ([Yes])
+        :Throw error: parent should not have tags;
+        stop
+    else ([No])
+        ' continue to add person
+    endif
+endif
+
+:Add person to AddressBook state list;
+:Save person in storage;
+
+stop
+@enduml
