@@ -417,3 +417,46 @@
     -fx-background-color: transparent;
     -fx-border-color: transparent;
 }
+
+/* Role chip shown at top-right of a person card */
+.role-chip {
+    -fx-background-color: #0369a1; /* default chip color */
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 6 10 6 10;
+    -fx-font-size: 12px;
+    /* Only bottom-left corner rounded: top-left, top-right, bottom-right, bottom-left */
+    -fx-background-radius: 0 0 0 8;
+    -fx-border-radius: 0 0 0 8;
+    -fx-border-color: rgba(0,0,0,0.12);
+    -fx-border-width: 1;
+    /* Force fixed width so all chips are same size */
+    -fx-min-width: 75px;
+    -fx-pref-width: 75px;
+    -fx-max-width: 75px;
+    -fx-min-height: 30px;
+    -fx-pref-height: 30px;
+    -fx-max-height: 30px;
+    -fx-alignment: center; /* center label inside chip */
+    -fx-background-insets: 0;
+}
+
+/* Make sure the Label inside the role chip uses white text and is centered */
+.role-chip .label, .role-chip .cell_small_label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-wrap-text: false;
+    -fx-text-alignment: center;
+}
+
+.role-chip.student-role {
+    -fx-background-color: #0369a1; /* darker blue */
+}
+
+.role-chip.parent-role {
+    -fx-background-color: #7c3aed; /* purple */
+}
+
+.role-chip.person-role {
+    -fx-background-color: #6b7280; /* neutral gray */
+}
