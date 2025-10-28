@@ -265,6 +265,9 @@ Format: `clear`
 *Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
 *Possible to delete multiple tags at once
 
+#### Listing all tags : `list_tags`
+*Lists all possible tags that can be used to tag students
+
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -314,6 +317,9 @@ Action | Format, Examples
 **Link** | `link sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]` <br> e.g., `link sn/John Tan pn/Mrs Tan`
 **Unlink** | `unlink sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
 **FindLink** | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
+**Add_tags** | `add_tags t/[TAG]`<br> e.g., `add_tags n/Math`
+**Delete_tags** | `delete_tags t/[TAG]`<br> e.g., `delete_tags t/Math`
+**List_tags** | `list_tags`
 **Filter** | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **List** | `list`
 **Help** | `help`
