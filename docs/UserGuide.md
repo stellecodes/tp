@@ -192,7 +192,7 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
 * `delete n/John Doe` deletes the contact whose name is “John Doe”. 
 * `delete e/alice@example.com` deletes the contact with the given email address.
-* `delete p/91234567 deletes` the contact with that phone number. 
+* `delete p/91234567` deletes the contact with that phone number. 
 * `delete n/John Tan e/john.tan@example.com` deletes the “John Tan” identified by the provided email.
 
 ### Linking a student and parent : `link`
