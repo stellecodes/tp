@@ -18,7 +18,7 @@ public class Name {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]{0,39}";
+    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]{1,40}";
 
     public final String fullName;
 
