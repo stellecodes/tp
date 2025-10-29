@@ -8,19 +8,18 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class Email {
-
-    private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS =
             """
-            Emails should be of the format "local-part@domain-part" where:
-            1. The local-part:
-                - Should only contain alphanumeric characters and special characters '+', '_', '.', '-'
-                - Must not start or end with any special characters
-                - Should not exceed 64 characters
-            2. The domain-part:
-                - Should only contain alphanumeric labels connected by hyphens '-', if any
-                - Must end with a domain label that is at least 2 characters long
-                - Should not exceed 255 characters""";
+                Emails should be of the format "local-part@domain-part" where:
+                1. The local-part:
+                    - Should only contain alphanumeric characters and special characters '+', '_', '.', '-'
+                    - Must not start or end with any special characters
+                    - Should not exceed 64 characters
+                2. The domain-part:
+                    - Should only contain alphanumeric labels connected by hyphens '-', if any
+                    - Must end with a domain label that is at least 2 characters long
+                    - Should not exceed 255 characters""";
+    private static final String SPECIAL_CHARACTERS = "+_.-";
 
     // alphanumeric and special characters
     private static final String ALPHANUMERIC = "[^\\W]+"; // alphanumeric characters
@@ -30,7 +29,7 @@ public class Email {
             + ALPHANUMERIC + ")*";
 
     // Max 255 characters in domain part
-    private static final String DOMAIN_PART_REGEX = "(?=.{1,253}$)" + ALPHANUMERIC+ "(-" + ALPHANUMERIC + ")*";
+    private static final String DOMAIN_PART_REGEX = "(?=.{1,253}$)" + ALPHANUMERIC + "(-" + ALPHANUMERIC + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
     private static final String DOMAIN_REGEX = "(?=.{1,255}$)(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
 
