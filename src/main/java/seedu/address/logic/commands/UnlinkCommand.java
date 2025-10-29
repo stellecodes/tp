@@ -19,7 +19,7 @@ public class UnlinkCommand extends Command {
             + "Parameters: sn/STUDENT_NAME pn/PARENT_NAME\n"
             + "Example: " + COMMAND_WORD + " sn/John Tan pn/Mrs Tan";
 
-    public static final String MESSAGE_SUCCESS = "Unlinked %1$s ↔ %2$s";
+    public static final String MESSAGE_UNLINK_SUCCESS = "Unlinked %1$s ↔ %2$s";
     public static final String MESSAGE_NOT_LINKED = "These contacts are not currently linked.";
     public static final String MESSAGE_SAME_PERSON = "Cannot unlink a contact from itself.";
     public static final String MESSAGE_NOT_FOUND = "One or both contacts could not be found.";
@@ -50,8 +50,10 @@ public class UnlinkCommand extends Command {
             throw new CommandException(MESSAGE_NOT_LINKED);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS,
-                Messages.format(student), Messages.format(parent)));
+        return new CommandResult(String.format(
+                MESSAGE_UNLINK_SUCCESS,
+                student.getName().fullName,
+                parent.getName().fullName));
     }
 
     @Override
