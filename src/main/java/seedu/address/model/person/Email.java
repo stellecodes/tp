@@ -10,30 +10,23 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Email {
     public static final String MESSAGE_CONSTRAINTS =
             """
-                Emails should be of the format "local-part@domain-part" where:
+                Emails should be of the format "local-part@domain-part" not exceeding 320 characters total, where:
                 1. The local-part:
                     - Should only contain alphanumeric characters and special characters '+', '_', '.', '-'
                     - Must not start or end with any special characters
-                    - Should not exceed 64 characters
                 2. The domain-part:
                     - Should only contain alphanumeric labels connected by hyphens '-', if any
-                    - Must end with a domain label that is at least 2 characters long
-                    - Should not exceed 255 characters""";
+                    - Must end with a domain label that is at least 2 characters long""";
     private static final String SPECIAL_CHARACTERS = "+_.-";
 
     // alphanumeric and special characters
-    private static final String ALPHANUMERIC = "[^\\W]+"; // alphanumeric characters
-
-    // Max 64 characters in local part
-    private static final String LOCAL_PART_REGEX = "^(?=.{1,64}$)" + ALPHANUMERIC + "([" + SPECIAL_CHARACTERS + "]"
-            + ALPHANUMERIC + ")*";
-
-    // Max 255 characters in domain part
-    private static final String DOMAIN_PART_REGEX = "(?=.{1,253}$)" + ALPHANUMERIC + "(-" + ALPHANUMERIC + ")*";
+    private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
+    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
+            + ALPHANUMERIC_NO_UNDERSCORE + ")*";
+    private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
+            + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
-    private static final String DOMAIN_REGEX = "(?=.{1,255}$)(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
-
-    // Max 320 characters in total
+    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
     public static final String VALIDATION_REGEX = "(?=.{1,320}$)" + LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;
