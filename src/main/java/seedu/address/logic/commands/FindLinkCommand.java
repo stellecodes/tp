@@ -56,7 +56,7 @@ public class FindLinkCommand extends Command {
         Predicate<Person> showOnlyLinked = buildMembershipPredicate(linked);
         model.updateFilteredPersonList(showOnlyLinked);
 
-        String header = String.format(MESSAGE_RESULT, linked.size(), Messages.format(target));
+        String header = String.format(MESSAGE_RESULT, linked.size(), target.getName().fullName);
         return new CommandResult(header);
     }
 
