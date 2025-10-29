@@ -176,24 +176,29 @@ Deletes the specified person from the address book.
 Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 
 * Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s). 
-* The index refers to the index number shown in the displayed person list. 
-* The index must be a positive integer 1, 2, 3, … 
+* The index refers to the number shown in the current displayed person list. 
+* The index must be a positive number 1, 2, 3, … 
 * When using identifiers:
 * `n/NAME` — matches the full name (case-insensitive). 
 * `e/EMAIL` — matches the exact email address (case-insensitive). 
 * `p/PHONE` — matches the exact phone number. 
-* You may combine multiple identifiers (e.g. `n/` + `e/`) to narrow down the match when multiple persons share the same name. 
+* You may combine identifiers (e.g. `n/` + `e/`) to narrow down the match when multiple persons share the same name. 
 * You must use either the index form or the identifier form — not both in the same command. 
-* If multiple persons match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
+* If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
 * If no match is found, the app will show a no match found message.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+If you are unsure of a contact’s full name, use identifiers such as email or phone number to avoid deleting the wrong person.
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book. 
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
-* `delete n/John Doe` deletes the contact whose name is “John Doe”. 
-* `delete e/alice@example.com` deletes the contact with the given email address.
-* `delete p/91234567` deletes the contact with that phone number. 
-* `delete n/John Tan e/john.tan@example.com` deletes the “John Tan” identified by the provided email.
+* `delete n/John Doe` deletes the person named “John Doe”. 
+* `delete e/alice@example.com` deletes the person with that email.
+* `delete p/91234567` deletes the person with that phone number. 
+* `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
 
 ### Linking a student and parent : `link`
 Links an existing student contact with a parent contact, forming a two-way relationship between them.
@@ -236,18 +241,22 @@ Finds and displays all contacts that are linked to a specified person.
 
 Format: `findlink n/NAME`
 
-* Shows all persons who are linked to the specified person. 
+* Finds people who are linked to the specified person. 
   For example, if a student is linked to their parents, this command will display the parents’ contacts.
-* The search by `NAME` is case-insensitive and must match the person’s full name exactly.
-  (e.g. `findlink n/Alice Tan`, `findlink n/aLiCe tAn` both refer to the same contact.)
-* You must include the `n/` prefix when specifying the name. 
-* If the specified person has no linked contacts, the command will show that there are 0 linked results. 
-* If the specified name does not exist in the address book, an error message will be displayed.
+* Name matching is case-insensitive e.g. findlink n/Alice Tan, findlink n/aLiCe tAn both work
+* The n/ prefix is required 
+* If the person exists but has no linked contacts, the command will show that there are 0 linked results. 
+* If no person matches the given name, an error message will be displayed.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+If multiple contacts share similar names, ensure you specify the correct full name to accurately retrieve linked contacts.
+</div>
 
 Examples:
 * `findlink n/Alice Tan` shows all contacts linked to Alice Tan (e.g. her parents).
 * `findlink n/Tom Tan` shows all contacts linked to Tom Tan (e.g. his children).
-* `findlink n/Bob Lee` shows “0 linked contact(s)” if Bob Lee has no linked persons.
+* `findlink n/Bob Lee` shows “0 linked contact(s) for Bob Lee” if Bob Lee has no linked persons.
 * `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
 
 ### Clearing all entries : `clear`
