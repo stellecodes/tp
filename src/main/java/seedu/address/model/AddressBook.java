@@ -154,6 +154,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public void deleteTagTypes(Set<Tag> tags) {
         this.tags.deleteTagTypes(tags);
+        for (Person person : persons) {
+            person.removeTags(tags);
+        }
+
     }
 
     @Override
