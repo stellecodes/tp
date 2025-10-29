@@ -8,7 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javafx.util.Pair;
+import seedu.address.model.person.Parent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Represents undirected relationships (links) between Person objects.
@@ -22,6 +24,23 @@ public class RelationshipGraph {
         if (a.equals(b)) {
             return false; // no self link
         }
+
+        // Identify student and parent roles
+        Person student = a instanceof Student ? a : (b instanceof Student ? b : null);
+        Person parent = a instanceof Parent ? a : (b instanceof Parent ? b : null);
+
+        // Enforce: A student can have at most 2 parents
+        if (student != null) {
+            links.putIfAbsent(student, new HashSet<>());
+            Set<Person> linked = links.get(student);
+
+            long parentCount = linked.stream().filter(p -> p instanceof Parent).count();
+            if (parentCount >= 2) {
+                // reject adding more parents
+                return false;
+            }
+        }
+
         links.putIfAbsent(a, new HashSet<>());
         links.putIfAbsent(b, new HashSet<>());
 
