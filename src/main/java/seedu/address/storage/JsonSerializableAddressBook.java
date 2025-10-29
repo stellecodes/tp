@@ -1,7 +1,9 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,6 +15,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
+import seedu.address.model.tag.Tag;
 
 /**
  * An Immutable AddressBook that is serializable to JSON format.
@@ -24,6 +27,7 @@ class JsonSerializableAddressBook {
 
     private final List<JsonAdaptedPerson> persons = new ArrayList<>();
 
+    private List<JsonAdaptedTag> tags = new ArrayList<>();
     private final List<JsonAdaptedLink> links = new ArrayList<>();
     /**
      * Constructs a {@code JsonSerializableAddressBook} with the given persons.
@@ -42,6 +46,12 @@ class JsonSerializableAddressBook {
         persons.addAll(source.getPersonList().stream()
                 .map(this::identifyContactType)
                 .collect(Collectors.toList()));
+
+        tags.addAll(source.getTagList().getTags()
+                .stream()
+                .map(JsonAdaptedTag::new)
+                .collect(Collectors.toList()));
+
 
         if (source instanceof AddressBook) {
             AddressBook ab = (AddressBook) source;
@@ -78,6 +88,11 @@ class JsonSerializableAddressBook {
             }
             addressBook.addPerson(p);
         }
+        Set<Tag> newTags = new HashSet<>();
+        for (JsonAdaptedTag jsonTag : tags) {
+            newTags.add(jsonTag.toModelType());
+        }
+        addressBook.addTagTypes(newTags);
 
         // REBUILD LINKS
         for (JsonAdaptedLink jsonLink : links) {
