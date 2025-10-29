@@ -23,14 +23,19 @@ public class Email {
                 - Should not exceed 255 characters""";
 
     // alphanumeric and special characters
-    private static final String ALPHANUMERIC_NO_UNDERSCORE = "[^\\W_]+"; // alphanumeric characters except underscore
-    private static final String LOCAL_PART_REGEX = "^" + ALPHANUMERIC_NO_UNDERSCORE + "([" + SPECIAL_CHARACTERS + "]"
-            + ALPHANUMERIC_NO_UNDERSCORE + ")*";
-    private static final String DOMAIN_PART_REGEX = ALPHANUMERIC_NO_UNDERSCORE
-            + "(-" + ALPHANUMERIC_NO_UNDERSCORE + ")*";
+    private static final String ALPHANUMERIC = "[^\\W]+"; // alphanumeric characters
+
+    // Max 64 characters in local part
+    private static final String LOCAL_PART_REGEX = "^(?=.{1,64}$)" + ALPHANUMERIC + "([" + SPECIAL_CHARACTERS + "]"
+            + ALPHANUMERIC + ")*";
+
+    // Max 255 characters in domain part
+    private static final String DOMAIN_PART_REGEX = "(?=.{1,253}$)" + ALPHANUMERIC+ "(-" + ALPHANUMERIC + ")*";
     private static final String DOMAIN_LAST_PART_REGEX = "(" + DOMAIN_PART_REGEX + "){2,}$"; // At least two chars
-    private static final String DOMAIN_REGEX = "(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
-    public static final String VALIDATION_REGEX = LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
+    private static final String DOMAIN_REGEX = "(?=.{1,255}$)(" + DOMAIN_PART_REGEX + "\\.)*" + DOMAIN_LAST_PART_REGEX;
+
+    // Max 320 characters in total
+    public static final String VALIDATION_REGEX = "(?=.{1,320}$)" + LOCAL_PART_REGEX + "@" + DOMAIN_REGEX;
 
     public final String value;
 
