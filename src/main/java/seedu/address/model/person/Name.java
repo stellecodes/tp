@@ -12,8 +12,7 @@ public class Name {
     public static final String MESSAGE_CONSTRAINTS =
             """
                Names should only contain alphabets and spaces.
-               It can not be blank and should be at most 40 characters long.
-               """;
+               It can not be blank and should be at most 40 characters long.""";
 
     /*
      * The first character of the address must not be a whitespace,
