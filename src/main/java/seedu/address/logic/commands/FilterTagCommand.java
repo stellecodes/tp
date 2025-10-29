@@ -7,9 +7,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.Student;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
-import seedu.address.model.tag.Tag;
 
 /**
  * Filters and lists all students whose tags contain any of the specified keywords.

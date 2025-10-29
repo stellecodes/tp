@@ -85,14 +85,12 @@ public class FilterTagCommandTest {
 
     @Test
     public void execute_multipleTagKeywords_unionOfPeopleFound() {
-        // Tags exist in registry (friends, owesMoney)
         TagContainsKeywordsPredicate predicate =
                 new TagContainsKeywordsPredicate(Arrays.asList("friends", "owesMoney"));
         FilterTagCommand command = new FilterTagCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
 
-        // Your command prints “Listed X persons with tag(s): <tags>.”
         String expectedMessage = String.format("Listed %d persons with tag(s): %s.",
                 expectedModel.getFilteredPersonList().size(), "friends, owesMoney");
 
@@ -100,13 +98,11 @@ public class FilterTagCommandTest {
     }
 
     @Test
-    public void execute_mixedValidAndMissing_filtersByValid_andWarnsAboutMissing() {
-        // valid tag: "friends" (exists); missing tag: "unicorns" (not in registry)
+    public void execute_mixedValidAndMissing_filtersByValidAndWarnsAboutMissing() {
         TagContainsKeywordsPredicate mixed =
                 new TagContainsKeywordsPredicate(Arrays.asList("friends", "unicorns"));
         FilterTagCommand command = new FilterTagCommand(mixed);
 
-        // expected model filters by valid tag only
         TagContainsKeywordsPredicate validOnly =
                 new TagContainsKeywordsPredicate(Collections.singletonList("friends"));
         expectedModel.updateFilteredPersonList(validOnly);
@@ -114,7 +110,6 @@ public class FilterTagCommandTest {
         CommandResult result = command.execute(model);
         String actualMessage = result.getFeedbackToUser();
 
-        // Expected message format (from your FilterTagCommand)
         // "Listed X persons with tag(s): friends. Note: tag 'unicorns' does not exist and was ignored."
         String expectedMessageStart = String.format("Listed %d persons with tag(s): %s.",
                 expectedModel.getFilteredPersonList().size(), "friends");
@@ -132,7 +127,7 @@ public class FilterTagCommandTest {
     }
 
     @Test
-    public void execute_missingTag_only_missing_showsNoSuchTag_noFilterApplied() {
+    public void execute_mixedTags_warnsAboutMissing() {
         TagContainsKeywordsPredicate predicate =
                 new TagContainsKeywordsPredicate(Collections.singletonList("nonexistentTag"));
         FilterTagCommand command = new FilterTagCommand(predicate);
