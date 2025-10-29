@@ -318,8 +318,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to add a student with details.
 2. System validates the details and checks for duplicates.
-3. User confirms proceeding with the validated details.
-4. System adds the student and acknowledges success.
+3. System adds the student and acknowledges success.
 
    Use case ends.
 
@@ -334,21 +333,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. User cancels after validation.
-    * 3a1. System discards the request.
-
-      Use case ends.
-
 ---
 
 **Use case: Add a parent contact**
 
+Similar to adding a student contact except that tags will be an invalid field for parent contacts.
+
+---
+
+**Use case: Edit a contact**
+
 **MSS**
 
-1. User requests to add a parent with details.
-2. System validates the details and checks for duplicates.
-3. User confirms proceeding with the validated details.
-4. System adds the parent and acknowledges success.
+1. User requests to edit a contact with details.
+2. System validates the details.
+3. System updates the contact and acknowledges success.
 
    Use case ends.
 
@@ -358,16 +357,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. System presents the validation issue.
     * 2a2. User revises the details (returns to Step 2).
 
-* 2b. A matching parent already exists.
-    * 2b1. System reports the duplicate and aborts.
-
-      Use case ends.
-
-* 3a. User cancels after validation.
-    * 3a1. System discards the request.
-
-      Use case ends.
-
 ---
 
 **Use case: Delete a contact**
@@ -375,8 +364,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 1. User requests to delete a contact using either an index or identifiers.
 2. System validates the request:
-    * If an index is provided, system checks that it exists in the current list.
-    * If identifiers are provided, system searches for matching contact(s).
+    * 2.1. If an index is provided, system checks that it exists in the current list.
+    * 2.2. If identifiers are provided, system searches for matching contact(s).
 3. If exactly one contact matches, the system deletes that contact and acknowledges success.
 
    Use case ends.
@@ -408,11 +397,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2b1. System requests disambiguation.
     * 2b2. User provides additional identifying detail (returns to Step 2).
 
-* 3a. User cancels selection.
-    * 3a1. System aborts the deletion.
-
-      Use case ends.
-
 ---
 
 **Use case: Link a student with a parent**
@@ -421,8 +405,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to link a specific student with a specific parent.
 2. System verifies that both contacts exist and that the link is valid and new.
-3. User confirms creating the link.
-4. System creates the link and acknowledges success.
+3. System creates the link and acknowledges success.
 
    Use case ends.
 
@@ -443,11 +426,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case ends.
 
-* 3a. User cancels linking.
-    * 3a1. System aborts the operation.
-
-      Use case ends.
-
 ---
 
 **Use case: Unlink a student from a parent**
@@ -456,8 +434,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to unlink a specific student from a specific parent.
 2. System verifies that both contacts exist and that the link currently exists.
-3. User confirms removing the link.
-4. System removes the link and acknowledges success.
+3. System removes the link and acknowledges success.
 
    Use case ends.
 
