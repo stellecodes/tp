@@ -28,11 +28,21 @@ public class LinkCommandParser implements Parser<LinkCommand> {
 
     @Override
     public LinkCommand parse(String args) throws ParseException {
-        var argMultimap = ArgumentTokenizer.tokenize(args,
-                PREFIX_STUDENT_NAME, PREFIX_PARENT_NAME);
+        var argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_STUDENT_NAME, PREFIX_PARENT_NAME);
 
+        // Reject anything before the first prefix (preamble should be empty)
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        }
+
+        // Must have exactly one sn/ and one pn/
         if (!argMultimap.getValue(PREFIX_STUDENT_NAME).isPresent()
                 || !argMultimap.getValue(PREFIX_PARENT_NAME).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
+        }
+
+        if (argMultimap.getAllValues(PREFIX_STUDENT_NAME).size() > 1
+                || argMultimap.getAllValues(PREFIX_PARENT_NAME).size() > 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LinkCommand.MESSAGE_USAGE));
         }
 
