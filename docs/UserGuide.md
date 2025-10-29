@@ -32,7 +32,7 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
      * Adds a student named `John` with tag `Math` to the Address Book:
        * `adds n/John p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Hate school t/Math`
      * Adds a parent named `Jane` to the Address Book:
-       * `addp n/Jane p/87654321 2/jane@example.com a/Jane street, block 321, #01-01 r/Love John`
+       * `addp n/Jane p/87654321 e/jane@example.com a/Jane street, block 321, #01-01 r/Love John`
    * Find all contacts with names containing `John`: `find John`
     
    * Deletes the 3rd contact shown in the current list: `delete 3`.
@@ -104,7 +104,7 @@ The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is als
 
 Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
-* `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal r/Prefers email`
+* `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
 ### Listing all contacts : `list`
 
