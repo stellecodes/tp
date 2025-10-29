@@ -3,8 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,7 +53,7 @@ public class AddTagsCommand extends Command {
             }
         }
 
-         model.addTagTypes(newTags);
+        model.addTagTypes(newTags);
 
         if (!existingTags.isEmpty()) {
             if (newTags.isEmpty()) {
