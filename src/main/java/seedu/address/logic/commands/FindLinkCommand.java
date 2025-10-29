@@ -9,7 +9,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -56,7 +55,7 @@ public class FindLinkCommand extends Command {
         Predicate<Person> showOnlyLinked = buildMembershipPredicate(linked);
         model.updateFilteredPersonList(showOnlyLinked);
 
-        String header = String.format(MESSAGE_RESULT, linked.size(), Messages.format(target));
+        String header = String.format(MESSAGE_RESULT, linked.size(), target.getName().fullName);
         return new CommandResult(header);
     }
 

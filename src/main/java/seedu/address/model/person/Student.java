@@ -36,8 +36,11 @@ public class Student extends Person {
         return Collections.unmodifiableSet(tags);
     }
 
-    public void removeTag(Tag tag) {
-        tags.remove(tag);
+    @Override
+    public void removeTags(Set<Tag> tag) {
+        for (Tag t : tag) {
+            tags.remove(t);
+        }
     }
     /**
      * Returns true if both persons have the same name.

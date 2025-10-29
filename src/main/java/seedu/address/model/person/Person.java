@@ -3,8 +3,10 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Person in the address book.
@@ -72,6 +74,14 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName());
+    }
+
+    /**
+     * If student, removes the given tags from the student's tag list.
+     * If parent, does nothing.
+     * Does nothing if the tag is not present.
+     */
+    public void removeTags(Set<Tag> tag) {
     }
 
     /**
