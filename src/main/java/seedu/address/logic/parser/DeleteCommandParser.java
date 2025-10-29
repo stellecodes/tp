@@ -28,57 +28,65 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Tokenize by the 3 prefixes. Anything not captured by a prefix remains in the preamble.
-        // splits by n/, e/, p/
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
+        ArgumentMultimap am = ArgumentTokenizer.tokenize(
+                args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
 
-        boolean hasName = argMultimap.getValue(PREFIX_NAME).isPresent();
-        boolean hasEmail = argMultimap.getValue(PREFIX_EMAIL).isPresent();
-        boolean hasPhone = argMultimap.getValue(PREFIX_PHONE).isPresent();
+        // If there is a preamble, we treat it as the index form.
+        // But if any identifier prefixes ALSO appear, reject as mixed usage.
+        String preamble = am.getPreamble().trim();
+        boolean hasName  = am.getValue(PREFIX_NAME).isPresent();
+        boolean hasEmail = am.getValue(PREFIX_EMAIL).isPresent();
+        boolean hasPhone = am.getValue(PREFIX_PHONE).isPresent();
         boolean hasAnyPrefix = hasName || hasEmail || hasPhone;
 
-        // If no prefixes are present, assume legacy 'delete INDEX'.
-        if (!hasAnyPrefix) {
-            String trimmed = args.trim();
-            if (trimmed.isEmpty()) {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        if (!preamble.isEmpty()) {
+            if (hasAnyPrefix) {
+                throw new ParseException(DeleteCommand.MESSAGE_EXCLUSIVE_FORMS);
             }
-            try {
-                Index index = ParserUtil.parseIndex(trimmed);
-                return new DeleteCommand(index);
-            } catch (ParseException pe) {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)
-                );
-            }
+            // index-only form
+            Index index = ParserUtil.parseIndex(preamble);
+            return new DeleteCommand(index);
         }
 
-        // Attribute-based delete: unwrap values and let ParserUtil validate/construct domain objects.
-        Optional<Name> name = Optional.empty();
-        Optional<Email> email = Optional.empty();
-        Optional<Phone> phone = Optional.empty();
+        // identifier-only form
+        am.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
 
-        // utilize existing validation rules to check for valid name / email / number
-        if (hasName) {
-            String raw = argMultimap.getValue(PREFIX_NAME).get();
-            name = Optional.of(ParserUtil.parseName(raw));
-        }
-        if (hasEmail) {
-            String raw = argMultimap.getValue(PREFIX_EMAIL).get();
-            email = Optional.of(ParserUtil.parseEmail(raw));
-        }
-        if (hasPhone) {
-            String raw = argMultimap.getValue(PREFIX_PHONE).get();
-            phone = Optional.of(ParserUtil.parsePhone(raw));
+        Optional<String> rawName  = am.getValue(PREFIX_NAME);
+        Optional<String> rawEmail = am.getValue(PREFIX_EMAIL);
+        Optional<String> rawPhone = am.getValue(PREFIX_PHONE);
+
+        // must have at least one identifier
+        if (rawName.isEmpty() && rawEmail.isEmpty() && rawPhone.isEmpty()) {
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        if (name.isEmpty() && email.isEmpty() && phone.isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        // reject empty values like n/, e/, p/
+        if (rawName.isPresent() && rawName.get().trim().isEmpty()
+                || rawEmail.isPresent() && rawEmail.get().trim().isEmpty()
+                || rawPhone.isPresent() && rawPhone.get().trim().isEmpty()) {
+            throw new ParseException(String.format(
+                    Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        return new DeleteCommand(name, email, phone);
+        // Parse to domain objects (will validate formats)
+        Optional<Name>  name  = rawName.map(s -> {
+            try { return ParserUtil.parseName(s); } catch (ParseException e) { throw new RuntimeException(e); }
+        });
+        Optional<Email> email = rawEmail.map(s -> {
+            try { return ParserUtil.parseEmail(s); } catch (ParseException e) { throw new RuntimeException(e); }
+        });
+        Optional<Phone> phone = rawPhone.map(s -> {
+            try { return ParserUtil.parsePhone(s); } catch (ParseException e) { throw new RuntimeException(e); }
+        });
+
+        // Re-throw any parse failures cleanly (unwrap the RuntimeException wrappers)
+        try {
+            return new DeleteCommand(name, email, phone);
+        } catch (RuntimeException re) {
+            if (re.getCause() instanceof ParseException pe) throw pe;
+            throw re;
+        }
     }
 }
+
