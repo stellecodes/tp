@@ -3,7 +3,7 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+ClassConnect is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -303,6 +303,15 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+
+**Q**: I closed ClassConnect by clicking the window’s close button instead of typing the exit command. Will I lose my work?<br>
+**A**: Don’t worry, ClassConnect saves your updates automatically as you go. When you reopen the app, your most recent changes should still be there.
+
+**Q**: Can I use ClassConnect on my phone or tablet?<br>
+**A**: Not at the moment. ClassConnect is currently available only on desktop computers.
+
+**Q**: What happens if a student leaves and I delete their contact?<br>
+**A**: Only the student is removed. Their parents remain safely in the address book — the family link is simply removed.
 
 --------------------------------------------------------------------------------------------------------------------
 
