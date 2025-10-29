@@ -251,16 +251,13 @@ Clears all entries from the address book.
 Format: `clear`
 
 ### Tag management
-#### Adding tags : `add_tags t/[TAG] t/[TAG]`
-*Adds more possible tags to use
-*Possible to add multiple tags at once
+#### Adding tags : `addtag t/[TAG] t/[TAG]`
+* Adds more possible tags to use
+* It is possible to add multiple tags at once
 
-#### Deleting tags : `delete_tags t/[TAG] t/[TAG]`
-*Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
-*Possible to delete multiple tags at once
-
-#### Listing all tags : `list_tags`
-*Lists all possible tags that can be used to tag students
+#### Deleting tags : `deletetag t/[TAG] t/[TAG]`
+* Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
+* It is possible to delete multiple tags at once
 
 ### Exiting the program : `exit`
 
