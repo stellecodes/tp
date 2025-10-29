@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  */
 public class AddTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_tags";
+    public static final String COMMAND_WORD = "addtag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " Parameters: "

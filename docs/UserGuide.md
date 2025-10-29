@@ -3,8 +3,15 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+**ClassConnect** is a **desktop application** designed for **private tuition teachers** to efficiently manage their contacts.  
+It helps tutors organize information about their **students and their parents**, keeping communication and record-keeping simple and centralized.
 
+### Key Features
+
+- **Add and manage contacts** — Create and update entries for both students and parents.
+- **Link students to parents** — Maintain clear relationships between students and their respective parents within the app.
+- **Tag students for easy organization** — Assign tags such as `math`, `P6`, or `progressing` to categorize students effectively.
+  <img src="images/Ui.png" alt="Ui" width="400" style="height:auto;">
 * Table of Contents
 {:toc}
 
@@ -21,7 +28,6 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   <img src="images/Ui.png" alt="Ui" width="400" style="height:auto;">
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -251,16 +257,13 @@ Clears all entries from the address book.
 Format: `clear`
 
 ### Tag management
-#### Adding tags : `add_tags t/[TAG] t/[TAG]`
-*Adds more possible tags to use
-*Possible to add multiple tags at once
+#### Adding tags : `addtag t/[TAG] t/[TAG]`
+* Adds more possible tags to use
+* It is possible to add multiple tags at once
 
-#### Deleting tags : `delete_tags t/[TAG] t/[TAG]`
-*Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
-*Possible to delete multiple tags at once
-
-#### Listing all tags : `list_tags`
-*Lists all possible tags that can be used to tag students
+#### Deleting tags : `deletetag t/[TAG] t/[TAG]`
+* Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
+* It is possible to delete multiple tags at once
 
 ### Exiting the program : `exit`
 
