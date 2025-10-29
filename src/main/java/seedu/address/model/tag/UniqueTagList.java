@@ -30,7 +30,7 @@ public class UniqueTagList {
     public void setTags(UniqueTagList replacement) {
         requireNonNull(replacement);
         tagSet.clear();
-        tagSet.addAll(replacement.tagSet);
+        tagSet.addAll(replacement.getTags());
     }
 
     /**
