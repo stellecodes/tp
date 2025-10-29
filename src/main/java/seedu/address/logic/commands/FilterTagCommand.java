@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import seedu.address.model.Model;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 
@@ -24,9 +28,53 @@ public class FilterTagCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format("%d people found with the specified tag(s).", model.getFilteredPersonList().size()));
+
+        // Use the master registry instead of scanning current Students
+        Set<String> knownTags = model.getAddressBook().getTagList().getTags()
+                .stream()
+                .map(t -> t.tagName.trim().toLowerCase())
+                .collect(Collectors.toSet());
+
+        List<String> requested = predicate.getKeywords();
+
+        List<String> valid = requested.stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .filter(s -> knownTags.contains(s.toLowerCase()))
+                .collect(Collectors.toList());
+
+        List<String> missing = requested.stream()
+                .map(String::trim)
+                .filter(s -> !s.isEmpty())
+                .filter(s -> !knownTags.contains(s.toLowerCase()))
+                .collect(Collectors.toList());
+
+        if (valid.isEmpty()) {
+            // All requested tags are unknown → early message
+            String msg = (missing.size() == 1)
+                    ? String.format("The tag '%s' does not exist. Refer to tag list for valid tags or add new tags.",
+                    missing.get(0))
+                    : String.format("These tags do not exist: %s. Refer to tag list for valid tags or add new tags.",
+                    String.join(", ", missing));
+            return new CommandResult(msg);
+        }
+
+        // Filter by only the valid tags
+        TagContainsKeywordsPredicate validPredicate = new TagContainsKeywordsPredicate(valid);
+        model.updateFilteredPersonList(validPredicate);
+
+        String base = String.format("Listed %d persons with tag(s): %s.",
+                model.getFilteredPersonList().size(), String.join(", ", valid));
+
+        if (!missing.isEmpty()) {
+            String note = (missing.size() == 1)
+                    ? String.format(" Note: tag '%s' does not exist and was ignored.", missing.get(0))
+                    : String.format(" Note: these tags do not exist and were ignored: %s.",
+                    String.join(", ", missing));
+            return new CommandResult(base + note);
+        }
+
+        return new CommandResult(base);
     }
 
     @Override
