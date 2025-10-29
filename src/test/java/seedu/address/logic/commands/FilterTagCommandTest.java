@@ -18,6 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FilterTagCommand}.
@@ -31,6 +32,12 @@ public class FilterTagCommandTest {
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+        model.getAddressBook().getTagList().getTags().add(new Tag("friends")); // or via StudentBuilder
+        model.getAddressBook().getTagList().getTags().add(new Tag("owesMoney"));
+        expectedModel.getAddressBook().getTagList().getTags().add(new Tag("friends"));
+        expectedModel.getAddressBook().getTagList().getTags().add(new Tag("owesMoney"));
+
     }
 
     @Test
@@ -62,11 +69,14 @@ public class FilterTagCommandTest {
 
     @Test
     public void execute_singleTagKeyword_somePeopleFound() {
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(
-                Collections.singletonList("friends"));
+        // Tag exists in registry (friends)
+        TagContainsKeywordsPredicate predicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("friends"));
         FilterTagCommand command = new FilterTagCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
+
+        // The command produces: "Listed X persons with tag(s): friends."
         String expectedMessage = String.format("Listed %d persons with tag(s): %s.",
                 expectedModel.getFilteredPersonList().size(), "friends");
 
@@ -75,15 +85,50 @@ public class FilterTagCommandTest {
 
     @Test
     public void execute_multipleTagKeywords_unionOfPeopleFound() {
-        TagContainsKeywordsPredicate predicate = new TagContainsKeywordsPredicate(
-                Arrays.asList("friends", "owesMoney"));
+        // Tags exist in registry (friends, owesMoney)
+        TagContainsKeywordsPredicate predicate =
+                new TagContainsKeywordsPredicate(Arrays.asList("friends", "owesMoney"));
         FilterTagCommand command = new FilterTagCommand(predicate);
 
         expectedModel.updateFilteredPersonList(predicate);
+
+        // Your command prints “Listed X persons with tag(s): <tags>.”
         String expectedMessage = String.format("Listed %d persons with tag(s): %s.",
                 expectedModel.getFilteredPersonList().size(), "friends, owesMoney");
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_mixedValidAndMissing_filtersByValid_andWarnsAboutMissing() {
+        // valid tag: "friends" (exists); missing tag: "unicorns" (not in registry)
+        TagContainsKeywordsPredicate mixed =
+                new TagContainsKeywordsPredicate(Arrays.asList("friends", "unicorns"));
+        FilterTagCommand command = new FilterTagCommand(mixed);
+
+        // expected model filters by valid tag only
+        TagContainsKeywordsPredicate validOnly =
+                new TagContainsKeywordsPredicate(Collections.singletonList("friends"));
+        expectedModel.updateFilteredPersonList(validOnly);
+
+        CommandResult result = command.execute(model);
+        String actualMessage = result.getFeedbackToUser();
+
+        // Expected message format (from your FilterTagCommand)
+        // "Listed X persons with tag(s): friends. Note: tag 'unicorns' does not exist and was ignored."
+        String expectedMessageStart = String.format("Listed %d persons with tag(s): %s.",
+                expectedModel.getFilteredPersonList().size(), "friends");
+
+        assertTrue(actualMessage.startsWith(expectedMessageStart),
+                "Expected message to start with: " + expectedMessageStart);
+        assertTrue(actualMessage.toLowerCase().contains("unicorns"),
+                "Expected missing tag name to appear");
+        assertTrue(actualMessage.toLowerCase().contains("ignored")
+                        || actualMessage.toLowerCase().contains("does not exist"),
+                "Expected note about ignored / does not exist");
+
+        // Ensure filtered list matches the valid-only predicate
+        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }
 
     @Test
@@ -100,31 +145,6 @@ public class FilterTagCommandTest {
 
         // Ensure list did not change
         assertEquals(before, model.getFilteredPersonList());
-        assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
-    }
-
-    @Test
-    public void execute_mixedValidAndMissing_filtersByValid_andWarnsAboutMissing() {
-        // valid: "friends", missing: "unicorns"
-        TagContainsKeywordsPredicate mixed =
-                new TagContainsKeywordsPredicate(Arrays.asList("friends", "unicorns"));
-        FilterTagCommand command = new FilterTagCommand(mixed);
-
-        // Expected: filter only by the valid subset
-        TagContainsKeywordsPredicate validOnly =
-                new TagContainsKeywordsPredicate(Collections.singletonList("friends"));
-        expectedModel.updateFilteredPersonList(validOnly);
-
-        CommandResult result = command.execute(model);
-
-        // Message should include normal success + note about the missing tag
-        String msg = result.getFeedbackToUser();
-        assertTrue(msg.contains("Listed"));
-        assertTrue(msg.contains("friends"));
-        assertTrue(msg.toLowerCase().contains("ignored") || msg.toLowerCase().contains("does not exist"));
-        assertTrue(msg.contains("unicorns"));
-
-        // Result list must match filtering by the valid tag only
         assertEquals(expectedModel.getFilteredPersonList(), model.getFilteredPersonList());
     }
 
