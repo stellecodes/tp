@@ -208,7 +208,7 @@ Examples:
 
 Notes:
 * A student can be linked to a maximum of 2 parents (e.g., mother and father).
-* A parent can be linked to multiple students (e.g., siblings).
+* A parent can be linked to multiple students (e.g., their children).
 * Links are bidirectional — linking a student to a parent automatically links the parent to that student.
 * Link relationships are automatically saved in the data file and reloaded when the app restarts.
 * Deleting a contact automatically removes all links associated with that contact.
