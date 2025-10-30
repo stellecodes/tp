@@ -65,30 +65,47 @@ Action | Description                     | Format, Examples
 
 Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
 
-All contacts contain an **_optional_** `remark` field and the following **_compulsory_** fields:
-- `name`
-- `phone number`
-- `email`
-- `address`<br>
+Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
+Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`<br>
 
-Students contain an additional **_optional_** `tags` field<br>
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** Only existing tags in the tag list can be added to a student.<br>
-Use the `add_tags` command to add new tags before use.
+Both student and parent contacts contain the following **compulsory** fields:
+- `name`, set with the prefix `n/`
+- `phone number`, set with the prefix `p/`
+- `email`, set with the prefix `e/`
+- `address`, set with the prefix `a/`<br>
+
+Optionally, a `remark` field can also be added with `r/`.<br>
+For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
+Multiple tags can be added by repeating the `t/` prefix.<br>
+
+Examples:
+* `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
+* `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/AddJohnDoe.png" alt="add john doe" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before adding (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/AddedJohnDoe.png" alt="added john doe" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After adding (contact successfully shows up)</em></p>
+  </div>
+
 </div>
 
-Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
-Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`
-
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
+See the `addtag` section below for more details.
+</div>
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 A student can have any number of tags (including 0).<br>
 The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
 </div>
 
-Examples:
-* `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
-* `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
 ### Editing a contact : `edit`
 
@@ -141,6 +158,34 @@ Examples:
 * `delete e/alice@example.com` deletes the person with that email.
 * `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletebyindex.png" alt="link alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before delete by index (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletedbyindex.png" alt="linked alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After deleting (contact deleted successfully)</em></p>
+  </div>
+
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletebyidentifier.png" alt="link alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before delete by identifier (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletedbyidentifier.png" alt="linked alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After delete (contact deleted successfully)</em></p>
+  </div>
+
+</div>
 
 ### Clearing all entries : `clear`
 
@@ -216,14 +261,27 @@ Examples:
 * `findlink n/Bob Lee` shows “0 linked contact(s) for Bob Lee” if Bob Lee has no linked persons.
 * `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
 
-### Tag management
-#### Adding tags : `addtag t/[TAG] t/[TAG]`
-* Adds more possible tags to use
-* It is possible to add multiple tags at once
+### Adding tags : `addtag`
+Adds new tags to the possible tags list. You can add multiple tags at once.
 
-#### Deleting tags : `deletetag t/[TAG] t/[TAG]`
-* Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
-* It is possible to delete multiple tags at once
+Format: `addtag t/TAG t/TAG`
+
+* `t/` — name of the tag to add (required)
+
+Examples:
+* `addtag t/Math t/Science` — Adds the tags `Math` and `Science` to the possible tags list.
+
+---
+
+### Deleting tags : `deletetag`
+Deletes tags from the possible tags list. This will also remove the tag from all contacts who have it. You can delete multiple tags at once.
+
+Format: `deletetag t/TAG t/TAG`
+
+* `t/` — name of the tag to delete (required)
+
+Examples:
+* `deletetag t/Math t/Science` — Deletes the tags `Math` and `Science` from the possible tags list and from all contacts who had them.
 
 ### Listing all contacts : `list`
 

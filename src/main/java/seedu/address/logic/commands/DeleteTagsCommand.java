@@ -3,14 +3,16 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
+
 /**
- * Adds a person to the address book.
+ * Deletes existing tags from the address book.
  */
 public class DeleteTagsCommand extends Command {
 
@@ -23,12 +25,14 @@ public class DeleteTagsCommand extends Command {
             + PREFIX_TAG + "Math "
             + PREFIX_TAG + "Science";
 
-    public static final String MESSAGE_SUCCESS = "All tags deleted: %1$s";
+    public static final String MESSAGE_SUCCESS = "Tag(s) successfully deleted: %1$s";
+    public static final String MESSAGE_NON_EXISTENT_TAG = "The following tag(s) do not exist "
+            + "and were not deleted: %1$s.";
 
     private final Set<Tag> toDelete;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a DeleteTagsCommand to delete the specified {@code Tag}s.
      */
     public DeleteTagsCommand(Set<Tag> tags) {
         requireNonNull(tags);
@@ -38,13 +42,37 @@ public class DeleteTagsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        Set<Tag> deletedTags = new HashSet<>();
+        Set<Tag> nonExistentTags = new HashSet<>();
+
+        // 1. Separate tags into those that exist and those that don't
         for (Tag tag : toDelete) {
-            if (!model.hasTag(tag)) {
-                throw new CommandException(String.format("Tag %s does not exist", tag));
+            if (model.hasTag(tag)) {
+                deletedTags.add(tag);
+            } else {
+                nonExistentTags.add(tag);
             }
         }
-        model.deleteTagTypes(toDelete);
-        return new CommandResult("Tags deleted successfully!");
+
+        // 2. Only perform deletion on tags that exist
+        model.deleteTagTypes(deletedTags);
+
+        // 3. Construct CommandResult based on deletion outcome (mimicking AddTagsCommand)
+        if (!nonExistentTags.isEmpty()) {
+            if (deletedTags.isEmpty()) {
+                // Case 1: None of the specified tags existed.
+                return new CommandResult(String.format(MESSAGE_NON_EXISTENT_TAG, nonExistentTags));
+            }
+            // Case 2: Partial success - some deleted, some didn't exist.
+            return new CommandResult(String.format(
+                    MESSAGE_NON_EXISTENT_TAG + " All other tag(s) were successfully deleted: %2$s",
+                    nonExistentTags, deletedTags
+            ));
+        }
+
+        // Case 3: Full success - all specified tags existed and were deleted.
+        return new CommandResult(String.format(MESSAGE_SUCCESS, deletedTags));
     }
 
 
