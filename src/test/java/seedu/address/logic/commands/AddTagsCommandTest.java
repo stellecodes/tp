@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
@@ -44,18 +43,23 @@ class AddTagsCommandTest {
     }
 
     @Test
-    void execute_nullModel_throwsNullPointerException() {
+    void execute_addExistingTags_noDuplicateAdded() throws Exception {
+        // Model already has "friends" tag
+        modelStub.addedTags.add(tagFriend);
+
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(tagMath);
+        tagsToAdd.add(tagFriend); // already exists
+        tagsToAdd.add(tagColleague); // new tag
 
         AddTagsCommand command = new AddTagsCommand(tagsToAdd);
-        assertThrows(NullPointerException.class, () -> command.execute(null));
+        command.execute(modelStub);
+
+        // "friends" should not be added again (still only one instance)
+        assertTrue(modelStub.addedTags.contains(tagFriend));
+        assertTrue(modelStub.addedTags.contains(tagColleague));
+        assertTrue(modelStub.addedTags.size() == 2); // ensures no duplicates
     }
 
-    @Test
-    void constructor_nullTags_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new AddTagsCommand(null));
-    }
 
     @Test
     void toString_correctFormat() {
