@@ -159,7 +159,21 @@ Format: `link sn/STUDENT_NAME pn/PARENT_NAME`
 * `pn/` — name of the parent contact (required)
 
 Examples:
-* `link sn/John Tan pn/Mrs Tan` Links student John Tan with parent Mrs Tan.
+* `link sn/Alex Jones pn/John Doe` Links student Alex Jones with parent John Doe.
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/linkAlexJohn.png" alt="link alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before linking (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/linkedAlexJohn.png" alt="linked alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After linking (contacts linked successfully)</em></p>
+  </div>
+
+</div>
 
 Notes:
 * A student can be linked to a maximum of 2 parents (e.g., mother and father).
@@ -176,7 +190,7 @@ Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 * `pn/` — name of the parent contact (required)
 
 Examples:
-* unlink sn/John Tan pn/Mrs Tan `Removes the link between John Tan and Mrs Tan.`
+* `unlink sn/Alex Jones pn/John Doe` Removes the link between student Alex Jones and parent John doe.
 
 ### Finding linked contacts : `findlink`
 
@@ -231,8 +245,8 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
+* `find alex john` returns `Alex jones`, `John Doe`<br>
+  <img src="images/findAlexJohnResult.png" alt="find alex john" width="400" style="height:auto;">
 
 ### Filtering by tags: `filter`
 
