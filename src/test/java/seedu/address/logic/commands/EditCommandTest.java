@@ -47,6 +47,10 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedStudent));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        model.addTagTypes(editedStudent.getTags());
+        expectedModel.addTagTypes(editedStudent.getTags());
+
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedStudent);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -82,6 +86,10 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+
+        model.addTagTypes(editedPerson.getTags());
+        expectedModel.addTagTypes(editedPerson.getTags());
+
         expectedModel.setPerson(studentPerson, editedPerson);
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
@@ -95,7 +103,11 @@ public class EditCommandTest {
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson));
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-
+        if (editedPerson instanceof Student) {
+            Student editedStudent = (Student) editedPerson;
+            model.addTagTypes(editedStudent.getTags());
+            expectedModel.addTagTypes(editedStudent.getTags());
+        }
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
@@ -121,6 +133,9 @@ public class EditCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), editedPerson);
+
+        model.addTagTypes(editedPerson.getTags());
+        expectedModel.addTagTypes(editedPerson.getTags());
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }

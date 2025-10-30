@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DeleteTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete_tags";
+    public static final String COMMAND_WORD = "deletetag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " Parameters: "

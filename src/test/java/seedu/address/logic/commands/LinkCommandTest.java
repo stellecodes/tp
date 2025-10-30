@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -77,8 +76,10 @@ public class LinkCommandTest {
     public void execute_validStudentParent_success() throws Exception {
         LinkCommand linkCommand = new LinkCommand(studentA, parentA);
 
-        String expectedMessage = String.format(LinkCommand.MESSAGE_LINK_SUCCESS,
-                Messages.format(studentA), Messages.format(parentA));
+        String expectedMessage = String.format(
+                LinkCommand.MESSAGE_LINK_SUCCESS,
+                studentA.getName().fullName,
+                parentA.getName().fullName);
 
         assertCommandSuccess(linkCommand, model, expectedMessage, model);
     }

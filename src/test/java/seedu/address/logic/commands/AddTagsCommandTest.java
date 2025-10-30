@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -38,7 +37,7 @@ class AddTagsCommandTest {
         tagsToAdd.add(tagScience);
 
         AddTagsCommand command = new AddTagsCommand(tagsToAdd);
-        CommandResult result = command.execute(modelStub);
+        command.execute(modelStub);
 
         assertEquals("Tags added successfully!", result.getFeedbackToUser());
         assertTrue(modelStub.addedTags.contains(tagMath));

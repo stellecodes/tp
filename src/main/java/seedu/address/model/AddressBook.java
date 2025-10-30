@@ -9,7 +9,6 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -45,11 +44,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
-        for (Person person : persons) {
-            if (person instanceof Student student) {
-                tags.addTagTypes(student.getTags());
-            }
-        }
     }
 
     //// list overwrite operations
@@ -70,7 +64,6 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         this.tags.setTags(newData.getTagList());
-
         if (newData instanceof AddressBook) {
             this.relationshipGraph.copyFrom(((AddressBook) newData).getRelationshipGraph());
         }
@@ -154,6 +147,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public void deleteTagTypes(Set<Tag> tags) {
         this.tags.deleteTagTypes(tags);
+        for (Person person : persons) {
+            person.removeTags(tags);
+        }
+
     }
 
     @Override

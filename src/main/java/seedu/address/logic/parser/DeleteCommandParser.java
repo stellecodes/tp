@@ -23,60 +23,70 @@ import seedu.address.model.person.Phone;
  *   - delete [n/NAME] [e/EMAIL] [p/PHONE]   (AND semantics; at least one required)
  */
 public class DeleteCommandParser implements Parser<DeleteCommand> {
-
     @Override
     public DeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        // Tokenize by the 3 prefixes. Anything not captured by a prefix remains in the preamble.
-        // splits by n/, e/, p/
+        // Tokenize known prefixes; anything else stays in the preamble
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
 
-        boolean hasName = argMultimap.getValue(PREFIX_NAME).isPresent();
-        boolean hasEmail = argMultimap.getValue(PREFIX_EMAIL).isPresent();
-        boolean hasPhone = argMultimap.getValue(PREFIX_PHONE).isPresent();
-        boolean hasAnyPrefix = hasName || hasEmail || hasPhone;
+        // Disallow duplicate identifiers like n/A n/B or e/... e/...
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_EMAIL, PREFIX_PHONE);
 
-        // If no prefixes are present, assume legacy 'delete INDEX'.
-        if (!hasAnyPrefix) {
-            String trimmed = args.trim();
-            if (trimmed.isEmpty()) {
-                throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-            }
+        // Raw values so ParserUtil can throw detailed messages
+        Optional<String> rawName = argMultimap.getValue(PREFIX_NAME);
+        Optional<String> rawEmail = argMultimap.getValue(PREFIX_EMAIL);
+        Optional<String> rawPhone = argMultimap.getValue(PREFIX_PHONE);
+        boolean hasAnyIdentifier = rawName.isPresent() || rawEmail.isPresent() || rawPhone.isPresent();
+
+        // Preamble is the only place an index can appear
+        String preamble = argMultimap.getPreamble().trim();
+
+        // Reject mixing index + identifiers
+        if (!preamble.isEmpty() && hasAnyIdentifier) {
+            throw new ParseException(DeleteCommand.MESSAGE_EXCLUSIVE_FORMS);
+        }
+
+        // INDEX form
+        if (!preamble.isEmpty()) {
             try {
-                Index index = ParserUtil.parseIndex(trimmed);
+                Index index = ParserUtil.parseIndex(preamble); // may throw ParseException
                 return new DeleteCommand(index);
             } catch (ParseException pe) {
+                // Re-map to the generic invalid format the test expects
                 throw new ParseException(
-                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE)
-                );
+                        String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
             }
         }
 
-        // Attribute-based delete: unwrap values and let ParserUtil validate/construct domain objects.
+        // IDENTIFIER form (must have at least one)
+        if (!hasAnyIdentifier) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        // Reject empty identifiers like n/, e/, p/
+        if ((rawName.isPresent() && rawName.get().trim().isEmpty())
+                || (rawEmail.isPresent() && rawEmail.get().trim().isEmpty())
+                || (rawPhone.isPresent() && rawPhone.get().trim().isEmpty())) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        }
+
+        // Parse with existing validators so detailed messages (email/phone/name constraints) show up
         Optional<Name> name = Optional.empty();
         Optional<Email> email = Optional.empty();
         Optional<Phone> phone = Optional.empty();
 
-        // utilize existing validation rules to check for valid name / email / number
-        if (hasName) {
-            String raw = argMultimap.getValue(PREFIX_NAME).get();
-            name = Optional.of(ParserUtil.parseName(raw));
+        if (rawName.isPresent()) {
+            name = Optional.of(ParserUtil.parseName(rawName.get()));
         }
-        if (hasEmail) {
-            String raw = argMultimap.getValue(PREFIX_EMAIL).get();
-            email = Optional.of(ParserUtil.parseEmail(raw));
+        if (rawEmail.isPresent()) {
+            email = Optional.of(ParserUtil.parseEmail(rawEmail.get()));
         }
-        if (hasPhone) {
-            String raw = argMultimap.getValue(PREFIX_PHONE).get();
-            phone = Optional.of(ParserUtil.parsePhone(raw));
-        }
-
-        if (name.isEmpty() && email.isEmpty() && phone.isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        if (rawPhone.isPresent()) {
+            phone = Optional.of(ParserUtil.parsePhone(rawPhone.get()));
         }
 
         return new DeleteCommand(name, email, phone);

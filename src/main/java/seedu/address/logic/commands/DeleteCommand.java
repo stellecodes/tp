@@ -42,6 +42,8 @@ public class DeleteCommand extends Command {
     public static final String MESSAGE_MULTIPLE_MATCHES =
             "Multiple persons match the given detail(s). Please refine using email/phone, "
                     + "or delete by index after using 'find'.";
+    public static final String MESSAGE_EXCLUSIVE_FORMS =
+            "You may use either the index form or the identifier form — not both.";
 
     // Either index is present OR one/more of these fields, hence usage of Optional
     private final Optional<Index> targetIndex;

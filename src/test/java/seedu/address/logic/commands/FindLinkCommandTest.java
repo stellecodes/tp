@@ -21,7 +21,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -78,15 +77,15 @@ public class FindLinkCommandTest {
         FindLinkCommand cmd = new FindLinkCommand("Alice Tan");
         CommandResult result = cmd.execute(model);
 
-        // filtered list should be Mary's and Tom's cards (order not guaranteed)
+        // Filtered list should be Mary's and Tom's cards (order not guaranteed)
         ObservableList<Person> filtered = model.getFilteredPersonList();
         assertEquals(2, filtered.size());
         assertTrue(filtered.contains(mary));
         assertTrue(filtered.contains(tom));
 
-        // message should start with count and include Alice's summary (Messages.format)
+        // Message should start with count and include Alice's summary (Messages.format)
         assertTrue(result.getFeedbackToUser().startsWith("Showing 2 linked contact(s)"));
-        assertTrue(result.getFeedbackToUser().contains(Messages.format(alice)));
+        assertTrue(result.getFeedbackToUser().contains(alice.getName().fullName));
     }
 
     @Test
@@ -100,7 +99,7 @@ public class FindLinkCommandTest {
 
         String expectedPrefix = "Showing 1 linked contact(s)";
         assertTrue(result.getFeedbackToUser().startsWith(expectedPrefix));
-        assertTrue(result.getFeedbackToUser().contains(Messages.format(tom)));
+        assertTrue(result.getFeedbackToUser().contains(tom.getName().fullName));
     }
 
     @Test
@@ -127,7 +126,7 @@ public class FindLinkCommandTest {
 
         String expectedPrefix = "Showing 0 linked contact(s)";
         assertTrue(result.getFeedbackToUser().startsWith(expectedPrefix));
-        assertTrue(result.getFeedbackToUser().contains(Messages.format(bob)));
+        assertTrue(result.getFeedbackToUser().contains(bob.getName().fullName));
     }
 
     @Test

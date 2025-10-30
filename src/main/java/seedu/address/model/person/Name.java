@@ -52,18 +52,17 @@ public class Name {
             return true;
         }
 
-        // instanceof handles nulls
         if (!(other instanceof Name)) {
             return false;
         }
 
         Name otherName = (Name) other;
-        return fullName.equals(otherName.fullName);
+        return fullName.equalsIgnoreCase(otherName.fullName);
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return fullName.toLowerCase().hashCode();
     }
 
 }
