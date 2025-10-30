@@ -142,6 +142,34 @@ Examples:
 * `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
 
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletebyindex.png" alt="link alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before delete by index (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletedbyindex.png" alt="linked alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After deleting (contact deleted successfully)</em></p>
+  </div>
+
+</div>
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletebyidentifier.png" alt="link alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before delete by identifier (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/deletedbyidentifier.png" alt="linked alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After delete (contact deleted successfully)</em></p>
+  </div>
+
+</div>
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
