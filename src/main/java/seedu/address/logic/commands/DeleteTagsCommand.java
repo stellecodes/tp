@@ -26,7 +26,8 @@ public class DeleteTagsCommand extends Command {
             + PREFIX_TAG + "Science";
 
     public static final String MESSAGE_SUCCESS = "Tag(s) successfully deleted: %1$s";
-    public static final String MESSAGE_NON_EXISTENT_TAG = "The following tag(s) do not exist and were not deleted: %1$s.";
+    public static final String MESSAGE_NON_EXISTENT_TAG = "The following tag(s) do not exist "
+            + "and were not deleted: %1$s.";
 
     private final Set<Tag> toDelete;
 
