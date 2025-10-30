@@ -53,28 +53,6 @@ It helps tutors organize information about their **students and their parents**,
 
 ## Features
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -114,7 +92,7 @@ Examples:
 
 ### Listing all contacts : `list`
 
-Shows a list of all contacts in the address book.
+Displays all contacts in the address book.
 
 Format: `list`
 
@@ -146,11 +124,10 @@ Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword will be shown.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -160,7 +137,7 @@ Examples:
 
 ### Filtering by tags: `filter`
 
-Show students whose have any of the tags given.
+Show students who have any of the tags given.
 
 Format: `filter tag [MORE_TAGS]`
 
@@ -168,12 +145,12 @@ Format: `filter tag [MORE_TAGS]`
 * The order of the tags does not matter.
 * Only the tags are searched.
 * Only full words will be matched e.g. `Math` will not match `Mathematics`
-* Students with at least one tag will be returned (i.e. `OR` search).
+* Students with at least one tag will be shown.
 
 Examples:
 * John Doe has Math tag, Peter has Chem and Math tags
-* `filter Math` returns `John Doe`
-* `filter Math Chem` returns `John Doe` and `Peter`
+* `filter Math` shows `John Doe`
+* `filter Math Chem` shows `John Doe` and `Peter`
 
 ### Deleting a person : `delete`
 
@@ -188,7 +165,6 @@ Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 * `n/NAME` — matches the full name (case-insensitive). 
 * `e/EMAIL` — matches the exact email address (case-insensitive). 
 * `p/PHONE` — matches the exact phone number. 
-* You may combine identifiers (e.g. `n/` + `e/`) to narrow down the match when multiple persons share the same name. 
 * You must use either the index form or the identifier form — not both in the same command. 
 * If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
 * If no match is found, the app will show a no match found message.
@@ -207,7 +183,8 @@ Examples:
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
 
 ### Linking a student and parent : `link`
-Links an existing student contact with a parent contact, forming a two-way relationship between them.
+
+Links an existing student contact with a parent contact so that their contacts will display each other's name.
 
 Format: `link sn/STUDENT_NAME pn/PARENT_NAME`
 
@@ -220,12 +197,11 @@ Examples:
 Notes:
 * A student can be linked to a maximum of 2 parents (e.g., mother and father).
 * A parent can be linked to multiple students (e.g., their children).
-* Links are bidirectional — linking a student to a parent automatically links the parent to that student.
 * Link relationships are automatically saved in the data file and reloaded when the app restarts.
 * Deleting a contact automatically removes all links associated with that contact.
 
 ### Unlinking a student and parent : `unlink`
-Removes an existing link between a student and a parent contact.
+Removes an existing link between a student and a parent contact, so you cannot see their names under each other's contact.
 
 Format: `unlink sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]`
 
@@ -332,8 +308,8 @@ Action | Format, Examples
 **Link** | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
 **Unlink** | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
 **FindLink** | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
-**Add_tags** | `add_tags t/[TAG]`<br> e.g., `add_tags n/Math`
-**Delete_tags** | `delete_tags t/[TAG]`<br> e.g., `delete_tags t/Math`
+**AddTag** | `addtag t/[TAG]`<br> e.g., `addtag n/Math`
+**DeleteTag** | `deletetag t/[TAG]`<br> e.g., `deletetag t/Math`
 **List_tags** | `list_tags`
 **Filter** | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **List** | `list`
