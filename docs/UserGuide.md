@@ -68,15 +68,24 @@ Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
 Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
 Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`<br>
 
-Both student and parent contacts contain the following **compulsory** fields:
-- `name`, set with the prefix `n/`
-- `phone number`, set with the prefix `p/`
-- `email`, set with the prefix `e/`
-- `address`, set with the prefix `a/`<br>
+- Both student and parent contacts contain the following **compulsory** fields:
+  - `name`, set with the prefix `n/`
+  - `phone number`, set with the prefix `p/`
+  - `email`, set with the prefix `e/`
+  - `address`, set with the prefix `a/`<br>
 
-Optionally, a `remark` field can also be added with `r/`.<br>
-For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
-Multiple tags can be added by repeating the `t/` prefix.<br>
+- Optionally, a `remark` field can also be added with `r/`.<br>
+- For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
+  - Multiple tags can be added by repeating the `t/` prefix.<br>
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
+See the `addtag` section below for more details.
+</div>
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
+</div>
 
 Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
@@ -96,16 +105,6 @@ Examples:
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
-See the `addtag` section below for more details.
-</div>
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**
-A student can have any number of tags (including 0).<br>
-The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
-</div>
-
 
 ### Editing a contact : `edit`
 
@@ -113,17 +112,19 @@ Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be replaced.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* Edits the person positioned at the specified `INDEX` in the contact list. The index **must be a positive integer** 1, 2, 3, …​
+* At least **_one_** of the optional fields must be provided.
+* Existing values will be **overridden** by the input values.
+  * When editing tags, the existing tags of the person will be replaced.
 
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+You can remove all the person’s tags by typing `t/` without specifying any tags after it.<br>
+</div>
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 Only student contacts can have tags, so updates to the tag with `t/` only applies to student contacts.<br>
 </div>
-
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
