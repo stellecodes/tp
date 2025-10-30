@@ -194,7 +194,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_deleteByName_noMatch() {
         DeleteCommand cmd = new DeleteCommand(
-                Optional.of(new Name("No Such Person 12345")),
+                Optional.of(new Name("No Such Person")),
                 Optional.empty(),
                 Optional.empty());
 

@@ -22,11 +22,11 @@ public class AddTagsCommand extends Command {
             + " Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Math "
+            + PREFIX_TAG + "Science";
 
-    public static final String MESSAGE_SUCCESS = "New tags added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "The following tags already exist and were not added: %1$s.";
+    public static final String MESSAGE_SUCCESS = "New tag(s) added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TAG = "The following tag(s) already exist and were not added: %1$s.";
 
     private final Set<Tag> toAdd;
 
@@ -60,7 +60,7 @@ public class AddTagsCommand extends Command {
                 return new CommandResult(String.format(MESSAGE_DUPLICATE_TAG, existingTags));
             }
             return new CommandResult(String.format(
-                    MESSAGE_DUPLICATE_TAG + " All other tags were successfully added: %2$s",
+                    MESSAGE_DUPLICATE_TAG + " All other tag(s) were successfully added: %2$s",
                     existingTags, newTags
             ));
         }
