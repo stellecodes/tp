@@ -203,7 +203,7 @@ Notes:
 ### Unlinking a student and parent : `unlink`
 Removes an existing link between a student and a parent contact, so you cannot see their names under each other's contact.
 
-Format: `unlink sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]`
+Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 
 * `sn/` — name of the student contact (required)
 * `pn/` — name of the parent contact (required)
@@ -302,7 +302,7 @@ Action | Format, Examples
 **Adds** | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `adds n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
 **Addp** | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/87654321 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
 **Clear** | `clear`
-**Delete** | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
+**Delete** | `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3`, `delete n/Alex Yeoh, delete e/alex@example.com`, `delete n/Alex Yeoh e/alex@example.com`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Link** | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
