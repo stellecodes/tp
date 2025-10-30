@@ -117,6 +117,7 @@ How the parsing works:
 
 ### Model component
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+![UndoSequenceDiagram](images/UndoSequenceDiagram-Logic.png)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -474,6 +475,46 @@ Similar to adding a student contact except that tags will be an invalid field fo
 
 * 2b. The contact exists but has no links.
     * 2b1. System reports that no linked contacts were found.
+
+      Use case ends.
+
+---
+
+**Use case: Add new tags for future tagging**
+
+**MSS**
+1. User requests to add one or more tags to a contact.
+2System reports success and provides feedback about tags that were already present.
+
+   Use case ends.
+
+**Extensions**
+* 2a. Some or all tags already exist on the contact.
+    * 2a1. System adds only the tags that are not already present.
+    * 2a2. System reports which tags were already present and not added.
+
+      Use case ends.
+
+* 2b. Tags are invalid (e.g., empty or disallowed characters).
+    * 2b1. System reports the validation errors.
+    * 2b2. User revises the tags (returns to Step 2).  
+
+---
+
+**Use case: Delete tags for future tagging**
+
+**MSS**
+1. User requests to add one or more tags to a contact.
+2. System validates the tags and the target contact(s).
+3. System removes the deleted tag from all people associated with it. 
+4. System reports success and provides feedback about tags that were not present.
+
+   Use case ends.
+
+**Extensions**
+* 2a. Some or all tags already exist on the contact.
+    * 2a1. System deletes only the tags that are already present.
+    * 2a2. System reports which tags were not present and thus not deleted.
 
       Use case ends.
 
