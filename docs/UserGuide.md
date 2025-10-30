@@ -56,28 +56,6 @@ Action | Description                     | Format, Examples
 **List** | Show all contact(s)             | `list`
 **Help** | Opens the user guide            | `help`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-
-* Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…​` after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-
-* Parameters can be in any order.<br>
-  e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
-
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
-</div>
-
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
@@ -117,7 +95,7 @@ Examples:
 
 ### Listing all contacts : `list`
 
-Shows a list of all contacts in the address book.
+Displays all contacts in the address book.
 
 Format: `list`
 
@@ -149,11 +127,10 @@ Finds contacts whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Persons matching at least one keyword will be shown.
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -163,7 +140,7 @@ Examples:
 
 ### Filtering by tags: `filter`
 
-Show students whose have any of the tags given.
+Show students who have any of the tags given.
 
 Format: `filter tag [MORE_TAGS]`
 
@@ -171,12 +148,12 @@ Format: `filter tag [MORE_TAGS]`
 * The order of the tags does not matter.
 * Only the tags are searched.
 * Only full words will be matched e.g. `Math` will not match `Mathematics`
-* Students with at least one tag will be returned (i.e. `OR` search).
+* Students with at least one tag will be shown.
 
 Examples:
 * John Doe has Math tag, Peter has Chem and Math tags
-* `filter Math` returns `John Doe`
-* `filter Math Chem` returns `John Doe` and `Peter`
+* `filter Math` shows `John Doe`
+* `filter Math Chem` shows `John Doe` and `Peter`
 
 ### Deleting a person : `delete`
 
@@ -185,27 +162,32 @@ Deletes the specified person from the address book.
 Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 
 * Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s). 
-* The index refers to the index number shown in the displayed person list. 
-* The index must be a positive integer 1, 2, 3, … 
+* The index refers to the number shown in the current displayed person list. 
+* The index must be a positive number 1, 2, 3, … 
 * When using identifiers:
 * `n/NAME` — matches the full name (case-insensitive). 
 * `e/EMAIL` — matches the exact email address (case-insensitive). 
 * `p/PHONE` — matches the exact phone number. 
-* You may combine multiple identifiers (e.g. `n/` + `e/`) to narrow down the match when multiple persons share the same name. 
 * You must use either the index form or the identifier form — not both in the same command. 
-* If multiple persons match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
+* If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
 * If no match is found, the app will show a no match found message.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+If you are unsure of a contact’s full name, use identifiers such as email or phone number to avoid deleting the wrong person.
+</div>
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book. 
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
-* `delete n/John Doe` deletes the contact whose name is “John Doe”. 
-* `delete e/alice@example.com` deletes the contact with the given email address.
-* `delete p/91234567 deletes` the contact with that phone number. 
-* `delete n/John Tan e/john.tan@example.com` deletes the “John Tan” identified by the provided email.
+* `delete n/John Doe` deletes the person named “John Doe”. 
+* `delete e/alice@example.com` deletes the person with that email.
+* `delete p/91234567` deletes the person with that phone number. 
+* `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
 
 ### Linking a student and parent : `link`
-Links an existing student contact with a parent contact, forming a two-way relationship between them.
+
+Links an existing student contact with a parent contact so that their contacts will display each other's name.
 
 Format: `link sn/STUDENT_NAME pn/PARENT_NAME`
 
@@ -218,14 +200,13 @@ Examples:
 Notes:
 * A student can be linked to a maximum of 2 parents (e.g., mother and father).
 * A parent can be linked to multiple students (e.g., their children).
-* Links are bidirectional — linking a student to a parent automatically links the parent to that student.
 * Link relationships are automatically saved in the data file and reloaded when the app restarts.
 * Deleting a contact automatically removes all links associated with that contact.
 
 ### Unlinking a student and parent : `unlink`
-Removes an existing link between a student and a parent contact.
+Removes an existing link between a student and a parent contact, so you cannot see their names under each other's contact.
 
-Format: `unlink sn/STUDENT_NAME [sp/STUDENT_PHONE] pn/PARENT_NAME [pp/PARENT_PHONE]`
+Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 
 * `sn/` — name of the student contact (required)
 * `pn/` — name of the parent contact (required)
@@ -239,18 +220,22 @@ Finds and displays all contacts that are linked to a specified person.
 
 Format: `findlink n/NAME`
 
-* Shows all persons who are linked to the specified person. 
+* Finds people who are linked to the specified person. 
   For example, if a student is linked to their parents, this command will display the parents’ contacts.
-* The search by `NAME` is case-insensitive and must match the person’s full name exactly.
-  (e.g. `findlink n/Alice Tan`, `findlink n/aLiCe tAn` both refer to the same contact.)
-* You must include the `n/` prefix when specifying the name. 
-* If the specified person has no linked contacts, the command will show that there are 0 linked results. 
-* If the specified name does not exist in the address book, an error message will be displayed.
+* Name matching is case-insensitive e.g. findlink n/Alice Tan, findlink n/aLiCe tAn both work
+* The n/ prefix is required 
+* If the person exists but has no linked contacts, the command will show that there are 0 linked results. 
+* If no person matches the given name, an error message will be displayed.
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+If multiple contacts share similar names, ensure you specify the correct full name to accurately retrieve linked contacts.
+</div>
 
 Examples:
 * `findlink n/Alice Tan` shows all contacts linked to Alice Tan (e.g. her parents).
 * `findlink n/Tom Tan` shows all contacts linked to Tom Tan (e.g. his children).
-* `findlink n/Bob Lee` shows “0 linked contact(s)” if Bob Lee has no linked persons.
+* `findlink n/Bob Lee` shows “0 linked contact(s) for Bob Lee” if Bob Lee has no linked persons.
 * `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
 
 ### Clearing all entries : `clear`
@@ -295,9 +280,18 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: I closed ClassConnect by clicking the window’s close button instead of typing the exit command. Will I lose my work?<br>
+**A**: Don’t worry, ClassConnect saves your updates automatically as you go. When you reopen the app, your most recent changes should still be there.
+
+**Q**: Can I use ClassConnect on my phone or tablet?<br>
+**A**: Not at the moment. ClassConnect is currently available only on desktop computers.
+
+**Q**: What happens if a student leaves and I delete their contact?<br>
+**A**: Only the student is removed. Their parents remain safely in the address book — the family link is simply removed.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Current limitations
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
