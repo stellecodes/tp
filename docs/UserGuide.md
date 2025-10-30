@@ -6,8 +6,7 @@ title: User Guide
 **ClassConnect** is a **desktop application** designed for **private tuition teachers** to efficiently manage their contacts.<br><br>
 It helps tutors organize information about their **students and their parents**, keeping communication and record-keeping simple and centralized.
 
-### Key Features
-{: .no_toc }
+## Key Features
 <img src="images/Ui.png" alt="Ui" width="500" style="height:auto;">
 
 - **Add and manage contacts** — Create and update entries for both students and parents.
@@ -17,8 +16,10 @@ It helps tutors organize information about their **students and their parents**,
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
-* Table of Contents
-{:toc}
+* [Quick start](#quick-start)
+* [Commands](#commands)
+* [FAQ](#faq)
+* [Current limitations](#current-limitations)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -44,21 +45,21 @@ It helps tutors organize information about their **students and their parents**,
 
 Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
-**Adds** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
-**Addp** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
-**Find** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Edit** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Delete** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
-**Clear** | Clear all contact(s)            | `clear`
-**Link** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
-**Unlink** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
-**FindLink** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
-**Addtag** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
-**Deletetag** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
-**List** | Show all contact(s)             | `list`
-**Filter** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
-**Help** | Opens the user guide            | `help`
-**Exit** | Exit the application            | `exit`
+**[Adds](#adding-a-contact-addsaddp)** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
+**[Addp](#adding-a-contact-addsaddp)** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
+**[Find](#finding-linked-contacts--findlink)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**[Edit](#editing-a-contact--edit)** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Delete](#deleting-a-person--delete)** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
+**[Clear](#clearing-all-entries--clear)** | Clear all contact(s)            | `clear`
+**[Link](#linking-a-student-and-parent--link)** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
+**[Unlink](#unlinking-a-student-and-parent--unlink)** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
+**[Findlink](#finding-linked-contacts--findlink)** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
+**[Addtag](#adding-tags--addtag-ttag-ttag)** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
+**[Deletetag](#deleting-tags--deletetag-ttag-ttag)** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
+**[List](#listing-all-contacts--list)** | Show all contact(s)             | `list`
+**[Filter](#filtering-by-tags-filter)** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
+**[Help](#viewing-help--help)** | Opens the user guide            | `help`
+**[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
 
 ### Adding a contact: `adds`/`addp`
 
