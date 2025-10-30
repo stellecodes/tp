@@ -293,6 +293,35 @@ Similar to adding a student contact except that tags will be an invalid field fo
 
 ---
 
+**Use case: Find by name**
+
+**MSS**
+1. User enters a find command with one or more name keywords (e.g., find alice, find alice bob).
+2. System validates the command format (non-empty, whitespace-separated keywords).
+3. System applies a name filter to all contacts (Students and Parents) using OR semantics: a contact is shown if their name matches any of the keywords.
+4. System displays the filtered list and a success message indicating the number of contacts found and the keyword(s) used.
+
+   Use case ends.
+
+**Extensions**
+* 2a. Invalid format (e.g., empty input, only spaces).
+    * 2a1. System shows usage message for find.
+
+      Use case ends.
+
+* 3a. No contacts match any keyword.
+    * 3a1. System shows: “0 persons listed!”.
+       
+      Use case ends.
+
+* 3b. Mixed case / extra spaces in keywords.
+    * 3b1. System trims spaces and matches case-insensitively. (Continue at Step 3.)
+
+* 3c. Duplicate keywords provided.
+    * 3c1. System de-duplicates internally; behavior unchanged. (Continue at Step 3.)
+
+---
+
 **Use case: Filter by tags**
 
 **MSS**
