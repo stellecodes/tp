@@ -7,12 +7,16 @@ title: User Guide
 It helps tutors organize information about their **students and their parents**, keeping communication and record-keeping simple and centralized.
 
 ### Key Features
+{: .no_toc }
 <img src="images/Ui.png" alt="Ui" width="500" style="height:auto;">
 
 - **Add and manage contacts** — Create and update entries for both students and parents.
 - **Link students to parents** — Maintain clear relationships between students and their respective parents within the app.
 - **Tag students for easy organization** — Assign tags such as `Math`, `P6`, or `Progressing` to categorize students effectively.
-* Table of Contents
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Table of Contents
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
