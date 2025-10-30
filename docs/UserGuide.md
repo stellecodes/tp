@@ -112,17 +112,19 @@ Edits an existing contact in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be replaced.
-* You can remove all the person’s tags by typing `t/` without specifying any tags after it.
+* Edits the person positioned at the specified `INDEX` in the contact list. The index **must be a positive integer** 1, 2, 3, …​
+* At least **_one_** of the optional fields must be provided.
+* Existing values will be **overridden** by the input values.
+  * When editing tags, the existing tags of the person will be replaced.
 
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+You can remove all the person’s tags by typing `t/` without specifying any tags after it.<br>
+</div>
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 Only student contacts can have tags, so updates to the tag with `t/` only applies to student contacts.<br>
 </div>
-
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
