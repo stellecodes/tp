@@ -40,7 +40,7 @@ class AddTagsCommandTest {
         AddTagsCommand command = new AddTagsCommand(tagsToAdd);
         CommandResult result = command.execute(modelStub);
 
-        assertEquals("Tags added successfully!", result.getFeedbackToUser());
+        assertEquals("Tag(s) added successfully!", result.getFeedbackToUser());
         assertTrue(modelStub.addedTags.contains(tagMath));
         assertTrue(modelStub.addedTags.contains(tagScience));
     }

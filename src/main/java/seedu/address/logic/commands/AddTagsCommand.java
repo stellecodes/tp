@@ -41,7 +41,7 @@ public class AddTagsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         model.addTagTypes(toAdd);
-        return new CommandResult("Tags added successfully!");
+        return new CommandResult("Tag(s) added successfully!");
     }
 
 
