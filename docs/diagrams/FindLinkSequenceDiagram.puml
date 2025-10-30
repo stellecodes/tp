@@ -1,0 +1,88 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":FindLinkCommandParser" as FindLinkCommandParser LOGIC_COLOR
+participant "c:FindLinkCommand" as FindLinkCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("findlink n/John Tan")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("findlink n/John Tan")
+activate AddressBookParser
+
+create FindLinkCommandParser
+AddressBookParser -> FindLinkCommandParser
+activate FindLinkCommandParser
+
+' Parser tokenizes args with n/, checks preamble empty, exactly one n/, no duplicates
+FindLinkCommandParser --> AddressBookParser
+deactivate FindLinkCommandParser
+
+AddressBookParser -> FindLinkCommandParser : parse("n/John Tan")
+activate FindLinkCommandParser
+
+create FindLinkCommand
+FindLinkCommandParser -> FindLinkCommand : «constructor» FindLinkCommand("John Tan")
+activate FindLinkCommand
+
+FindLinkCommand --> FindLinkCommandParser : c
+deactivate FindLinkCommand
+
+FindLinkCommandParser --> AddressBookParser : c
+deactivate FindLinkCommandParser
+' Hidden arrow to place destroy marker nicely
+FindLinkCommandParser -[hidden]-> AddressBookParser
+destroy FindLinkCommandParser
+
+AddressBookParser --> LogicManager : c
+deactivate AddressBookParser
+
+LogicManager -> FindLinkCommand : execute(m)
+activate FindLinkCommand
+
+' --- Inside execute(Model) ---
+' Resolve target by name (case-insensitive):
+FindLinkCommand -> Model : getAddressBook()
+activate Model
+Model --> FindLinkCommand : ReadOnlyAddressBook
+deactivate Model
+
+' (Command searches address book for exact name match; internal iteration omitted)
+
+' Retrieve linked persons and filter UI list:
+FindLinkCommand -> Model : getLinkedPersons(target)
+activate Model
+Model --> FindLinkCommand : List<Person> linked
+deactivate Model
+
+FindLinkCommand -> Model : updateFilteredPersonList(predicateOf(linked))
+activate Model
+Model --> FindLinkCommand
+deactivate Model
+
+' Build user feedback: "Showing X linked contact(s) for John Tan"
+create CommandResult
+FindLinkCommand -> CommandResult :
+activate CommandResult
+CommandResult --> FindLinkCommand
+deactivate CommandResult
+' --- end execute(Model) ---
+
+FindLinkCommand --> LogicManager : r
+deactivate FindLinkCommand
+
+[<-- LogicManager
+deactivate LogicManager
+@enduml
+
+

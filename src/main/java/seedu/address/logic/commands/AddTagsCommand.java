@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -15,17 +16,17 @@ import seedu.address.model.tag.Tag;
  */
 public class AddTagsCommand extends Command {
 
-    public static final String COMMAND_WORD = "add_tags";
+    public static final String COMMAND_WORD = "addtag";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + " Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Math "
+            + PREFIX_TAG + "Science";
 
-    public static final String MESSAGE_SUCCESS = "New tags added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TAG = "Some tags already exist and were not added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New tag(s) added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TAG = "The following tag(s) already exist and were not added: %1$s.";
 
     private final Set<Tag> toAdd;
 
@@ -40,10 +41,32 @@ public class AddTagsCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        model.addTagTypes(toAdd);
-        return new CommandResult("Tag(s) added successfully!");
-    }
 
+        Set<Tag> existingTags = new HashSet<>();
+        Set<Tag> newTags = new HashSet<>();
+
+        for (Tag tag : toAdd) {
+            if (model.hasTag(tag)) {
+                existingTags.add(tag);
+            } else {
+                newTags.add(tag);
+            }
+        }
+
+        model.addTagTypes(newTags);
+
+        if (!existingTags.isEmpty()) {
+            if (newTags.isEmpty()) {
+                return new CommandResult(String.format(MESSAGE_DUPLICATE_TAG, existingTags));
+            }
+            return new CommandResult(String.format(
+                    MESSAGE_DUPLICATE_TAG + " All other tag(s) were successfully added: %2$s",
+                    existingTags, newTags
+            ));
+        }
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, newTags));
+    }
 
     @Override
     public String toString() {

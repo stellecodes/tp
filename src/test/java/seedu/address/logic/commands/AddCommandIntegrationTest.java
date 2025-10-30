@@ -34,7 +34,7 @@ public class AddCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addTagTypes(validStudent.getTags());
-
+        model.addTagTypes(validStudent.getTags());
         expectedModel.addPerson(validStudent);
 
         assertCommandSuccess(new AddStudentCommand(validStudent), model,
