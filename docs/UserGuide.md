@@ -68,15 +68,24 @@ Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
 Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
 Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`<br>
 
-Both student and parent contacts contain the following **compulsory** fields:
-- `name`, set with the prefix `n/`
-- `phone number`, set with the prefix `p/`
-- `email`, set with the prefix `e/`
-- `address`, set with the prefix `a/`<br>
+- Both student and parent contacts contain the following **compulsory** fields:
+  - `name`, set with the prefix `n/`
+  - `phone number`, set with the prefix `p/`
+  - `email`, set with the prefix `e/`
+  - `address`, set with the prefix `a/`<br>
 
-Optionally, a `remark` field can also be added with `r/`.<br>
-For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
-Multiple tags can be added by repeating the `t/` prefix.<br>
+- Optionally, a `remark` field can also be added with `r/`.<br>
+- For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
+  - Multiple tags can be added by repeating the `t/` prefix.<br>
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
+See the `addtag` section below for more details.
+</div>
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
+</div>
 
 Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
