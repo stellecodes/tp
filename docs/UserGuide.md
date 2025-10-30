@@ -233,14 +233,27 @@ Examples:
 * `findlink n/Bob Lee` shows “0 linked contact(s) for Bob Lee” if Bob Lee has no linked persons.
 * `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
 
-### Tag management
-#### Adding tags : `addtag t/[TAG] t/[TAG]`
-* Adds more possible tags to use
-* It is possible to add multiple tags at once
+### Adding tags : `addtag`
+Adds new tags to the possible tags list. You can add multiple tags at once.
 
-#### Deleting tags : `deletetag t/[TAG] t/[TAG]`
-* Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
-* It is possible to delete multiple tags at once
+Format: `addtag t/TAG t/TAG`
+
+* `t/` — name of the tag to add (required)
+
+Examples:
+* `addtag t/Math t/Science` — Adds the tags `Math` and `Science` to the possible tags list.
+
+---
+
+### Deleting tags : `deletetag`
+Deletes tags from the possible tags list. This will also remove the tag from all contacts who have it. You can delete multiple tags at once.
+
+Format: `deletetag t/TAG t/TAG`
+
+* `t/` — name of the tag to delete (required)
+
+Examples:
+* `deletetag t/Math t/Science` — Deletes the tags `Math` and `Science` from the possible tags list and from all contacts who had them.
 
 ### Listing all contacts : `list`
 
