@@ -3,15 +3,15 @@ layout: page
 title: User Guide
 ---
 
-**ClassConnect** is a **desktop application** designed for **private tuition teachers** to efficiently manage their contacts.  
+**ClassConnect** is a **desktop application** designed for **private tuition teachers** to efficiently manage their contacts.<br><br>
 It helps tutors organize information about their **students and their parents**, keeping communication and record-keeping simple and centralized.
 
 ### Key Features
+<img src="images/Ui.png" alt="Ui" width="500" style="height:auto;">
 
 - **Add and manage contacts** — Create and update entries for both students and parents.
 - **Link students to parents** — Maintain clear relationships between students and their respective parents within the app.
-- **Tag students for easy organization** — Assign tags such as `math`, `P6`, or `progressing` to categorize students effectively.
-  <img src="images/Ui.png" alt="Ui" width="400" style="height:auto;">
+- **Tag students for easy organization** — Assign tags such as `Math`, `P6`, or `Progressing` to categorize students effectively.
 * Table of Contents
 {:toc}
 
@@ -22,36 +22,39 @@ It helps tutors organize information about their **students and their parents**,
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+3. Copy the file to a folder of your choice.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+4. Open the command terminal in this folder and enter `java -jar addressbook.jar` to run the application.<br>
+   An interface similar to the one shown above should appear in a few seconds. The app comes with some sample data.<br>
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
-
-   * Lists all contacts: `list`
-
-   * Add contacts:
-     * Adds a student named `John` with tag `Math` to the Address Book:
-       * `adds n/John p/98765432 e/johnd@example.com a/John street, block 123, #01-01 r/Hate school t/Math`
-     * Adds a parent named `Jane` to the Address Book:
-       * `addp n/Jane p/87654321 e/jane@example.com a/Jane street, block 321, #01-01 r/Love John`
-   * Find all contacts with names containing `John`: `find John`
-    
-   * Deletes the 3rd contact shown in the current list: `delete 3`.
-
-   * `clear` : Deletes all contacts.
-
-   * `exit` : Exits the app.
-
-1. Refer to the [Features](#features) below for details of each command.
+5. Refer to the [Commands section](#commands) below for details of available commands.<br> 
+   Enter them in the command box and have experiment using the sample data!
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Features
+## Commands
+
+
+### Summary
+
+Action | Description                     | Format, Examples
+-------|---------------------------------|-------------
+**Adds** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
+**Addp** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
+**Clear** | Clear all contact(s)            | `clear`
+**Delete** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
+**Edit** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Link** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
+**Unlink** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
+**FindLink** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
+**Addtag** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
+**Deletetag** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
+**Filter** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
+**List** | Show all contact(s)             | `list`
+**Help** | Opens the user guide            | `help`
 
 <div markdown="block" class="alert alert-info">
 
@@ -301,22 +304,3 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
-
-Action | Format, Examples
---------|------------------
-**Adds** | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `adds n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
-**Addp** | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/87654321 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
-**Clear** | `clear`
-**Delete** | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Link** | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
-**Unlink** | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
-**FindLink** | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
-**Add_tags** | `add_tags t/[TAG]`<br> e.g., `add_tags n/Math`
-**Delete_tags** | `delete_tags t/[TAG]`<br> e.g., `delete_tags t/Math`
-**List_tags** | `list_tags`
-**Filter** | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
-**List** | `list`
-**Help** | `help`
