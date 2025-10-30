@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -31,13 +30,13 @@ public class DeleteTagsCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public DeleteTagsCommand(Set<Tag> tags) {
-        requireNonNull(tags);
+        assert tags != null : "Tags should not be null";
         toDelete = tags;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null : "Model should not be null";
         for (Tag tag : toDelete) {
             if (!model.hasTag(tag)) {
                 throw new CommandException(String.format("Tag %s does not exist", tag));
