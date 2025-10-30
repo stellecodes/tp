@@ -47,7 +47,6 @@ Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
 **[Adds](#adding-a-contact-addsaddp)** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
 **[Addp](#adding-a-contact-addsaddp)** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
-**[Find](#finding-linked-contacts--findlink)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **[Edit](#editing-a-contact--edit)** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **[Delete](#deleting-a-person--delete)** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
 **[Clear](#clearing-all-entries--clear)** | Clear all contact(s)            | `clear`
@@ -57,6 +56,7 @@ Action | Description                     | Format, Examples
 **[Addtag](#adding-tags--addtag-ttag-ttag)** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
 **[Deletetag](#deleting-tags--deletetag-ttag-ttag)** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
 **[List](#listing-all-contacts--list)** | Show all contact(s)             | `list`
+**[Find](#finding-linked-contacts--findlink)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **[Filter](#filtering-by-tags-filter)** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **[Help](#viewing-help--help)** | Opens the user guide            | `help`
 **[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
@@ -89,23 +89,6 @@ The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is als
 Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
 * `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
-
-### Locating contacts by name: `find`
-
-Finds contacts whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be shown.
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  <img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
 
 ### Editing a contact : `edit`
 
@@ -233,6 +216,23 @@ Examples:
 Displays all contacts in the address book.
 
 Format: `list`
+
+### Locating contacts by name: `find`
+
+Finds contacts whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be shown.
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  <img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
 
 ### Filtering by tags: `filter`
 
