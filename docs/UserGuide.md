@@ -105,16 +105,6 @@ Examples:
 
 </div>
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
-See the `addtag` section below for more details.
-</div>
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**
-A student can have any number of tags (including 0).<br>
-The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
-</div>
-
 
 ### Editing a contact : `edit`
 
