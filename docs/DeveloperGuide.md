@@ -571,16 +571,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -588,13 +588,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 
@@ -624,6 +624,60 @@ testers are expected to do more *exploratory* testing.
    8. Test case: `delete n/`<br>
       Expected: Error message shown: “Invalid command format. Identifier cannot be empty.” No data modified.
 
+### Linking contacts
+
+1. Links a student and a parent together to represent a relationship (e.g., a tutor linking a student to their parent).
+
+    1. **Prerequisites:**  
+       Ensure that both the student and parent contacts already exist in the address book.  
+       For example, `adds n/John Tan p/98765432 e/john@example.com a/Blk 1 t/Math` and  
+       `addp n/Mrs Tan p/92345678 e/mrs.tan@example.com a/Blk 1`.
+
+    2. **Test case:** `link sn/John Tan pn/Mrs Tan`  
+       Expected: Success message — “Linked John Tan ↔ Mrs Tan”.  
+       Both contacts now appear as linked when you use the `findlink n/John Tan` command.
+
+    3. **Test case:** `link sn/Mrs Tan pn/John Tan`  
+       Expected: Error message — “Student contact not found or is not of type Student.”  
+       The command enforces valid pairing (sn/Student ↔ pn/Parent only).
+
+    4. **Test case:** `link sn/John Tan pn/John Tan`  
+       Expected: Error message — “Student contact not found or is not of type Student.”
+
+    5. **Test case:** `link sn/John Tan pn/Nonexistent Parent`  
+       Expected: Error message — “Parent contact not found or is not of type Parent.”
+
+    6. **Test case:** `link sn/Nonexistent Student pn/Mrs Tan`  
+       Expected: Error message — “Student contact not found or is not of type Student.”
+
+    7. **Test case:** `link sn/John Tan pn/Mrs Tan` (repeat twice)  
+       Expected: Error message — “These contacts are already linked.”
+
+    8. **Test case:** Link the same student to two parents (`link sn/John Tan pn/Mrs Tan`, then `link sn/John Tan pn/Mr Tan`)  
+       Expected: Success message for both commands.  
+       Attempting a third parent link (`link sn/John Tan pn/Uncle Tan`)  
+       shows: “Each student can only be linked to up to 2 parents.”
+
+### Unlinking contacts
+
+1. Removes an existing student–parent link.
+
+    1. **Prerequisites:**  
+       The student and parent must already be linked using the `link` command.
+
+    2. **Test case:** `unlink sn/John Tan pn/Mrs Tan`  
+       Expected: Success message — “Unlinked John Tan ↔ Mrs Tan”.  
+       Running `findlink n/John Tan` afterward shows that the parent contact no longer appears.
+
+    3. **Test case:** `unlink sn/John Tan pn/Nonexistent Parent`  
+       Expected: Error message — “Parent contact not found or is not of type Parent.”
+
+    4. **Test case:** `unlink sn/Nonexistent Student pn/Mrs Tan`  
+       Expected: Error message — “Student contact not found or is not of type Student.”
+
+    5. **Test case:** `unlink sn/John Tan pn/Mr Tan` where they were never linked  
+       Expected: Error message — “These contacts are not currently linked.”
+
 ### Finding linked contacts
 
 1. Displays all contacts that are linked to a given person (e.g., showing all parents linked to a student, or vice versa).
@@ -643,4 +697,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_

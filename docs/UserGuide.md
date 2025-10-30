@@ -6,8 +6,7 @@ title: User Guide
 **ClassConnect** is a **desktop application** designed for **private tuition teachers** to efficiently manage their contacts.<br><br>
 It helps tutors organize information about their **students and their parents**, keeping communication and record-keeping simple and centralized.
 
-### Key Features
-{: .no_toc }
+## Key Features
 <img src="images/Ui.png" alt="Ui" width="500" style="height:auto;">
 
 - **Add and manage contacts** — Create and update entries for both students and parents.
@@ -39,34 +38,25 @@ It helps tutors organize information about their **students and their parents**,
 --------------------------------------------------------------------------------------------------------------------
 
 ## Commands
-
-
 ### Summary
 
 Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
-**Adds** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
-**Addp** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
-**Clear** | Clear all contact(s)            | `clear`
-**Delete** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
-**Edit** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**Link** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
-**Unlink** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
-**FindLink** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
-**Addtag** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
-**Deletetag** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
-**Filter** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
-**List** | Show all contact(s)             | `list`
-**Help** | Opens the user guide            | `help`
-
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-<img src="images/helpMessage.png" alt="help" width="400" style="height:auto;">
-Format: `help`
-
+**[Adds](#adding-a-contact-addsaddp)** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
+**[Addp](#adding-a-contact-addsaddp)** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
+**[Edit](#editing-a-contact--edit)** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Delete](#deleting-a-person--delete)** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
+**[Clear](#clearing-all-entries--clear)** | Clear all contact(s)            | `clear`
+**[Link](#linking-a-student-and-parent--link)** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
+**[Unlink](#unlinking-a-student-and-parent--unlink)** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
+**[Findlink](#finding-linked-contacts--findlink)** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
+**[Addtag](#adding-tags--addtag-ttag-ttag)** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
+**[Deletetag](#deleting-tags--deletetag-ttag-ttag)** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
+**[List](#listing-all-contacts--list)** | Show all contact(s)             | `list`
+**[Find](#finding-linked-contacts--findlink)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**[Filter](#filtering-by-tags-filter)** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
+**[Help](#viewing-help--help)** | Opens the user guide            | `help`
+**[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
 
 ### Adding a contact: `adds`/`addp`
 
@@ -97,12 +87,6 @@ Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
 * `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
-### Listing all contacts : `list`
-
-Displays all contacts in the address book.
-
-Format: `list`
-
 ### Editing a contact : `edit`
 
 Edits an existing contact in the address book.
@@ -125,55 +109,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating contacts by name: `find`
-
-Finds contacts whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be shown.
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-<img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
-
-### Filtering by tags: `filter`
-
-Show students who have any of the tags given.
-
-Format: `filter tag [MORE_TAGS]`
-
-* The search is case-insensitive. e.g `Math` will match `math`
-* The order of the tags does not matter.
-* Only the tags are searched.
-* Only full words will be matched e.g. `Math` will not match `Mathematics`
-* Students with at least one tag will be shown.
-
-Examples:
-* John Doe has Math tag, Peter has Chem and Math tags
-* `filter Math` shows `John Doe`
-* `filter Math Chem` shows `John Doe` and `Peter`
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
 Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 
-* Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s). 
-* The index refers to the number shown in the current displayed person list. 
-* The index must be a positive number 1, 2, 3, … 
+* Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s).
+* The index refers to the number shown in the current displayed person list.
+* The index must be a positive number 1, 2, 3, …
 * When using identifiers:
-* `n/NAME` — matches the full name (case-insensitive). 
-* `e/EMAIL` — matches the exact email address (case-insensitive). 
-* `p/PHONE` — matches the exact phone number. 
-* You must use either the index form or the identifier form — not both in the same command. 
-* If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
+* `n/NAME` — matches the full name (case-insensitive).
+* `e/EMAIL` — matches the exact email address (case-insensitive).
+* `p/PHONE` — matches the exact phone number.
+* You must use either the index form or the identifier form — not both in the same command.
+* If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers.
 * If no match is found, the app will show a no match found message.
 
 <div markdown="span" class="alert alert-primary">
@@ -182,11 +132,11 @@ If you are unsure of a contact’s full name, use identifiers such as email or p
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book. 
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
-* `delete n/John Doe` deletes the person named “John Doe”. 
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/John Doe` deletes the person named “John Doe”.
 * `delete e/alice@example.com` deletes the person with that email.
-* `delete p/91234567` deletes the person with that phone number. 
+* `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
 
 ### Linking a student and parent : `link`
@@ -199,7 +149,21 @@ Format: `link sn/STUDENT_NAME pn/PARENT_NAME`
 * `pn/` — name of the parent contact (required)
 
 Examples:
-* `link sn/John Tan pn/Mrs Tan` Links student John Tan with parent Mrs Tan.
+* `link sn/Alex Jones pn/John Doe` Links student Alex Jones with parent John Doe.
+
+<div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/linkAlexJohn.png" alt="link alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>Before linking (command entered)</em></p>
+  </div>
+
+  <div style="flex: 1; min-width: 300px;">
+    <img src="images/linkedAlexJohn.png" alt="linked alex john" style="width: 100%; height: auto; border-radius: 6px;">
+    <p align="center"><em>After linking (contacts linked successfully)</em></p>
+  </div>
+
+</div>
 
 Notes:
 * A student can be linked to a maximum of 2 parents (e.g., mother and father).
@@ -216,7 +180,7 @@ Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 * `pn/` — name of the parent contact (required)
 
 Examples:
-* unlink sn/John Tan pn/Mrs Tan `Removes the link between John Tan and Mrs Tan.`
+* `unlink sn/Alex Jones pn/John Doe` Removes the link between student Alex Jones and parent John doe.
 
 ### Finding linked contacts : `findlink`
 
