@@ -22,7 +22,8 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        // Normalize to capitalize first letter
+        this.tagName = tagName.substring(0, 1).toUpperCase() + tagName.substring(1).toLowerCase();
     }
 
     /**

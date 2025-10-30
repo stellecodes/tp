@@ -22,28 +22,28 @@ import seedu.address.model.tag.Tag;
 class DeleteTagsCommandTest {
 
     private ModelStub modelStub;
-    private Tag tagFriend;
-    private Tag tagOwesMoney;
+    private Tag tagMath;
+    private Tag tagScience;
 
     @BeforeEach
     void setUp() {
         modelStub = new ModelStub();
-        tagFriend = new Tag("friends");
-        tagOwesMoney = new Tag("owesMoney");
-        modelStub.addedTags.add(tagFriend);
-        modelStub.addedTags.add(tagOwesMoney);
+        tagMath = new Tag("Math");
+        tagScience = new Tag("Science");
+        modelStub.addedTags.add(tagMath);
+        modelStub.addedTags.add(tagScience);
     }
 
     @Test
     void execute_deleteExistingTags_success() throws Exception {
-        Set<Tag> tagsToDelete = Set.of(tagFriend);
+        Set<Tag> tagsToDelete = Set.of(tagMath);
         DeleteTagsCommand command = new DeleteTagsCommand(tagsToDelete);
 
         CommandResult result = command.execute(modelStub);
 
         assertEquals("Tags deleted successfully!", result.getFeedbackToUser());
-        assertTrue(!modelStub.addedTags.contains(tagFriend));
-        assertTrue(modelStub.addedTags.contains(tagOwesMoney)); // untouched
+        assertTrue(!modelStub.addedTags.contains(tagMath));
+        assertTrue(modelStub.addedTags.contains(tagScience)); // untouched
     }
 
     @Test
@@ -58,12 +58,11 @@ class DeleteTagsCommandTest {
 
     @Test
     void toString_containsTagNames() {
-        Set<Tag> tags = Set.of(tagFriend);
-        DeleteTagsCommand command = new DeleteTagsCommand(tags);
-        String result = command.toString();
+        Set<Tag> tags = Set.of(tagMath);
+        String result = new DeleteTagsCommand(tags).toString();
 
         assertTrue(result.contains("toDelete"));
-        assertTrue(result.contains("friends"));
+        assertTrue(result.contains("Math"));
     }
 
     /**

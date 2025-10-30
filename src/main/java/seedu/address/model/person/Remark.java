@@ -9,12 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Remark {
 
     public static final String MESSAGE_CONSTRAINTS =
-            "Remarks are optional but should not contain special character '/' or newline.";
+            """
+            Remark is limited to 200 characters.
+            It should not contain special characters '/' or '\\n'.""";
 
     /*
      * The remark cannot contain special character '/' or newline.
      */
-    public static final String VALIDATION_REGEX = "[^\\n/]*";
+    public static final String VALIDATION_REGEX = "[^\\n/]{0,200}";
 
     public final String remarks;
 
