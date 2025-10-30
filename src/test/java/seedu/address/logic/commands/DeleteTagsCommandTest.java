@@ -78,8 +78,6 @@ class DeleteTagsCommandTest {
     void execute_mixedTags_partialSuccess() throws Exception {
         // Deleting all three tags: Math (exists), Science (exists), History (non-existent)
         Set<Tag> tagsToDelete = allThreeTags;
-        Set<Tag> deletedTags = tagMathAndScience; // Tags that will be deleted
-        Set<Tag> nonExistentTags = onlyTagHistory; // Tags that won't be deleted
 
         DeleteTagsCommand command = new DeleteTagsCommand(tagsToDelete);
 
