@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import java.util.List;
 import java.util.Set;
 
-import seedu.address.logic.commands.AddTagsCommand;
 import seedu.address.logic.commands.DeleteTagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
@@ -25,7 +24,7 @@ public class DeleteTagsParser implements Parser<DeleteTagsCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TAG);
         List<String> tagValues = argMultimap.getAllValues(PREFIX_TAG);
         if (tagValues.isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTagsCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTagsCommand.MESSAGE_USAGE));
         }
         Set<Tag> tagSet = ParserUtil.parseTags(tagValues);
         return new DeleteTagsCommand(tagSet);
