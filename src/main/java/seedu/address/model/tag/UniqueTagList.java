@@ -1,5 +1,7 @@
 package seedu.address.model.tag;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ public class UniqueTagList {
      * Returns true if the list contains an equivalent tag as the given argument.
      */
     public boolean contains(Tag toCheck) {
-        assert toCheck != null : "Tag to check should not be null";
+        requireNonNull(toCheck);
         return tagSet.contains(toCheck);
     }
 
@@ -26,7 +28,7 @@ public class UniqueTagList {
      * Replaces the current map with another UniqueTagList's contents.
      */
     public void setTags(UniqueTagList replacement) {
-        assert replacement != null : "Replacement should not be null";
+        requireNonNull(replacement);
         tagSet.clear();
         tagSet.addAll(replacement.getTags());
     }
@@ -61,7 +63,7 @@ public class UniqueTagList {
      * @throws TagNotFoundException if any tag of the person does not exist in the tag list.
      */
     public boolean personHasValidTags(Person person) throws TagNotFoundException {
-        assert person != null : "Person should not be null";
+        requireNonNull(person);
         if (!(person instanceof Student student)) {
             return false;
         }
@@ -79,7 +81,7 @@ public class UniqueTagList {
      * Returns a set of tags that were not added because they already exist.
      */
     public Set<Tag> addTagTypes(Set<Tag> tagsToAdd) {
-        assert tagsToAdd != null : "Tags should not be null";
+        requireNonNull(tagsToAdd);
         Set<Tag> alreadyPresent = new HashSet<>();
         for (Tag tag : tagsToAdd) {
             if (contains(tag)) {
@@ -95,7 +97,7 @@ public class UniqueTagList {
      * Deletes multiple tag types from the map.
      */
     public void deleteTagTypes(Set<Tag> tagsToDelete) {
-        assert tagsToDelete != null : "Tags should not be null";
+        requireNonNull(tagsToDelete);
         for (Tag toDelete : tagsToDelete) {
             tagSet.remove(toDelete);
         }
