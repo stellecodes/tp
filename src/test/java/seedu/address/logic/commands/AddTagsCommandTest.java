@@ -20,33 +20,33 @@ import seedu.address.model.tag.Tag;
 class AddTagsCommandTest {
 
     private ModelStub modelStub;
-    private Tag tagFriend;
-    private Tag tagColleague;
+    private Tag tagMath;
+    private Tag tagScience;
 
     @BeforeEach
     void setUp() {
         modelStub = new ModelStub();
-        tagFriend = new Tag("friends");
-        tagColleague = new Tag("colleagues");
+        tagMath = new Tag("Math");
+        tagScience = new Tag("Science");
     }
 
     @Test
     void execute_addTags_success() throws Exception {
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(tagFriend);
-        tagsToAdd.add(tagColleague);
+        tagsToAdd.add(tagMath);
+        tagsToAdd.add(tagScience);
 
         AddTagsCommand command = new AddTagsCommand(tagsToAdd);
         command.execute(modelStub);
 
-        assertTrue(modelStub.addedTags.contains(tagFriend));
-        assertTrue(modelStub.addedTags.contains(tagColleague));
+        assertTrue(modelStub.addedTags.contains(tagMath));
+        assertTrue(modelStub.addedTags.contains(tagScience));
     }
 
     @Test
     void execute_nullModel_throwsNullPointerException() {
         Set<Tag> tagsToAdd = new HashSet<>();
-        tagsToAdd.add(tagFriend);
+        tagsToAdd.add(tagMath);
 
         AddTagsCommand command = new AddTagsCommand(tagsToAdd);
         assertThrows(NullPointerException.class, () -> command.execute(null));
@@ -59,12 +59,12 @@ class AddTagsCommandTest {
 
     @Test
     void toString_correctFormat() {
-        Set<Tag> tags = Set.of(tagFriend);
-        AddTagsCommand command = new AddTagsCommand(tags);
+        Set<Tag> tags = Set.of(tagMath, tagScience);
         String expected = new AddTagsCommand(tags).toString();
 
         assertTrue(expected.contains("toAdd"));
-        assertTrue(expected.contains("friends"));
+        assertTrue(expected.contains("Science"));
+        assertTrue(expected.contains("Math"));
     }
 
     /**
