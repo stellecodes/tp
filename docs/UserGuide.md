@@ -40,34 +40,25 @@ It helps tutors organize information about their **students and their parents**,
 --------------------------------------------------------------------------------------------------------------------
 
 ## Commands
-
-
 ### Summary
 
 Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
 **Adds** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
 **Addp** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
-**Clear** | Clear all contact(s)            | `clear`
-**Delete** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
-**Edit** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Delete** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
+**Clear** | Clear all contact(s)            | `clear`
 **Link** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
 **Unlink** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
 **FindLink** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
 **Addtag** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
 **Deletetag** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
-**Filter** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **List** | Show all contact(s)             | `list`
+**Filter** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **Help** | Opens the user guide            | `help`
-
-### Viewing help : `help`
-
-Shows a message explaining how to access the help page.
-
-<img src="images/helpMessage.png" alt="help" width="400" style="height:auto;">
-Format: `help`
-
+**Exit** | Exit the application            | `exit`
 
 ### Adding a contact: `adds`/`addp`
 
@@ -98,11 +89,22 @@ Examples:
 * `adds n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 t/Math`
 * `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
-### Listing all contacts : `list`
+### Locating contacts by name: `find`
 
-Displays all contacts in the address book.
+Finds contacts whose names contain any of the given keywords.
 
-Format: `list`
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be shown.
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex david` returns `Alex Yeoh`, `David Li`<br>
+  <img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
 
 ### Editing a contact : `edit`
 
@@ -126,55 +128,21 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-### Locating contacts by name: `find`
-
-Finds contacts whose names contain any of the given keywords.
-
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be shown.
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-
-Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-<img src="images/findAlexDavidResult.png" alt="find alex david" width="400" style="height:auto;">
-
-### Filtering by tags: `filter`
-
-Show students who have any of the tags given.
-
-Format: `filter tag [MORE_TAGS]`
-
-* The search is case-insensitive. e.g `Math` will match `math`
-* The order of the tags does not matter.
-* Only the tags are searched.
-* Only full words will be matched e.g. `Math` will not match `Mathematics`
-* Students with at least one tag will be shown.
-
-Examples:
-* John Doe has Math tag, Peter has Chem and Math tags
-* `filter Math` shows `John Doe`
-* `filter Math Chem` shows `John Doe` and `Peter`
-
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
 
 Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 
-* Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s). 
-* The index refers to the number shown in the current displayed person list. 
-* The index must be a positive number 1, 2, 3, … 
+* Deletes the person at the specified INDEX, or deletes the person that matches the provided identifier(s).
+* The index refers to the number shown in the current displayed person list.
+* The index must be a positive number 1, 2, 3, …
 * When using identifiers:
-* `n/NAME` — matches the full name (case-insensitive). 
-* `e/EMAIL` — matches the exact email address (case-insensitive). 
-* `p/PHONE` — matches the exact phone number. 
-* You must use either the index form or the identifier form — not both in the same command. 
-* If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers. 
+* `n/NAME` — matches the full name (case-insensitive).
+* `e/EMAIL` — matches the exact email address (case-insensitive).
+* `p/PHONE` — matches the exact phone number.
+* You must use either the index form or the identifier form — not both in the same command.
+* If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers.
 * If no match is found, the app will show a no match found message.
 
 <div markdown="span" class="alert alert-primary">
@@ -183,12 +151,19 @@ If you are unsure of a contact’s full name, use identifiers such as email or p
 </div>
 
 Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book. 
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command. 
-* `delete n/John Doe` deletes the person named “John Doe”. 
+* `list` followed by `delete 2` deletes the 2nd person in the address book.
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `delete n/John Doe` deletes the person named “John Doe”.
 * `delete e/alice@example.com` deletes the person with that email.
-* `delete p/91234567` deletes the person with that phone number. 
+* `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
+
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
 
 ### Linking a student and parent : `link`
 
@@ -243,12 +218,6 @@ Examples:
 * `findlink n/Bob Lee` shows “0 linked contact(s) for Bob Lee” if Bob Lee has no linked persons.
 * `findlink n/Nonexistent Person` shows an error message indicating that no such person exists.
 
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
-
 ### Tag management
 #### Adding tags : `addtag t/[TAG] t/[TAG]`
 * Adds more possible tags to use
@@ -257,6 +226,36 @@ Format: `clear`
 #### Deleting tags : `deletetag t/[TAG] t/[TAG]`
 * Deletes a tag type from the possible tags list. This will also delete the tag from all contacts who have this tag.
 * It is possible to delete multiple tags at once
+
+### Listing all contacts : `list`
+
+Displays all contacts in the address book.
+
+Format: `list`
+
+### Filtering by tags: `filter`
+
+Show students who have any of the tags given.
+
+Format: `filter tag [MORE_TAGS]`
+
+* The search is case-insensitive. e.g `Math` will match `math`
+* The order of the tags does not matter.
+* Only the tags are searched.
+* Only full words will be matched e.g. `Math` will not match `Mathematics`
+* Students with at least one tag will be shown.
+
+Examples:
+* John Doe has Math tag, Peter has Chem and Math tags
+* `filter Math` shows `John Doe`
+* `filter Math Chem` shows `John Doe` and `Peter`
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+<img src="images/helpMessage.png" alt="help" width="400" style="height:auto;">
+Format: `help`
 
 ### Exiting the program : `exit`
 
