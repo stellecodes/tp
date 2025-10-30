@@ -334,7 +334,7 @@ Similar to adding a student contact except that tags will be an invalid field fo
 **MSS**
 1. User requests to filter students by one or more tag keywords (e.g., filter Math or filter Math Chem).
 2. System validates the command format (non-empty, whitespace-separated keywords).
-3. System checks each keywordIf at least one known tag remains, System applies the filter to students only (parents are excluded) using OR-semantics (a student is shown if they have any of the known tags). 
+3. System checks each keyword. If at least one known tag remains, System applies the filter to students only (parents are excluded) using OR-semantics (a student is shown if they have any of the known tags). 
 4. System displays the filtered list and a success message indicating the number of students and the tag(s) used. 
 5. If some requested tags are unknown, System appends a note indicating those tags were ignored.
 
