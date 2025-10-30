@@ -22,8 +22,8 @@ public class AddTagsCommand extends Command {
             + " Parameters: "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "Math "
+            + PREFIX_TAG + "H2chemistry";
 
     public static final String MESSAGE_SUCCESS = "New tags added: %1$s";
     public static final String MESSAGE_DUPLICATE_TAG = "The following tags already exist and were not added: %1$s.";
