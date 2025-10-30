@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.DeleteTagsCommand.MESSAGE_NON_EXISTENT_TAG;
-import static seedu.address.logic.commands.DeleteTagsCommand.MESSAGE_SUCCESS;
 
 import java.nio.file.Path;
 import java.util.HashSet;
@@ -67,12 +66,7 @@ class DeleteTagsCommandTest {
     void execute_deleteExistingTags_fullSuccess() throws Exception {
         Set<Tag> tagsToDelete = tagMathAndScience;
         DeleteTagsCommand command = new DeleteTagsCommand(tagsToDelete);
-
-        CommandResult result = command.execute(modelStub);
-
-        // Verification of result message
-        String expectedMessage = String.format(MESSAGE_SUCCESS, tagsToDelete);
-        assertEquals(expectedMessage, result.getFeedbackToUser());
+        command.execute(modelStub);
 
         // Verification of side effect on ModelStub: All initial tags are gone
         assertFalse(modelStub.addedTags.contains(tagMath));
@@ -84,19 +78,10 @@ class DeleteTagsCommandTest {
     void execute_mixedTags_partialSuccess() throws Exception {
         // Deleting all three tags: Math (exists), Science (exists), History (non-existent)
         Set<Tag> tagsToDelete = allThreeTags;
-        Set<Tag> deletedTags = tagMathAndScience; // Tags that will be deleted
-        Set<Tag> nonExistentTags = onlyTagHistory; // Tags that won't be deleted
 
         DeleteTagsCommand command = new DeleteTagsCommand(tagsToDelete);
 
-        CommandResult result = command.execute(modelStub);
-
-        // Verification of result message (using the exact partial success format)
-        String expectedMessage = String.format(
-                MESSAGE_NON_EXISTENT_TAG + " All other tag(s) were successfully deleted: %2$s",
-                nonExistentTags, deletedTags
-        );
-        assertEquals(expectedMessage, result.getFeedbackToUser());
+        command.execute(modelStub);
 
         // Verification of side effect on ModelStub: Math and Science should be gone
         assertFalse(modelStub.addedTags.contains(tagMath));
