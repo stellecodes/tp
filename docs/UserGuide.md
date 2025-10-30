@@ -16,7 +16,10 @@ It helps tutors organize information about their **students and their parents**,
 --------------------------------------------------------------------------------------------------------------------
 
 ## Table of Contents
-{:toc}
+* [Quick start](#quick-start)
+* [Commands](#commands)
+* [FAQ](#faq)
+* [Current limitations](#current-limitations)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,6 +142,13 @@ Examples:
 * `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
 
+### Clearing all entries : `clear`
+
+Clears all entries from the address book.
+
+Format: `clear`
+
+
 ### Linking a student and parent : `link`
 
 Links an existing student contact with a parent contact so that their contacts will display each other's name.
@@ -228,11 +238,52 @@ Format: `deletetag t/TAG t/TAG`
 Examples:
 * `deletetag t/Math t/Science` — Deletes the tags `Math` and `Science` from the possible tags list and from all contacts who had them.
 
-### Clearing all entries : `clear`
+### Listing all contacts : `list`
 
-Clears all entries from the address book.
+Displays all contacts in the address book.
 
-Format: `clear`
+Format: `list`
+
+### Locating contacts by name: `find`
+
+Finds contacts whose names contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be shown.
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+
+Examples:
+* `find John` returns `john` and `John Doe`
+* `find alex john` returns `Alex jones`, `John Doe`<br>
+  <img src="images/findAlexJohnResult.png" alt="find alex john" width="400" style="height:auto;">
+
+### Filtering by tags: `filter`
+
+Show students who have any of the tags given.
+
+Format: `filter tag [MORE_TAGS]`
+
+* The search is case-insensitive. e.g `Math` will match `math`
+* The order of the tags does not matter.
+* Only the tags are searched.
+* Only full words will be matched e.g. `Math` will not match `Mathematics`
+* Students with at least one tag will be shown.
+
+Examples:
+* John Doe has Math tag, Peter has Chem and Math tags
+* `filter Math` shows `John Doe`
+* `filter Math Chem` shows `John Doe` and `Peter`
+
+### Viewing help : `help`
+
+Shows a message explaining how to access the help page.
+
+<img src="images/helpMessage.png" alt="help" width="400" style="height:auto;">
+Format: `help`
 
 ### Exiting the program : `exit`
 
