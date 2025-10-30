@@ -21,7 +21,7 @@ public class DeleteTagsCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TAG + "Math "
-            + PREFIX_TAG + "H2chemistry";
+            + PREFIX_TAG + "Science";
 
     public static final String MESSAGE_SUCCESS = "All tags deleted: %1$s";
 
