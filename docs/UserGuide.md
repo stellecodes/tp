@@ -254,8 +254,6 @@ Format: `addtag t/TAG t/TAG`
 Examples:
 * `addtag t/Math t/Science` — Adds the tags `Math` and `Science` to the possible tags list.
 
----
-
 ### Deleting tags : `deletetag`
 Deletes tags from the possible tags list. This will also remove the tag from all contacts who have it. You can delete multiple tags at once.
 
