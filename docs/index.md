@@ -14,7 +14,7 @@ title: ClassConnect — Smart Contact Manager for Private Tutors
 **ClassConnect** is a **desktop application for managing contact details** —  
 built especially for **private tutors** who prefer a fast, efficient **Command Line Interface (CLI)** while still enjoying the clarity of a **Graphical User Interface (GUI)**.
 
-ClassConnect goes beyond a simple address book. It’s designed for tutors who teach multiple small groups or individual students across different levels (e.g. *Primary 5*, *Secondary 3*, *JC2*), and who rely on clear communication with both students and parents.
+ClassConnect goes beyond a simple address book. It’s designed for tutors who teach multiple small groups or individual students across different levels (e.g. *Primary5*, *Secondary3*, *JC2*), and who rely on clear communication with both students and parents.
 
 ---
 
@@ -26,7 +26,7 @@ No more digging through a messy contact list — keep lessons running smoothly w
 ClassConnect helps you:
 - 👩‍🏫 **Store and organize** student and parent contact details efficiently
 - 🔗 **Link students to parents** to reflect real-world relationships
-- 🏷️ **Tag students** by subject or level for quick filtering (e.g., “Sec 3”, “Math”)
+- 🏷️ **Tag students** by subject or level for quick filtering (e.g., “Sec3”, “Math”)
 - ⚡ **Find and edit contacts instantly** with intuitive CLI commands
 - 🧭 **Focus on teaching**, not admin work — everything stays structured and synced
 
