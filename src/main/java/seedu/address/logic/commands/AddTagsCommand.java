@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.HashSet;
@@ -33,13 +34,13 @@ public class AddTagsCommand extends Command {
      * Creates an AddCommand to add the specified {@code Person}
      */
     public AddTagsCommand(Set<Tag> tags) {
-        assert tags != null : "Tags should not be null";
+        requireNonNull(tags);
         toAdd = tags;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert model != null : "Model should not be null";
+        requireNonNull(model);
 
         Set<Tag> existingTags = new HashSet<>();
         Set<Tag> newTags = new HashSet<>();

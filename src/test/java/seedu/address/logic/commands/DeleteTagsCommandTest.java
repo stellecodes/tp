@@ -57,6 +57,18 @@ class DeleteTagsCommandTest {
     }
 
     @Test
+    void execute_nullModel_throwsNullPointerException() {
+        Set<Tag> tagsToDelete = Set.of(tagMath);
+        DeleteTagsCommand command = new DeleteTagsCommand(tagsToDelete);
+        assertThrows(NullPointerException.class, () -> command.execute(null));
+    }
+
+    @Test
+    void constructor_nullTags_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> new DeleteTagsCommand(null));
+    }
+
+    @Test
     void toString_containsTagNames() {
         Set<Tag> tags = Set.of(tagMath);
         String result = new DeleteTagsCommand(tags).toString();
