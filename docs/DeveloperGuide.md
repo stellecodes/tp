@@ -99,6 +99,32 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </div>
 
+### Interactions inside the Logic component for the `findlink n/NAME` command
+
+The following sequence diagram illustrates how the **Logic** component handles the `findlink` command.
+
+![Interactions Inside the Logic Component for the `findlink n/John Tan` Command](images/FindLinkSequenceDiagram.png)
+
+1. The `LogicManager#execute("findlink n/John Tan")` method receives the user's command input.
+2. The command text is passed to the `AddressBookParser#parseCommand()` method.
+3. The `AddressBookParser` identifies the keyword `findlink` and delegates the parsing to a `FindLinkCommandParser`.
+4. The `FindLinkCommandParser#parse()` method validates the input, extracts the name parameter, and constructs a new `FindLinkCommand` object with the given name.
+5. The `FindLinkCommand#execute(Model)` method is invoked by the `LogicManager`.
+6. During execution:
+    - The `Model` provides the current address book (`getAddressBook()`).
+    - The command retrieves linked contacts from the model (`getLinkedPersons(target)`).
+    - The model updates the displayed list with only those linked contacts (`updateFilteredPersonList(predicateOf(linked))`).
+7. A `CommandResult` is created containing either:
+    - The list of linked contacts, or
+    - A message indicating no linked contacts were found.
+8. This `CommandResult` is returned to the `LogicManager`, which then displays it in the UI.
+
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The diagram abstracts away lower-level operations within the Model and UI components to maintain clarity. It focuses on how the `Logic` component parses, constructs, and executes the `findlink` command.
+</div>
+
+---
+
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
@@ -610,19 +636,19 @@ testers are expected to do more *exploratory* testing.
       Expected: The contact with the given phone number is deleted. Success message confirms deletion.
 
    4. Test case: `delete n/John Tan e/john.tan@example.com`<br>
-      Expected: Deletes the specific “John Tan” whose email matches the provided address. This helps when multiple persons share the same name. Success message confirms deletion.
+      Expected: Deletes contact “John Tan” whose email matches the provided address. Success message confirms deletion.
 
    5. Test case: `delete n/John` (ambiguous input)<br>
-      Expected: No person is deleted. Error message shown: “Multiple persons match the given identifiers. Please provide more identifiers to specify the person.”
+      Expected: No person is deleted. Error message shown: “Multiple persons match the given detail(s). Please refine using email/phone, or delete by index after using 'find'.”
 
    6. Test case: `delete n/Nonexistent Name`<br>
-      Expected: No person is deleted. Error message shown: “No person found matching the provided identifiers.”
+      Expected: No person is deleted. Error message shown: “No person matches the given detail(s).”
 
    7. Test case: `delete 1 n/John Doe`<br>
       Expected: No person is deleted. Error message shown: “You may use either the index form or identifier form — not both.”
 
    8. Test case: `delete n/`<br>
-      Expected: Error message shown: “Invalid command format. Identifier cannot be empty.” No data modified.
+      Expected: Error message shown: “Invalid command format! delete: Deletes the specified person from the address book. Legacy (index-based): delete INDEX (must be a positive integer) Attribute-based: delete [n/NAME] [e/EMAIL] [p/PHONE] Examples: delete 2 delete e/alex@example.com delete p/91234567 delete n/Ada Lovelace e/ada@example.com"
 
 ### Linking contacts
 
@@ -683,13 +709,13 @@ testers are expected to do more *exploratory* testing.
 1. Displays all contacts that are linked to a given person (e.g., showing all parents linked to a student, or vice versa).
 
    1. Test case: `findlink n/John Doe`<br>
-      Expected: Lists all contacts linked to “John Doe”. Message: Showing X linked contact(s) for John Doe.
+      Expected: Lists all contacts linked to “John Doe”. Message: "Showing X linked contact(s) for John Doe."
 
    2. Test case: `findlink n/Nonexistent Name`<br>
-      Expected: Error: No person found with the name: Nonexistent Name.
+      Expected: Error: "No person found with the name: Nonexistent Name."
 
    3. Other incorrect delete commands to try: `findlink`, `findlink n/`, `findlink 1`, `findlink n/John n/Jane`,  `findlink randomtext n/John`<br>
-      Expected: Error: Invalid command format. Usage: findlink n/NAME.
+      Expected: Error: "Invalid command format! findlink: Shows contacts linked to the given person. Parameters: n/NAME Example: findlink n/John Tan"
 
 ### Saving data
 
