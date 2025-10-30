@@ -291,16 +291,40 @@ Similar to adding a student contact except that tags will be an invalid field fo
 
       Use case ends.
 
-**Extensions**
+---
 
-* 2a. No contact matches.
-    * 2a1. System informs the absence of a match.
+**Use case: Filter by tags**
+
+**MSS**
+1. User requests to filter students by one or more tag keywords (e.g., filter Math or filter Math Chem).
+2. System validates the command format (non-empty, whitespace-separated keywords).
+3. System checks each keywordIf at least one known tag remains, System applies the filter to students only (parents are excluded) using OR-semantics (a student is shown if they have any of the known tags). 
+4. System displays the filtered list and a success message indicating the number of students and the tag(s) used. 
+5. If some requested tags are unknown, System appends a note indicating those tags were ignored.
+
+   Use case ends.
+
+**Extensions**
+* 2a. Command format invalid (e.g., empty input, only spaces).
+    * 2a1. System shows usage message for filter.
 
       Use case ends.
 
-* 2b. Multiple contacts match.
-    * 2b1. System requests disambiguation.
-    * 2b2. User provides additional identifying detail (returns to Step 2).
+* 3a. All requested tags are unknown (not in master tag registry).
+    * 3a1. System informs:
+      * “The tag ‘X’ does not exist …” or
+      * • “These tags do not exist: X, Y …”
+    * 3a2. No filtering applied; current list remains unchanged. Use case ends.
+    
+      Use case ends.
+
+* 4a. Known tags provided but no student currently has them.
+    * 4a1. System applies filter and shows: “Listed 0 persons with tag(s): …”.
+
+      Use case ends.
+
+* 4b. Extra spaces in keywords.
+    * 4b1. System trims spaces. (Continue at Step 4.)
 
 ---
 
