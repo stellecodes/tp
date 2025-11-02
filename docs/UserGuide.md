@@ -53,8 +53,8 @@ Action | Description                     | Format, Examples
 **[Link](#linking-a-student-and-parent--link)** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
 **[Unlink](#unlinking-a-student-and-parent--unlink)** | Break a parent-student link     | `unlink sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `unlink sn/John Tan pn/Mrs Tan`
 **[Findlink](#finding-linked-contacts--findlink)** | Find linked contacts            | `findlink n/NAME`<br> e.g., `findlink n/Alice Tan`
-**[Addtag](#adding-tags--addtag)** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `addtag t/Math`
-**[Deletetag](#deleting-tags--deletetag)** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `deletetag t/Math`
+**[Addtag](#adding-tags--addtag)** | Add tag(s) to the tag list      | `addtag t/TAG`<br> e.g., `addtag t/Math`
+**[Deletetag](#deleting-tags--deletetag)** | Delete tag(s) from the tag list | `deletetag t/TAG`<br> e.g., `deletetag t/Math`
 **[List](#listing-all-contacts--list)** | Show all contact(s)             | `list`
 **[Find](#locating-contacts-by-name-find)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **[Filter](#filtering-by-tags-filter)** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
