@@ -28,7 +28,7 @@ It helps tutors organize information about their **students and their parents**,
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-2. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F10-4/tp/releases).
 
 3. Copy the file to a folder of your choice.
 
@@ -56,7 +56,7 @@ Action | Description                     | Format, Examples
 **[Addtag](#adding-tags--addtag-ttag-ttag)** | Add tag(s) to the tag list      | `addtag t/[TAG]`<br> e.g., `add_tags n/Math`
 **[Deletetag](#deleting-tags--deletetag-ttag-ttag)** | Delete tag(s) from the tag list | `deletetag t/[TAG]`<br> e.g., `delete_tags t/Math`
 **[List](#listing-all-contacts--list)** | Show all contact(s)             | `list`
-**[Find](#finding-linked-contacts--findlink)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**[Find](#locating-contacts-by-name-find)** | Find contact(s) by name(s)      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **[Filter](#filtering-by-tags-filter)** | Find contacts by tag(s)         | `filter TAG [MORE_TAGS]`<br> e.g., `filter Math Science`
 **[Help](#viewing-help--help)** | Opens the user guide            | `help`
 **[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
@@ -226,6 +226,7 @@ Notes:
 * A parent can be linked to multiple students (e.g., their children).
 * Link relationships are automatically saved in the data file and reloaded when the app restarts.
 * Deleting a contact automatically removes all links associated with that contact.
+* ⚠️ GUI update delay: When a link is created, it may take a short while for the linked names to appear under each contact due to internal update latency. If the change does not appear immediately, try running another command (e.g. list) to refresh the display.
 
 ### Unlinking a student and parent : `unlink`
 Removes an existing link between a student and a parent contact, so you cannot see their names under each other's contact.
@@ -237,6 +238,7 @@ Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 
 Examples:
 * `unlink sn/Alex Jones pn/John Doe` Removes the link between student Alex Jones and parent John doe.
+* ⚠️ GUI update delay: The removal of linked names may take a short moment to display due to latency. You can run a list command to refresh the view immediately.
 
 ### Finding linked contacts : `findlink`
 
