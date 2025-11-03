@@ -42,6 +42,11 @@ It helps tutors organize information about their **students and their parents**,
 
 ## Commands
 ### Summary
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+All parameters shown in the commands are compulsory unless denoted by square brackets `[]`.
+For optional parameters denoted with `...`, multiple of said parameter can be specified.
+</div>
 
 Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
