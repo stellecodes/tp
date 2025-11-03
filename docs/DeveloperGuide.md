@@ -72,7 +72,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TagListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -229,14 +229,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor with many students      | find all linked contacts (e.g., parents of a student, students of a parent) | easily view relationships without searching manually                                                        |
 | `* *`    | tutor with many students      | tag students with their grades | identify students who need more attention                      |
 | `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
-| `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
 | `* *`    | tutor with a lot of classes   | retrieve contact info of all students in the same class | send class announcements to students quickly                   |
 | `* *`    | tutor                         | search for students by level/subject/grades | target specific students more easily                           |
 | `* *`    | tutor                         | record the preferred communication method for each contact | reach students/parents effectively                             |
 | `* *`    | tutor                         | keep short notes for each contact | recall important attributes or situations                      |
 | `* *`    | new tutor                     | access a help page        | learn how to use the app                                       |
 | `* *`    | new tutor                     | see sample data on first launch | familiarise myself with the functionalities                    |
-| `*`      | tutor                         | pin certain contacts to the top | quickly find contacts I contact often                          |
 | `*`      | tutor returning after a while | access a refresher tutorial on launch | get back up to speed quickly                                   |
 
 ### Use cases
@@ -606,18 +604,27 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a person
+1. Adding a parent
+   1. **Prerequisites**: None
+   2. **Test case**: `addp n/Mrs Tan p/92345678 e/tanCheeWee@email.com a/Blk 1 Raffles Road, #12-34`<br>
+      Expected: A new parent contact (identified by a purple contact card with a "parent" label on the top right) is added to the base of the current contact list. Details of the new contact shown in the status message.
+2. Adding a student
+   1. **Prerequisites**: None
+   2. **Test case**: `adds n/Alice Tan p/98765432 e/alicetan0914@email.com a/Blk 2 Ang Mo Kio Ave 3, #05-12 t/Math t/Chem`<br>
+      Expected: A new student contact (identified by a blue contact card with a "student" label on the top right) is added to the base of the current contact list. Details of the new contact shown in the status message.
+
 
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`<br>
+   2. **Test case**: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
+   3. **Test case**: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
@@ -626,28 +633,28 @@ testers are expected to do more *exploratory* testing.
 
 2. Deleting by identifiers (name/email/phone)
 
-   1. Test case: `delete n/John Doe`<br>
+   1. **Test case**: `delete n/John Doe`<br>
       Expected: The contact whose name matches “John Doe” (case-insensitive) is deleted. Success message shows the deleted person’s details.
 
-   2. Test case: `delete e/alice@example.com`<br>
+   2. **Test case**: `delete e/alice@example.com`<br>
       Expected: The contact with the given email address is deleted. Success message confirms deletion.
 
-   3. Test case: `delete p/91234567`<br>
+   3. **Test case**: `delete p/91234567`<br>
       Expected: The contact with the given phone number is deleted. Success message confirms deletion.
 
-   4. Test case: `delete n/John Tan e/john.tan@example.com`<br>
+   4. **Test case**: `delete n/John Tan e/john.tan@example.com`<br>
       Expected: Deletes contact “John Tan” whose email matches the provided address. Success message confirms deletion.
 
-   5. Test case: `delete n/John` (ambiguous input)<br>
+   5. **Test case**: `delete n/John` (ambiguous input)<br>
       Expected: No person is deleted. Error message shown: “Multiple persons match the given detail(s). Please refine using email/phone, or delete by index after using 'find'.”
 
-   6. Test case: `delete n/Nonexistent Name`<br>
+   6. **Test case**: `delete n/Nonexistent Name`<br>
       Expected: No person is deleted. Error message shown: “No person matches the given detail(s).”
 
-   7. Test case: `delete 1 n/John Doe`<br>
+   7. **Test case**: `delete 1 n/John Doe`<br>
       Expected: No person is deleted. Error message shown: “You may use either the index form or identifier form — not both.”
 
-   8. Test case: `delete n/`<br>
+   8. **Test case**: `delete n/`<br>
       Expected: Error message shown: “Invalid command format! delete: Deletes the specified person from the address book. Legacy (index-based): delete INDEX (must be a positive integer) Attribute-based: delete [n/NAME] [e/EMAIL] [p/PHONE] Examples: delete 2 delete e/alex@example.com delete p/91234567 delete n/Ada Lovelace e/ada@example.com"
 
 ### Linking contacts
