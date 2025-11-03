@@ -30,9 +30,26 @@ public class AddParentCommandParser extends AddCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddParentCommand parse(String args) throws ParseException {
+        StringBuilder wrongPrefixes = new StringBuilder();
+        if (!args.contains("n/")) {
+            wrongPrefixes.append("n/NAME ");
+        }
+        if (!args.contains("p/")) {
+            wrongPrefixes.append("p/PHONE ");
+        }
+        if (!args.contains("e/")) {
+            wrongPrefixes.append("e/EMAIL ");
+        }
+        if (!args.contains("a/")) {
+            wrongPrefixes.append("a/ADDRESS ");
+        }
         if (args.contains("t/")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    "Tagging is not allowed for parents.\n" + AddParentCommand.MESSAGE_USAGE));
+                    "WARNING: Tagging is not allowed for parents\n" + AddParentCommand.MESSAGE_USAGE));
+        }
+        if (!wrongPrefixes.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Missing required fields: " + wrongPrefixes + "\n" + AddParentCommand.MESSAGE_USAGE));
         }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
