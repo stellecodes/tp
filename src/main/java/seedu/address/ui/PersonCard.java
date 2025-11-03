@@ -89,7 +89,7 @@ public class PersonCard extends UiPart<Region> {
             remark.setVisible(false);
             remark.setManaged(false);
         } else {
-            remark.setText("Remarks: " + person.getRemark().remarks);
+            remark.setText("Remark: " + person.getRemark().remarks);
         }
 
         // show linked contacts if any exist

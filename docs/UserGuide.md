@@ -47,7 +47,7 @@ Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
 **[Adds](#adding-a-contact-addsaddp)** | Add a student contact           | `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…​` <br> e.g., `adds n/James Ho p/87492563 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/Math`
 **[Addp](#adding-a-contact-addsaddp)** | Add a parent contact            | `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]​` <br> e.g., `addp n/Jane Doe p/97549673 e/janedoe@example.com a/321, Jurong West St 74 r/Avail on weekends`
-**[Edit](#editing-a-contact--edit)** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**[Edit](#editing-a-contact--edit)** | Edit a contact's fields         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **[Delete](#deleting-a-person--delete)** | Delete a contact                | `delete INDEX or delete [n/NAME] [e/EMAIL] [p/PHONE]` <br> e.g., `delete 3, delete n/Alex Yeoh, delete e/alex@example.com, delete n/Alex Yeoh e/alex@example.com`
 **[Clear](#clearing-all-entries--clear)** | Clear all contact(s)            | `clear`
 **[Link](#linking-a-student-and-parent--link)** | Establish a parent-student link | `link sn/STUDENT_NAME pn/PARENT_NAME` <br> e.g., `link sn/John Tan pn/Mrs Tan`
@@ -110,7 +110,7 @@ Examples:
 
 Edits an existing contact in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]…​`
 
 * Edits the person positioned at the specified `INDEX` in the contact list. The index **must be a positive integer** 1, 2, 3, …​
 * At least **_one_** of the optional fields must be provided.
