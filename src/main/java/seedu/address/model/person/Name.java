@@ -11,7 +11,7 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             """
-               Names should only contain alphabets, spaces, apostrophes (') and hyphens (-).
+               Names should only contain alphabets, spaces, ' and -. If / is used, consider replacing it with -.
                It can not be blank and should be at most 60 characters long.""";
 
     /*
