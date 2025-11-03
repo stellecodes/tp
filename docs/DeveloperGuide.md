@@ -9,7 +9,6 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 * This project is based on the AddressBook-Level3 project created by the [SE-EDU initiative](https://se-education.org).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -73,7 +72,6 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TagListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
@@ -239,7 +237,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor                         | keep short notes for each contact | recall important attributes or situations                      |
 | `* *`    | new tutor                     | access a help page        | learn how to use the app                                       |
 | `* *`    | new tutor                     | see sample data on first launch | familiarise myself with the functionalities                    |
-| `*`      | tutor                         | pin certain contacts to the top | quickly find contacts I contact often                          |
 | `*`      | tutor returning after a while | access a refresher tutorial on launch | get back up to speed quickly                                   |
 
 ### Use cases
@@ -609,7 +606,16 @@ testers are expected to do more *exploratory* testing.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-3. _{ more test cases …​ }_
+### Adding a person
+1. Adding a parent
+   1. Prerequisites: None
+   2. Test case: `addp n/Mrs Tan p/92345678 e/tanCheeWee@email.com a/Blk 1 Raffles Road, #12-34`<br>
+      Expected: A new parent contact (identified by a purple contact card with a "parent" label on the top right) is added to the base of the current contact list. Details of the new contact shown in the status message.
+2. Adding a student
+   1. Prerequisites: None
+   2. Test case: `adds n/Alice Tan p/98765432 e/alicetan0914@email.com a/Blk 2 Ang Mo Kio Ave 3, #05-12 t/Math t/Chem`<br>
+      Expected: A new student contact (identified by a blue contact card with a "student" label on the top right) is added to the base of the current contact list. Details of the new contact shown in the status message.
+
 
 ### Deleting a person
 
