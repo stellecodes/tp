@@ -708,14 +708,30 @@ testers are expected to do more *exploratory* testing.
 
 1. Displays all contacts that are linked to a given person (e.g., showing all parents linked to a student, or vice versa).
 
-   1. Test case: `findlink n/John Doe`<br>
+   1. **Test case:** `findlink n/John Doe`<br>
       Expected: Lists all contacts linked to “John Doe”. Message: "Showing X linked contact(s) for John Doe."
 
-   2. Test case: `findlink n/Nonexistent Name`<br>
+   2. **Test case:** `findlink n/Nonexistent Name`<br>
       Expected: Error: "No person found with the name: Nonexistent Name."
 
    3. Other incorrect delete commands to try: `findlink`, `findlink n/`, `findlink 1`, `findlink n/John n/Jane`,  `findlink randomtext n/John`<br>
       Expected: Error: "Invalid command format! findlink: Shows contacts linked to the given person. Parameters: n/NAME Example: findlink n/John Tan"
+
+### Filter contacts by tag
+
+Prerequisites: 
+1. Ensure that contacts have been added with specific tags (e.g., add n/John Tan p/98765432 e/john@example.com a/Blk 1 t/Math, add n/Jane Doe p/91234567 e/jane@example.com a/Blk 2 t/Science).
+2. Ensure the desired tags are already in the tag list. If not, use addtag.
+
+1. Displays all contacts with the given tags if the tags exist 
+   1. **Test case:** `filter t/Math`<br>
+      Expected: Display all contacts with the "Math" tag.
+   2. **Test case:** `filter t/Science`<br>
+      Expected: Display all contacts with the "Science" tag.
+   3. **Test case:** `filter t/Math t/Science`<br>
+      Expected: Display all contacts with either "Math" or "Science" tags.
+   4. **Test case:** `filter t/English` when no contacts have "English" tag <br>
+      Expected: No contacts found with the "English" tag.
 
 ### Saving data
 
