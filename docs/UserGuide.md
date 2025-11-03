@@ -322,6 +322,9 @@ Examples:
 * `filter Math` shows `John Doe`
 * `filter Math Chem` shows `John Doe` and `Peter`
 
+Note:
+* Since only student contacts can have tags, filtering will only display student contacts
+
 ### Viewing help : `help`
 
 Shows a message explaining how to access the help page.
