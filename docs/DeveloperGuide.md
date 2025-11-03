@@ -627,7 +627,7 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 
-1. Deleting by identifiers (name/email/phone)
+2. Deleting by identifiers (name/email/phone)
 
    1. Test case: `delete n/John Doe`<br>
       Expected: The contact whose name matches “John Doe” (case-insensitive) is deleted. Success message shows the deleted person’s details.
@@ -722,8 +722,23 @@ testers are expected to do more *exploratory* testing.
 
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with missing files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+    1. Navigate to the `/data` folder and delete `addressbook.json`. Then relaunch the app.
+       Expected: App starts with an empty address book. A new `addressbook.json` file is created automatically when the next change is made (e.g., after an `add` command).
 
-2. _{ more test cases …​ }_
+2. Dealing with corrupted data
+
+    1. Open `addressbook.json` and manually edit its contents to invalid JSON (e.g., delete a bracket, or change a field name). Then relaunch the app.
+       Expected: App detects invalid data and starts with an empty address book. An error message is shown in the terminal indicating the data could not be loaded. The corrupted file is not overwritten until a modifying command is executed.
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** Corruption must result in invalid JSON (not just editing a value). E.g., removing a " or } is a valid test.
+</div>
+
+3. Verifying Data is Saved Across Sessions
+
+    1. Launch ClassConnect.
+    2. Perform a data-editing command.
+    3. Close the application.
+    4. Relaunch the application.
+       Expected: The contact added in Step 2 is still shown. This confirms that data saving and loading work correctly.
