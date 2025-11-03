@@ -108,6 +108,9 @@ Examples:
 
 </div>
 
+Note:
+* 2 separate contacts can have the same phone number and email as long as the name is different since family members may share a phone or an email.
+
 
 ### Editing a contact : `edit`
 
