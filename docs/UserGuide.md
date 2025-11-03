@@ -64,7 +64,7 @@ Action | Description                     | Format, Examples
 ### Command Parameter Summary
 Parameter | Description              | Example           | Constraints
 ----------|--------------------------|-------------------|-------------
-`n/` | Name                     | `n/John Tan`      | Names should only contain alphabets, spaces, apostrophes (') and hyphens (-). <br> It is **compulsory** and should be at most 60 characters long.
+`n/` | Name                     | `n/John Tan`      | Names should only contain alphabets, spaces, apostrophes (') and hyphens (-). <br> It is **compulsory** and should be at most 60 characters long. <br> if a / is included in the name, consider replacing it with -.
 `p/` | Phone number             | `p/+65 9876 5432` | Phone numbers should only contain digits, spaces, brackets (), adds (+) and hyphens (-). <br> It is **compulsory**  and should be 3 to 25 characters long.
 `e/` | Email address            | `e/John Tan @example.com` | Emails should follow the format of local-part@domain-part. <br> It is **compulsory** and should be at most 320 characters long. The domain-part itself should be at leasts 2 characters long.
 `a/` | Physical address         | `a/123, Clementi Rd, #12-34, Singapore 123456` | Addresses can contain any character. <br> It is **compulsory** and should be at most 100 characters long.
