@@ -61,6 +61,9 @@ Action | Description                     | Format, Examples
 **[Help](#viewing-help--help)** | Opens the user guide            | `help`
 **[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
 
+<div markdown="span" class="alert alert-primary">
+:bulb: **Important Note:** ClassConnect currently does not allow 2 separate contacts with the same name even if the case is different or the other information (phone number, email...) are different.
+
 ### Adding a contact: `adds`/`addp`
 
 Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
@@ -105,6 +108,9 @@ Examples:
 
 </div>
 
+Note:
+* 2 separate contacts can have the same phone number and email **as long as the name is different** since family members may share a phone or an email.
+
 
 ### Editing a contact : `edit`
 
@@ -129,6 +135,9 @@ Only student contacts can have tags, so updates to the tag with `t/` only applie
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+Note:
+* You **cannot** edit a contact name to another existing contact name (case insensitive) since ClassConnect does not accept duplicate names (even if the other info is different).
 
 ### Deleting a person : `delete`
 
@@ -323,6 +332,9 @@ Examples:
 * John Doe has Math tag, Peter has Chem and Math tags
 * `filter Chem` shows `Peter`
 * `filter Math Chem` shows `John Doe` and `Peter`
+
+Note:
+* Since only student contacts can have tags, filtering will only display student contacts
 
 ### Viewing help : `help`
 
