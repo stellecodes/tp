@@ -42,6 +42,11 @@ It helps tutors organize information about their **students and their parents**,
 
 ## Commands
 ### Summary
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+All parameters shown in the commands are compulsory unless denoted by square brackets `[]`.
+For optional parameters denoted with `...`, multiple of said parameter can be specified.
+</div>
 
 Action | Description                     | Format, Examples
 -------|---------------------------------|-------------
@@ -61,9 +66,18 @@ Action | Description                     | Format, Examples
 **[Help](#viewing-help--help)** | Opens the user guide            | `help`
 **[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Important Note:** ClassConnect currently does not allow 2 separate contacts with the same name even if the case is different or the other information (phone number, email...) are different.
-</div>
+### Command Parameter Summary
+Parameter | Description             | Example           | Constraints
+----------|-------------------------|-------------------|-------------
+`n/` | Name                    | `n/John Tan`      | Names should only contain alphabets, spaces, apostrophes (') and hyphens (-). <br> It is **compulsory** and should be at most 60 characters long. <br> if a / is included in the name, consider replacing it with -.
+`p/` | Phone number            | `p/+65 9876 5432` | Phone numbers should only contain digits, spaces, brackets (), adds (+) and hyphens (-). <br> It is **compulsory**  and should be 3 to 25 characters long.
+`e/` | Email address           | `e/John Tan @example.com` | Emails should follow the format of local-part@domain-part. <br> It is **compulsory** and should be at most 320 characters long. The domain-part itself should be at leasts 2 characters long.
+`a/` | Physical address        | `a/123, Clementi Rd, #12-34, Singapore 123456` | Addresses can contain any character. <br> It is **compulsory** and should be at most 100 characters long.
+`r/` | Remark                  | `r/Available on weekends` | Remarks can contain any character except for `/` or `\n`. <br> It is **optional** but should be at most 250 characters long.
+`t/` | Tag for student contacts | `t/Math` | Tags should only contain alphabets, digits and underscores (\_). <br> It is **optional** but should be at most 30 characters long. <br> Only tag values **already added** and shown in the "Tags" list on the right of the interface can be added to student contacts. 
+`sn/` | Student name for linking | `sn/John Tan` | Should follow the same constraints as `n/` above.
+`pn/` | Parent name for linking  | `pn/Mrs Tan` | Should follow the same constraints as `n/` above.
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact: `adds`/`addp`
 
@@ -71,6 +85,11 @@ Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
 
 Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
 Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`<br>
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
+</div>
 
 - Both student and parent contacts contain the following **compulsory** fields:
   - `name`, set with the prefix `n/`
@@ -84,9 +103,15 @@ Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TA
     See the `addtag` section below for more details.
   - Multiple tags can be added by repeating the `t/` prefix.<br>
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**
-The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
+:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
+See the `addtag` section below for more details.
+</div>
+
+<div markdown="span" class="alert alert-primary">
+Multiple contacts with **different names** can have the same information fields (phone number, email...) as family members may share a phone or email.
 </div>
 
 Examples:
@@ -94,7 +119,6 @@ Examples:
 * `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
 <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-
   <div style="flex: 1; min-width: 300px;">
     <img src="images/AddJohnDoe.png" alt="add john doe" style="width: 100%; height: auto; border-radius: 6px;">
     <p align="center"><em>Before adding (command entered)</em></p>
@@ -104,11 +128,12 @@ Examples:
     <img src="images/AddedJohnDoe.png" alt="added john doe" style="width: 100%; height: auto; border-radius: 6px;">
     <p align="center"><em>After adding (contact successfully shows up)</em></p>
   </div>
-
 </div>
 
-Note:
-* 2 separate contacts can have the same phone number and email **as long as the name is different** since family members may share a phone or an email.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+ClassConnect **prohibits** multiple contacts with the exact same name, 
+even if the capitalisation or information fields (phone number, email...) are different.
+</div>
 
 
 ### Editing a contact : `edit`
@@ -121,6 +146,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 * At least **_one_** of the optional fields must be provided.
 * Existing values will be **overridden** by the input values.
   * When editing tags, the existing tags of the person will be replaced.
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
@@ -155,6 +182,8 @@ Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 * If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers.
 * If no match is found, the app will show a no match found message.
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 If you are unsure of a contact’s full name, use identifiers such as email or phone number to avoid deleting the wrong person.
@@ -167,6 +196,8 @@ Examples:
 * `delete e/alice@example.com` deletes the person with that email.
 * `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
 
@@ -212,6 +243,8 @@ Format: `link sn/STUDENT_NAME pn/PARENT_NAME`
 * `sn/` — name of the student contact (required)
 * `pn/` — name of the parent contact (required)
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 Examples:
 * `link sn/Alex Jones pn/John Doe` Links student Alex Jones with parent John Doe.
 
@@ -244,6 +277,8 @@ Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 * `sn/` — name of the student contact (required)
 * `pn/` — name of the parent contact (required)
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 Examples:
 * `unlink sn/Alex Jones pn/John Doe` Removes the link between student Alex Jones and parent John doe.
 * ⚠️ GUI update delay: The removal of linked names may take a short moment to display due to latency. You can run a list command to refresh the view immediately.
@@ -260,6 +295,8 @@ Format: `findlink n/NAME`
 * The n/ prefix is required 
 * If the person exists but has no linked contacts, the command will show that there are 0 linked results. 
 * If no person matches the given name, an error message will be displayed.
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
@@ -278,6 +315,8 @@ Adds new tags to the possible tags list. You can add multiple tags at once.
 Format: `addtag t/TAG t/TAG`
 
 * `t/` — name of the tag to add (required)
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 Examples:
 * `addtag t/Math t/Science` — Adds the tags `Math` and `Science` to the possible tags list.
@@ -300,7 +339,7 @@ Format: `list`
 
 ### Locating contacts by name: `find`
 
-Finds contacts whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords (names).
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
