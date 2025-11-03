@@ -608,12 +608,12 @@ testers are expected to do more *exploratory* testing.
 
 ### Adding a person
 1. Adding a parent
-   1. Prerequisites: None
-   2. Test case: `addp n/Mrs Tan p/92345678 e/tanCheeWee@email.com a/Blk 1 Raffles Road, #12-34`<br>
+   1. **Prerequisites**: None
+   2. **Test case**: `addp n/Mrs Tan p/92345678 e/tanCheeWee@email.com a/Blk 1 Raffles Road, #12-34`<br>
       Expected: A new parent contact (identified by a purple contact card with a "parent" label on the top right) is added to the base of the current contact list. Details of the new contact shown in the status message.
 2. Adding a student
-   1. Prerequisites: None
-   2. Test case: `adds n/Alice Tan p/98765432 e/alicetan0914@email.com a/Blk 2 Ang Mo Kio Ave 3, #05-12 t/Math t/Chem`<br>
+   1. **Prerequisites**: None
+   2. **Test case**: `adds n/Alice Tan p/98765432 e/alicetan0914@email.com a/Blk 2 Ang Mo Kio Ave 3, #05-12 t/Math t/Chem`<br>
       Expected: A new student contact (identified by a blue contact card with a "student" label on the top right) is added to the base of the current contact list. Details of the new contact shown in the status message.
 
 
@@ -621,12 +621,12 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a person while all persons are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. **Prerequisites**: List all persons using the `list` command. Multiple persons in the list.
 
-   2. Test case: `delete 1`<br>
+   2. **Test case**: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   3. Test case: `delete 0`<br>
+   3. **Test case**: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
@@ -635,28 +635,28 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting by identifiers (name/email/phone)
 
-   1. Test case: `delete n/John Doe`<br>
+   1. **Test case**: `delete n/John Doe`<br>
       Expected: The contact whose name matches “John Doe” (case-insensitive) is deleted. Success message shows the deleted person’s details.
 
-   2. Test case: `delete e/alice@example.com`<br>
+   2. **Test case**: `delete e/alice@example.com`<br>
       Expected: The contact with the given email address is deleted. Success message confirms deletion.
 
-   3. Test case: `delete p/91234567`<br>
+   3. **Test case**: `delete p/91234567`<br>
       Expected: The contact with the given phone number is deleted. Success message confirms deletion.
 
-   4. Test case: `delete n/John Tan e/john.tan@example.com`<br>
+   4. **Test case**: `delete n/John Tan e/john.tan@example.com`<br>
       Expected: Deletes contact “John Tan” whose email matches the provided address. Success message confirms deletion.
 
-   5. Test case: `delete n/John` (ambiguous input)<br>
+   5. **Test case**: `delete n/John` (ambiguous input)<br>
       Expected: No person is deleted. Error message shown: “Multiple persons match the given detail(s). Please refine using email/phone, or delete by index after using 'find'.”
 
-   6. Test case: `delete n/Nonexistent Name`<br>
+   6. **Test case**: `delete n/Nonexistent Name`<br>
       Expected: No person is deleted. Error message shown: “No person matches the given detail(s).”
 
-   7. Test case: `delete 1 n/John Doe`<br>
+   7. **Test case**: `delete 1 n/John Doe`<br>
       Expected: No person is deleted. Error message shown: “You may use either the index form or identifier form — not both.”
 
-   8. Test case: `delete n/`<br>
+   8. **Test case**: `delete n/`<br>
       Expected: Error message shown: “Invalid command format! delete: Deletes the specified person from the address book. Legacy (index-based): delete INDEX (must be a positive integer) Attribute-based: delete [n/NAME] [e/EMAIL] [p/PHONE] Examples: delete 2 delete e/alex@example.com delete p/91234567 delete n/Ada Lovelace e/ada@example.com"
 
 ### Linking contacts
