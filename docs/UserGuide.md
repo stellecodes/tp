@@ -63,6 +63,7 @@ Action | Description                     | Format, Examples
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Important Note:** ClassConnect currently does not allow 2 separate contacts with the same name even if the case is different or the other information (phone number, email...) are different.
+</div>
 
 ### Adding a contact: `adds`/`addp`
 
