@@ -74,6 +74,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `TagListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -232,7 +233,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor with many students      | find all linked contacts (e.g., parents of a student, students of a parent) | easily view relationships without searching manually                                                        |
 | `* *`    | tutor with many students      | tag students with their grades | identify students who need more attention                      |
 | `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
-| `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
 | `* *`    | tutor with a lot of classes   | retrieve contact info of all students in the same class | send class announcements to students quickly                   |
 | `* *`    | tutor                         | search for students by level/subject/grades | target specific students more easily                           |
 | `* *`    | tutor                         | record the preferred communication method for each contact | reach students/parents effectively                             |
