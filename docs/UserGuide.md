@@ -109,7 +109,7 @@ Examples:
 </div>
 
 Note:
-* 2 separate contacts can have the same phone number and email as long as the name is different since family members may share a phone or an email.
+* 2 separate contacts can have the same phone number and email **as long as the name is different** since family members may share a phone or an email.
 
 
 ### Editing a contact : `edit`
@@ -135,6 +135,9 @@ Only student contacts can have tags, so updates to the tag with `t/` only applie
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+Note:
+* You **cannot** edit a contact name to another existing contact name (case insensitive) since ClassConnect does not accept duplicate names (even if the other info is different).
 
 ### Deleting a person : `delete`
 
