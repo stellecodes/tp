@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -32,6 +33,23 @@ public class AddStudentCommandParser extends AddCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddStudentCommand parse(String args) throws ParseException {
+        StringBuilder wrongPrefixes = new StringBuilder();
+        if (!args.contains("n/")) {
+            wrongPrefixes.append("n/NAME ");
+        }
+        if (!args.contains("p/")) {
+            wrongPrefixes.append("p/PHONE ");
+        }
+        if (!args.contains("e/")) {
+            wrongPrefixes.append("e/EMAIL ");
+        }
+        if (!args.contains("a/")) {
+            wrongPrefixes.append("a/ADDRESS ");
+        }
+        if (!wrongPrefixes.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    "Missing required fields: " + wrongPrefixes + "\n" + AddStudentCommand.MESSAGE_USAGE));
+        }
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_REMARK, PREFIX_TAG);

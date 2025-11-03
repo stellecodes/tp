@@ -142,27 +142,30 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE);
-
         // missing name prefix
         assertParseFailure(studentParser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + REMARK_DESC_BOB, expectedMessage);
+                + REMARK_DESC_BOB, "Invalid command format! \nMissing required fields: "
+                + "n/NAME \n" + AddStudentCommand.MESSAGE_USAGE);
 
         // missing phone prefix
         assertParseFailure(studentParser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                        + REMARK_DESC_BOB, expectedMessage);
+                + REMARK_DESC_BOB, "Invalid command format! \nMissing required fields: "
+                + "p/PHONE \n" + AddStudentCommand.MESSAGE_USAGE);
 
         // missing email prefix
         assertParseFailure(studentParser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB
-                        + REMARK_DESC_BOB, expectedMessage);
+                + REMARK_DESC_BOB, "Invalid command format! \nMissing required fields: "
+                + "e/EMAIL \n" + AddStudentCommand.MESSAGE_USAGE);
 
         // missing address prefix
         assertParseFailure(studentParser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB
-                        + REMARK_DESC_BOB, expectedMessage);
+                + REMARK_DESC_BOB, "Invalid command format! \nMissing required fields: "
+                + "a/ADDRESS \n" + AddStudentCommand.MESSAGE_USAGE);
 
         // all prefixes missing
         assertParseFailure(studentParser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB
-                        + VALID_REMARK_BOB, expectedMessage);
+                + VALID_REMARK_BOB, "Invalid command format! \nMissing required fields: "
+                + "n/NAME p/PHONE e/EMAIL a/ADDRESS \n" + AddStudentCommand.MESSAGE_USAGE);
     }
 
     @Test
