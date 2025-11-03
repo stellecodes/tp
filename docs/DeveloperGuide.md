@@ -234,8 +234,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
 | `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
 | `* *`    | tutor with a lot of classes   | retrieve contact info of all students in the same class | send class announcements to students quickly                   |
-| `* *`    | tutor                         | see students’ and parents’ contacts side by side | choose the right person to contact                             |
-| `* *`    | tutor with a lot of classes   | retrieve contact info of all parents of students in the same class | send class announcements to parents quickly                    |
 | `* *`    | tutor                         | search for students by level/subject/grades | target specific students more easily                           |
 | `* *`    | tutor                         | record the preferred communication method for each contact | reach students/parents effectively                             |
 | `* *`    | tutor                         | keep short notes for each contact | recall important attributes or situations                      |
