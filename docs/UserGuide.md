@@ -61,9 +61,15 @@ Action | Description                     | Format, Examples
 **[Help](#viewing-help--help)** | Opens the user guide            | `help`
 **[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Important Note:** ClassConnect currently does not allow 2 separate contacts with the same name even if the case is different or the other information (phone number, email...) are different.
-</div>
+### Command Parameter Summary
+Parameter | Description              | Example           | Constraints
+----------|--------------------------|-------------------|-------------
+`n/` | Name                     | `n/John Tan`      | Names should only contain alphabets, spaces, apostrophes (') and hyphens (-). <br> It is **compulsory** and should be at most 60 characters long.
+`p/` | Phone number             | `p/+65 9876 5432` | Phone numbers should only contain digits, spaces, brackets (), adds (+) and hyphens (-). <br> It is **compulsory**  and should be 3 to 25 characters long.
+`e/` | Email address            | `e/John Tan @example.com` | Emails should follow the format of local-part@domain-part. <br> It is **compulsory** and should be at most 320 characters long. The domain-part itself should be at leasts 2 characters long.
+`a/` | Physical address         | `a/123, Clementi Rd, #12-34, Singapore 123456` | Addresses can contain any character. <br> It is **compulsory** and should be at most 100 characters long.
+`r/` | Remarks                  | `r/Available on weekends` | Remarks can contain any character except for `/` or `\n`. <br> It is **optional** but should be at most 250 characters long.
+`t/` | Tag for student contacts | `t/Math` | Tags should only contain alphabets, digits and underscores (\_). <br> It is **optional** but should be at most 30 characters long. <br> Only tag values **already added** and shown in the "Tags" list on the right of the interface can be added to student contacts. 
 
 ### Adding a contact: `adds`/`addp`
 
@@ -71,6 +77,11 @@ Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
 
 Format (Parent): `addp n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK]` <br>
 Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TAG]…`<br>
+
+<div markdown="span" class="alert alert-primary">
+:bulb: **Tip:**
+The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
+</div>
 
 - Both student and parent contacts contain the following **compulsory** fields:
   - `name`, set with the prefix `n/`
@@ -86,9 +97,9 @@ Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TA
 :bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
 See the `addtag` section below for more details.
 </div>
+
 <div markdown="span" class="alert alert-primary">
-:bulb: **Tip:**
-The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
+Multiple contacts with **different names** can have the same information fields (phone number, email...) as family members may share a phone or email.
 </div>
 
 Examples:
@@ -96,7 +107,6 @@ Examples:
 * `addp n/Betsy Crowe e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
 <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
-
   <div style="flex: 1; min-width: 300px;">
     <img src="images/AddJohnDoe.png" alt="add john doe" style="width: 100%; height: auto; border-radius: 6px;">
     <p align="center"><em>Before adding (command entered)</em></p>
@@ -106,11 +116,12 @@ Examples:
     <img src="images/AddedJohnDoe.png" alt="added john doe" style="width: 100%; height: auto; border-radius: 6px;">
     <p align="center"><em>After adding (contact successfully shows up)</em></p>
   </div>
-
 </div>
 
-Note:
-* 2 separate contacts can have the same phone number and email **as long as the name is different** since family members may share a phone or an email.
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
+ClassConnect **prohibits** multiple contacts with the exact same name, 
+even if the capitalisation or information fields (phone number, email...) are different.
+</div>
 
 
 ### Editing a contact : `edit`
