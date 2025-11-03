@@ -119,7 +119,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
-You can remove all the person’s tags by typing `t/` without specifying any tags after it.<br>
+You can remove all the person’s tags by typing `t/` without specifying any tags after it. You can also do the same with remark by typing `/r` without specifying a remark after.<br>
 </div>
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
