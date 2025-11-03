@@ -25,14 +25,14 @@ It helps tutors organize information about their **students and their parents**,
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java `17` installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 2. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F10-4/tp/releases).
 
 3. Copy the file to a folder of your choice.
 
-4. Open the command terminal in this folder and enter `java -jar addressbook.jar` to run the application.<br>
+4. Open the command terminal in this folder and enter `java -jar ClassConnect.jar` to run the application.<br>
    An interface similar to the one shown above should appear in a few seconds. The app comes with some sample data.<br>
 
 5. Refer to the [Commands section](#commands) below for details of available commands.<br> 
@@ -99,6 +99,8 @@ The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is als
 
 - Optionally, a `remark` field can also be added with `r/`.<br>
 - For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
+  - A tag MUST be added with `addtag` before it can be assigned to a contact.<br>
+    See the `addtag` section below for more details.
   - Multiple tags can be added by repeating the `t/` prefix.<br>
 
 For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
@@ -387,15 +389,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+ClassConnect data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+ClassConnect data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, ClassConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the ClassConnect to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 
@@ -404,7 +406,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ClassConnect home folder.
 
 **Q**: I closed ClassConnect by clicking the window’s close button instead of typing the exit command. Will I lose my work?<br>
 **A**: Don’t worry, ClassConnect saves your updates automatically as you go. When you reopen the app, your most recent changes should still be there.

@@ -234,8 +234,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | tutor with many students      | tag students by their classes | manage students who are in the same class                      |
 | `* *`    | tutor                         | update tags without affecting current tags | make changes without disrupting existing data                  |
 | `* *`    | tutor with a lot of classes   | retrieve contact info of all students in the same class | send class announcements to students quickly                   |
-| `* *`    | tutor                         | see students’ and parents’ contacts side by side | choose the right person to contact                             |
-| `* *`    | tutor with a lot of classes   | retrieve contact info of all parents of students in the same class | send class announcements to parents quickly                    |
 | `* *`    | tutor                         | search for students by level/subject/grades | target specific students more easily                           |
 | `* *`    | tutor                         | record the preferred communication method for each contact | reach students/parents effectively                             |
 | `* *`    | tutor                         | keep short notes for each contact | recall important attributes or situations                      |
@@ -546,7 +544,7 @@ Similar to adding a student contact except that tags will be an invalid field fo
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1.  Should work on any _mainstream OS_ as long as it has Java `17`
 2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4.  Should not depend on a DBMS or remote server for core operations.
