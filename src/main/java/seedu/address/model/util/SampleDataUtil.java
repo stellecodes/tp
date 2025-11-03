@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -40,11 +41,17 @@ public class SampleDataUtil {
         };
     }
 
+    public static Set<Tag> getSampleTags() {
+        return new HashSet<>(Set.of(new Tag("Music"), new Tag("Science"), new Tag("Math")
+        ));
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        sampleAb.addTagTypes(getSampleTags());
         return sampleAb;
     }
 
