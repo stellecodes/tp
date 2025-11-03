@@ -61,6 +61,9 @@ Action | Description                     | Format, Examples
 **[Help](#viewing-help--help)** | Opens the user guide            | `help`
 **[Exit](#exiting-the-program--exit)** | Exit the application            | `exit`
 
+<div markdown="span" class="alert alert-primary">
+:bulb: **Important Note:** ClassConnect currently does not allow 2 separate contacts with the same name even if the case is different or the other information (phone number, email...) are different.
+
 ### Adding a contact: `adds`/`addp`
 
 Adds a student (with `adds`) or a parent (with `addp`) to the address book.<br>
