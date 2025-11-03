@@ -11,14 +11,14 @@ public class Name {
 
     public static final String MESSAGE_CONSTRAINTS =
             """
-               Names should only contain alphabets and spaces.
-               It can not be blank and should be at most 40 characters long.""";
+               Names should only contain alphabets, spaces, apostrophes (') and hyphens (-).
+               It can not be blank and should be at most 60 characters long.""";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z ]{1,40}";
+    public static final String VALIDATION_REGEX = "[A-Za-z][A-Za-z '-]{0,59}";
 
     public final String fullName;
 
