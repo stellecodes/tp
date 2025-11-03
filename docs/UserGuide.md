@@ -75,6 +75,9 @@ Parameter | Description              | Example           | Constraints
 `a/` | Physical address         | `a/123, Clementi Rd, #12-34, Singapore 123456` | Addresses can contain any character. <br> It is **compulsory** and should be at most 100 characters long.
 `r/` | Remarks                  | `r/Available on weekends` | Remarks can contain any character except for `/` or `\n`. <br> It is **optional** but should be at most 250 characters long.
 `t/` | Tag for student contacts | `t/Math` | Tags should only contain alphabets, digits and underscores (\_). <br> It is **optional** but should be at most 30 characters long. <br> Only tag values **already added** and shown in the "Tags" list on the right of the interface can be added to student contacts. 
+`sn/` | Student name for linking  | `sn/John Tan` | Should follow the same constraints as `n/` above.
+`pn/` | Parent name for linking   | `pn/Mrs Tan` | Should follow the same constraints as `n/` above.
+--------------------------------------------------------------------------------------------------------------------
 
 ### Adding a contact: `adds`/`addp`
 
@@ -97,6 +100,8 @@ The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is als
 - Optionally, a `remark` field can also be added with `r/`.<br>
 - For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
   - Multiple tags can be added by repeating the `t/` prefix.<br>
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
@@ -140,6 +145,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/REMARK] [t/TAG]�
 * Existing values will be **overridden** by the input values.
   * When editing tags, the existing tags of the person will be replaced.
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 You can remove all the person’s tags by typing `t/` without specifying any tags after it. You can also do the same with remark by typing `/r` without specifying a remark after.<br>
@@ -173,6 +180,8 @@ Format: `delete INDEX` or `delete [n/NAME] [e/EMAIL] [p/PHONE]`
 * If multiple people match, the app reports that the command is ambiguous and requests you to specify more identifiers.
 * If no match is found, the app will show a no match found message.
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 If you are unsure of a contact’s full name, use identifiers such as email or phone number to avoid deleting the wrong person.
@@ -185,6 +194,8 @@ Examples:
 * `delete e/alice@example.com` deletes the person with that email.
 * `delete p/91234567` deletes the person with that phone number.
 * `delete n/John Tan e/john.tan@example.com` deletes the correct “John Tan” by email.
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 <div style="display: flex; justify-content: center; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
 
@@ -230,6 +241,8 @@ Format: `link sn/STUDENT_NAME pn/PARENT_NAME`
 * `sn/` — name of the student contact (required)
 * `pn/` — name of the parent contact (required)
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 Examples:
 * `link sn/Alex Jones pn/John Doe` Links student Alex Jones with parent John Doe.
 
@@ -262,6 +275,8 @@ Format: `unlink sn/STUDENT_NAME pn/PARENT_NAME`
 * `sn/` — name of the student contact (required)
 * `pn/` — name of the parent contact (required)
 
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
+
 Examples:
 * `unlink sn/Alex Jones pn/John Doe` Removes the link between student Alex Jones and parent John doe.
 * ⚠️ GUI update delay: The removal of linked names may take a short moment to display due to latency. You can run a list command to refresh the view immediately.
@@ -278,6 +293,8 @@ Format: `findlink n/NAME`
 * The n/ prefix is required 
 * If the person exists but has no linked contacts, the command will show that there are 0 linked results. 
 * If no person matches the given name, an error message will be displayed.
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
@@ -296,6 +313,8 @@ Adds new tags to the possible tags list. You can add multiple tags at once.
 Format: `addtag t/TAG t/TAG`
 
 * `t/` — name of the tag to add (required)
+
+For parameter constraints, please refer to the [Command Parameter Summary](#command-parameter-summary) table above.
 
 Examples:
 * `addtag t/Math t/Science` — Adds the tags `Math` and `Science` to the possible tags list.
@@ -318,7 +337,7 @@ Format: `list`
 
 ### Locating contacts by name: `find`
 
-Finds contacts whose names contain any of the given keywords.
+Finds contacts whose names contain any of the given keywords (names).
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
