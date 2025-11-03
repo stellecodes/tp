@@ -80,12 +80,10 @@ Format (Student): `adds n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [r/REMARK] [t/TA
 
 - Optionally, a `remark` field can also be added with `r/`.<br>
 - For **students**, additional **_optional_** `tag` fields can be added with `t/` to organise them.<br>
+  - A tag MUST be added with `addtag` before it can be assigned to a contact.<br>
+    See the `addtag` section below for more details.
   - Multiple tags can be added by repeating the `t/` prefix.<br>
 
-<div markdown="span" class="alert alert-primary">
-:bulb: **Tip:** A tag must be added with `addtag` before it can be assigned to a contact.<br>
-See the `addtag` section below for more details.
-</div>
 <div markdown="span" class="alert alert-primary">
 :bulb: **Tip:**
 The order of fields does not matter. e.g. `adds p/98765432 n/John Doe...` is also acceptable.
