@@ -99,9 +99,9 @@ public class PersonCard extends UiPart<Region> {
             linkedContacts.setManaged(false); // removes it from layout spacing
         } else {
             if (person instanceof Parent) {
-                linkedContacts.setText("Child(ren): " + linkedText);
+                linkedContacts.setText("Children: " + linkedText);
             } else if (person instanceof Student) {
-                linkedContacts.setText("Parent(s): " + linkedText);
+                linkedContacts.setText("Parents: " + linkedText);
             }
         }
 
