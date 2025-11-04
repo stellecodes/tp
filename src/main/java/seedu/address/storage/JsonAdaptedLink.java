@@ -10,7 +10,7 @@ import seedu.address.model.person.Person;
  * between two {@link seedu.address.model.person.Person} objects.
  * <p>
  * Each link stores the names of two contacts that are connected in the model.
- * This class is used to serialize and deserialize link data in {@code addressbook.json}.
+ * This class is used to serialize and deserialize link data in {@code ClassConnect.json}.
  */
 public class JsonAdaptedLink {
 
@@ -61,4 +61,3 @@ public class JsonAdaptedLink {
         return b;
     }
 }
-
